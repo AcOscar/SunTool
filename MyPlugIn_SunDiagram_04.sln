@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MyPlugIn_SunDiagram_04", "MyPlugIn_SunDiagram_04\MyPlugIn_SunDiagram_04.vbproj", "{237DFFFF-3CCB-48DF-A298-B85497F1599F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SunDiagram_06", "SunDiagram_06\SunDiagram_06.vbproj", "{EB20540C-C04F-4B05-BA94-09EBFBA562CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{237DFFFF-3CCB-48DF-A298-B85497F1599F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237DFFFF-3CCB-48DF-A298-B85497F1599F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB20540C-C04F-4B05-BA94-09EBFBA562CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB20540C-C04F-4B05-BA94-09EBFBA562CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB20540C-C04F-4B05-BA94-09EBFBA562CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB20540C-C04F-4B05-BA94-09EBFBA562CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {868A01B2-C10D-455E-BDF2-6A538DBFA2D0}
+	EndGlobalSection
+EndGlobal

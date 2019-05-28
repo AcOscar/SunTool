@@ -1,0 +1,1271 @@
+﻿
+Public Class SPD
+    Public Shared ids As New List(Of Guid)()
+
+    'main function, that draws the diagram
+    Public Shared Function Draw(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
+        Dim arr() As Double
+        arr = GetData(doc, lon, lat, TZone, nOffset)
+        AddLayers_SDP(doc)
+        ids = New List(Of Guid)()
+
+        'pick building
+        Dim ptCentr As New Rhino.Geometry.Point3d(0, 0, 0)
+        If SPD_pickBld Then
+            Dim rhObject As Rhino.DocObjects.ObjRef = Nothing
+            Dim rc = Rhino.Input.RhinoGet.GetOneObject("Pick building", False, Rhino.DocObjects.ObjectType.Mesh, rhObject)
+            If rc <> Rhino.Commands.Result.Success Then
+                Return rc
+            End If
+
+            Dim obj = rhObject.Object()
+            Dim view = doc.Views.ActiveView
+            If obj Is Nothing OrElse view Is Nothing Then
+                Return Rhino.Commands.Result.Failure
+            End If
+
+            Dim bbox = obj.Geometry.GetBoundingBox(False)
+
+            ptCentr = New Rhino.Geometry.Point3d((bbox.Max.X + bbox.Min.X) / 2, (bbox.Max.Y + bbox.Min.Y) / 2, 0)
+            'doc.Objects.AddPoint(ptCentr)
+
+            Const pad As Double = 0.05
+            ' A little padding...
+            Dim dx As Double = (bbox.Max.X - bbox.Min.X) * pad
+            Dim dy As Double = (bbox.Max.Y - bbox.Min.Y) * pad
+            Dim dz As Double = (bbox.Max.Z - bbox.Min.Z) * pad
+            bbox.Inflate(dx, dy, dz)
+            view.ActiveViewport.ZoomBoundingBox(bbox)
+            view.Redraw()
+        End If
+
+        SPD.DrawStereoscopicTemplate(doc, arr(7), arr(8))
+        If SPD_is3D Then
+            SPD.DrawStereoscopicSunPathMonthlyDiagram3D(doc, arr)
+            SPD.DrawStereoscopicSunPathHourlyDiagram3D(doc, arr)
+        Else
+            SPD.DrawStereoscopicSunPathMonthlyDiagram(doc, arr)
+            SPD.DrawStereoscopicSunPathHourlyDiagram(doc, arr)
+        End If
+
+        'move diagram to the center of building
+        If SPD_pickBld Then
+            Dim xform As Rhino.Geometry.Transform = Rhino.Geometry.Transform.Translation(New Rhino.Geometry.Vector3d(ptCentr))
+            For i = 0 To ids.Count - 1
+                doc.Objects.Transform(ids(i), xform, True)
+            Next
+            doc.Views.Redraw()
+        End If
+
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+    '# draw Stereoscopic Template
+    Private Shared Function DrawStereoscopicTemplate(ByVal doc As Rhino.RhinoDoc, ByVal fRad As Double, ByVal fOffset As Double) As Rhino.Commands.Result
+
+        'Rhino.RhinoApp.WriteLine("DrawStereoscopicTemplate")
+        'Define source plane
+        Dim source_plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+
+        'Define main functions variables
+        Dim center As New Rhino.Geometry.Point3d(0, 0, 0)
+        Dim arrObj As New System.Collections.Generic.List(Of Guid)()
+      
+        Dim xform As Rhino.Geometry.Transform = Rhino.Geometry.Transform.Rotation(Rhino.RhinoMath.ToRadians(-fOffset), center)
+        Dim delete_original As Boolean = True
+
+        'set current layer
+        Dim index As Integer = doc.Layers.Find("SPD_template", True)
+        doc.Layers.SetCurrentLayerIndex(index, True)
+
+        'Draw outer ring and main axes
+        Dim c As New Rhino.Geometry.Circle(center, fRad + 1)
+        Dim l1 As New Rhino.Geometry.Line(New Rhino.Geometry.Point3d(-fRad, 0, 0), New Rhino.Geometry.Point3d(fRad, 0, 0))
+        Dim l2 As New Rhino.Geometry.Line(New Rhino.Geometry.Point3d(0, -fRad, 0), New Rhino.Geometry.Point3d(0, fRad, 0))
+        arrObj.Add(doc.Objects.Transform(doc.Objects.AddCircle(c), xform, delete_original))
+        arrObj.Add(doc.Objects.Transform(doc.Objects.AddLine(l1), xform, delete_original))
+        arrObj.Add(doc.Objects.Transform(doc.Objects.AddLine(l2), xform, delete_original))
+
+        'draw concentric circles
+        Dim tRad As Double
+        For i As Integer = 0 To 80 Step 10
+            tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(i))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(i)))
+            c.Center = center
+            c.Radius = tRad
+            arrObj.Add(doc.Objects.Transform(doc.Objects.AddCircle(c), xform, delete_original))
+        Next
+
+        Dim t As String
+        Dim height As Double = 1.5
+        Dim font As String = "Arial"
+        Dim plane As Rhino.Geometry.Plane
+
+        'draw small lines every 15 degrees
+        Dim pt As New Rhino.Geometry.Point3d(0, fRad, 0)
+        Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
+        Dim vecS As New Rhino.Geometry.Vector3d
+        Dim vecE As New Rhino.Geometry.Vector3d
+
+        For i As Integer = 0 To 355 Step 5
+            vecS = New Rhino.Geometry.Vector3d(pt)
+            vecS.Rotate(Rhino.RhinoMath.ToRadians(-i), ax)
+            vecE = vecS
+            vecE.Unitize()
+            Dim l As New Rhino.Geometry.Line(New Rhino.Geometry.Point3d(vecS), vecE)
+            arrObj.Add(doc.Objects.Transform(doc.Objects.AddLine(l), xform, delete_original))
+
+            'draw azimuth angles as text
+            Dim j As Double = i Mod 15
+            If j = 0 And Not i = 355 Then
+                t = i & Chr(176)
+                plane = source_plane
+                vecE = vecS + 4 * vecE + New Rhino.Geometry.Vector3d(-1.5, -height / 2, 0)
+                plane.Origin = New Rhino.Geometry.Point3d(vecE)
+                arrObj.Add(doc.Objects.Transform(doc.Objects.AddText(t, plane, height, font, False, False), xform, delete_original))
+            End If
+
+        Next
+
+        'index = doc.Layers.Find("SPD_text", True)
+        'doc.Layers.SetCurrentLayerIndex(index, True)
+        'draw altitude angles as text
+        For i As Integer = 10 To 80 Step 10
+            tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(i))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(i))) + 0.5
+            t = i & Chr(176)
+            plane = source_plane
+            plane.Origin = New Rhino.Geometry.Point3d(0.5, tRad, 0)
+            arrObj.Add(doc.Objects.Transform(doc.Objects.AddText(t, plane, height, font, False, False), xform, delete_original))
+        Next
+
+        For i As Integer = 0 To arrObj.Count - 1
+            ids.Add(arrObj(i))
+        Next
+
+
+        doc.Views.Redraw()
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+    '# draw Stereoscopic Template - monthly
+    Private Shared Function DrawStereoscopicSunPathMonthlyDiagram(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double) As Rhino.Commands.Result
+        'Rhino.RhinoApp.WriteLine("DrawStereoscopicSunPathMonthlyDiagram")
+
+        Dim tMonth As Double = arrVal(0)
+        Dim tDay As Double = arrVal(1)
+        Dim tHours As Double = arrVal(2)
+        Dim tMin As Double = arrVal(3)
+        Dim lat As Double = arrVal(4)
+        Dim lon As Double = arrVal(5)
+        Dim tZone As Double = arrVal(6)
+        Dim fRad As Double = arrVal(7)
+        Dim fOff As Double = arrVal(8)
+
+
+        Dim arrMonth() As String = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
+        Dim arrSunValues(3) As Double
+        Dim tRad As Double
+        Dim vec As New Rhino.Geometry.Vector3d
+        Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
+        Dim arrPtSunRise, arrPtSunSet As New Rhino.Geometry.Point3d
+        Dim temp1, temp2 As Integer
+        Dim crv As Rhino.Geometry.Curve
+        Dim attribs = doc.CreateDefaultAttributes()
+        Dim t As String
+        Dim plane As Rhino.Geometry.Plane
+        Dim source_plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+        Dim height As Double = 1.5
+        Dim font As String = "Arial"
+        Dim delete_original As Boolean = True
+        Dim vecT As New Rhino.Geometry.Vector3d
+        Dim index As Integer
+        Dim arrObj As New System.Collections.Generic.List(Of Guid)()
+
+        'calculate and draw monhly path
+        If setDate = False Then
+            'Option without precised date
+            For i As Integer = 1 To 12
+                Dim arrPts As New Rhino.Collections.Point3dList
+                tMonth = i
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                tHours = Math.Floor(arrSunValues(2))
+                tMin = (arrSunValues(2) - tHours) * 60
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                arrPtSunRise = New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPtSunRise)
+
+                temp1 = CType(arrSunValues(2), Integer) + 1
+                temp2 = CType(arrSunValues(3), Integer) - 1
+                For j As Integer = temp1 To temp2
+                    tHours = j
+                    arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                    vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                    Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                    arrPts.Add(arrPt)
+
+                Next
+
+                tHours = Math.Floor(arrSunValues(3))
+                tMin = (arrSunValues(3) - tHours) * 60
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                arrPtSunSet = New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPtSunSet)
+
+                crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+
+                If i <= 6 Then
+                    t = "1. " & arrMonth(i)
+                    plane = source_plane
+                    vecT = New Rhino.Geometry.Vector3d(arrPtSunRise) + New Rhino.Geometry.Vector3d(1.5, 0, 0)
+                    plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                Else
+                    attribs.ObjectColor = Drawing.Color.Blue
+
+                    t = "1. " & arrMonth(i)
+                    plane = source_plane
+                    vecT = New Rhino.Geometry.Vector3d(arrPtSunSet) + New Rhino.Geometry.Vector3d(-9, 0, 0)
+                    plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                End If
+
+                arrObj.Add(doc.Objects.AddCurve(crv))
+
+            Next
+        Else
+            'Option with precised date
+            Dim arrPts As New Rhino.Collections.Point3dList
+
+            tMonth = month
+            tDay = day
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            tHours = Math.Floor(arrSunValues(2))
+            tMin = (arrSunValues(2) - tHours) * 60
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+            arrPtSunRise = New Rhino.Geometry.Point3d(vec)
+            arrPts.Add(arrPtSunRise)
+
+            temp1 = CType(arrSunValues(2), Integer) + 1
+            temp2 = CType(arrSunValues(3), Integer) - 1
+            For j As Integer = temp1 To temp2
+                tHours = j
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPt)
+            Next
+
+            tHours = Math.Floor(arrSunValues(3))
+            tMin = (arrSunValues(3) - tHours) * 60
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+            arrPtSunSet = New Rhino.Geometry.Point3d(vec)
+            arrPts.Add(arrPtSunSet)
+
+            crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+
+            If month <= 6 Then
+
+                t = tDay & ". " & arrMonth(CInt(month))
+                plane = source_plane
+                vecT = New Rhino.Geometry.Vector3d(arrPtSunRise) + New Rhino.Geometry.Vector3d(1.5, 0, 0)
+                plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                'set current layer
+                index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                doc.Layers.SetCurrentLayerIndex(index, True)
+
+                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+
+            Else
+                t = tDay & ". " & arrMonth(CInt(month))
+                plane = source_plane
+                vecT = New Rhino.Geometry.Vector3d(arrPtSunSet) + New Rhino.Geometry.Vector3d(-9, 0, 0)
+                plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                'set current layer
+                index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                doc.Layers.SetCurrentLayerIndex(index, True)
+
+                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+            End If
+            arrObj.Add(doc.Objects.AddCurve(crv))
+        End If
+
+        For i As Integer = 0 To arrObj.Count - 1
+            ids.Add(arrObj(i))
+        Next
+
+        doc.Views.Redraw()
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+    '# draw Stereoscopic Template 3D - monthly
+    Private Shared Function DrawStereoscopicSunPathMonthlyDiagram3D(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double) As Rhino.Commands.Result
+        'Rhino.RhinoApp.WriteLine("DrawStereoscopicSunPathMonthlyDiagram3d")
+
+        Dim tMonth As Double = arrVal(0)
+        Dim tDay As Double = arrVal(1)
+        Dim tHours As Double = arrVal(2)
+        Dim tMin As Double = arrVal(3)
+        Dim lat As Double = arrVal(4)
+        Dim lon As Double = arrVal(5)
+        Dim tZone As Double = arrVal(6)
+        Dim fRad As Double = arrVal(7)
+        Dim fOff As Double = arrVal(8)
+
+        Dim arrMonth() As String = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
+        Dim arrSunValues(3) As Double
+        Dim tRad As Double
+        Dim vec As New Rhino.Geometry.Vector3d
+        Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
+        Dim arrPtSunRise, arrPtSunSet As New Rhino.Geometry.Point3d
+        Dim temp1, temp2 As Integer
+        Dim crv As Rhino.Geometry.Curve
+        Dim attribs = doc.CreateDefaultAttributes()
+        Dim t As String
+        Dim plane As Rhino.Geometry.Plane
+        Dim source_plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+        Dim height As Double = 1.5
+        Dim font As String = "Arial"
+        Dim delete_original As Boolean = True
+        Dim vecT As New Rhino.Geometry.Vector3d
+        Dim index As Integer
+        Dim arrObj As New System.Collections.Generic.List(Of Guid)()
+
+        tRad = fRad
+        'calculate and draw monhly path
+        If setDate = False Then
+            'Option without precised date
+            For i As Integer = 1 To 12
+                Dim arrPts As New Rhino.Collections.Point3dList
+                tMonth = i
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                tHours = Math.Floor(arrSunValues(2))
+                tMin = (arrSunValues(2) - tHours) * 60
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                arrPtSunRise = New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPtSunRise)
+
+                temp1 = CType(arrSunValues(2), Integer) + 1
+                temp2 = CType(arrSunValues(3), Integer) - 1
+                For j As Integer = temp1 To temp2
+                    tHours = j
+                    arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                    tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                    vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                    Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                    arrPts.Add(arrPt)
+
+                Next
+
+                tHours = Math.Floor(arrSunValues(3))
+                tMin = (arrSunValues(3) - tHours) * 60
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                arrPtSunSet = New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPtSunSet)
+
+                crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+
+                If i <= 6 Then
+                    t = "1. " & arrMonth(i)
+                    plane = source_plane
+                    vecT = New Rhino.Geometry.Vector3d(arrPtSunRise) + New Rhino.Geometry.Vector3d(1.5, 0, 0)
+                    plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                Else
+                    attribs.ObjectColor = Drawing.Color.Blue
+
+                    t = "1. " & arrMonth(i)
+                    plane = source_plane
+                    vecT = New Rhino.Geometry.Vector3d(arrPtSunSet) + New Rhino.Geometry.Vector3d(-9, 0, 0)
+                    plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                End If
+
+                arrObj.Add(doc.Objects.AddCurve(crv))
+
+            Next
+        Else
+            'Option with precised date
+            Dim arrPts As New Rhino.Collections.Point3dList
+            tMonth = month
+            tDay = day
+
+
+            'Return Rhino.Commands.Result.Failure
+
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            tHours = Math.Floor(arrSunValues(2))
+            tMin = (arrSunValues(2) - tHours) * 60
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+            vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+            arrPtSunRise = New Rhino.Geometry.Point3d(vec)
+            arrPts.Add(arrPtSunRise)
+
+            temp1 = CType(arrSunValues(2), Integer) + 1
+            temp2 = CType(arrSunValues(3), Integer) - 1
+            For j As Integer = temp1 To temp2
+                tHours = j
+                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                arrPts.Add(arrPt)
+            Next
+
+            tHours = Math.Floor(arrSunValues(3))
+            tMin = (arrSunValues(3) - tHours) * 60
+            arrSunValues = SunAngle.Calculate(0, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+            If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+            'tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+            vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+            arrPtSunSet = New Rhino.Geometry.Point3d(vec)
+            arrPts.Add(arrPtSunSet)
+
+            crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+
+            If month <= 6 Then
+
+                t = tDay & ". " & arrMonth(CInt(month))
+                plane = source_plane
+                vecT = New Rhino.Geometry.Vector3d(arrPtSunRise) + New Rhino.Geometry.Vector3d(1.5, 0, 0)
+                plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                'set current layer
+                index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                doc.Layers.SetCurrentLayerIndex(index, True)
+
+                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+
+            Else
+                t = tDay & ". " & arrMonth(CInt(month))
+                plane = source_plane
+                vecT = New Rhino.Geometry.Vector3d(arrPtSunSet) + New Rhino.Geometry.Vector3d(-9, 0, 0)
+                plane.Origin = New Rhino.Geometry.Point3d(vecT)
+
+                'set current layer
+                index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                doc.Layers.SetCurrentLayerIndex(index, True)
+
+                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+            End If
+            arrObj.Add(doc.Objects.AddCurve(crv))
+        End If
+
+        For i As Integer = 0 To arrObj.Count - 1
+            ids.Add(arrObj(i))
+        Next
+
+        doc.Views.Redraw()
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+    '# draw stereoscopic sunpath diagram - hourly
+    Private Shared Function DrawStereoscopicSunPathHourlyDiagram(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double) As Rhino.Commands.Result
+
+        Rhino.RhinoApp.WriteLine("DrawStereoscopicSunPathHourlyDiagram")
+
+        Dim tMonth As Double = arrVal(0)
+        Dim tDay As Double = arrVal(1)
+        Dim tHours As Double = arrVal(2)
+        Dim tMin As Double = arrVal(3)
+        Dim lat As Double = arrVal(4)
+        Dim lon As Double = arrVal(5)
+        Dim tZone As Double = arrVal(6)
+        Dim fRad As Double = arrVal(7)
+        Dim fOff As Double = arrVal(8)
+
+        Dim arrSunValues(3) As Double
+        Dim tRad As Double
+        Dim vec As New Rhino.Geometry.Vector3d
+        Dim arrVec As Rhino.Geometry.Vector3d
+        Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
+        Dim arrCut(1) As Rhino.Geometry.Point3d
+        Dim t As String
+        Dim height As Double = 1.5
+        Dim font As String = "Arial"
+        Dim plane As Rhino.Geometry.Plane
+        Dim source_plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+        Dim crv As Rhino.Geometry.Curve
+        Dim attribs = doc.CreateDefaultAttributes()
+        Dim j As Integer
+        Dim arrObj As New System.Collections.Generic.List(Of Guid)()
+        Dim index As Integer
+
+        Dim vec_sun As Rhino.Geometry.Vector3d
+        Dim angle As Double
+
+        'Dim arrParam(1) As Double
+
+        ' calculate and hourly path
+        Dim flag As Integer
+        If setHour = False Then
+            For i = 0 To 23
+                flag = 0
+                tHours = i
+                tMin = 0
+                Dim arrPts As New Rhino.Collections.Point3dList
+                Dim arrPtsB, arrPtsR As New Rhino.Collections.Point3dList
+                'Dim arrParam As New Rhino.Collections.RhinoList(Of Double)
+
+                If setDate = False Then
+                    For j = 1 To 365 Step 3
+
+                        arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                        If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                        If i >= arrSunValues(2) And i <= arrSunValues(3) Then
+                            tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                            Dim arrPt As New Rhino.Geometry.Point3d(vec)
+
+                            arrPts.Add(arrPt)
+
+                            'If j = 172 Then arrCut(0) = arrPt
+                            'If j = 355 Then arrCut(1) = arrPt
+                            If j <= 172 Then
+                                arrPtsR.Add(arrPt)
+                            End If
+
+                            If j = 355 Then
+                                arrPtsR.Insert(0, arrPt)
+                            End If
+
+                            If j >= 172 And j <= 355 Then
+                                arrPtsB.Add(arrPt)
+                            End If
+
+                            If j = 184 Then
+                                arrVec = vec
+                                arrVec.Unitize()
+                                arrVec = arrVec * (-3)
+                                arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                                arrVec = arrVec + vec
+
+                                t = i & ":00"
+                                plane = source_plane
+                                plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                            End If
+                        Else
+                            flag = 1
+                        End If
+                    Next
+
+
+                    If arrPts.Count > 0 And flag = 0 Then
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                        'arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    ElseIf arrPts.Count > 0 And flag = 1 Then
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                        'arrObj.Add(doc.Objects.AddCurve(crv))
+                    End If
+
+                Else
+                    j = 0
+                    tMonth = month
+                    tDay = day
+                    'Rhino.RhinoApp.WriteLine(CStr(tMonth) & " _ " & CStr(tDay) & " _ " & CStr(tHours) & " _ " & CStr(tMin) & " _ " & CStr(tZone) & " _ " & CStr(lat) & " _ " & CStr(lon) & " _ " & CStr(fOff))
+                    arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    If i >= arrSunValues(2) And i <= arrSunValues(3) Then
+                        tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                        vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                        Dim arrPt As New Rhino.Geometry.Point3d(vec)
+
+                        arrPts.Add(arrPt)
+                        arrObj.Add(doc.Objects.AddPoint(arrPt))
+
+                        'adding an hour
+                        arrVec = vec
+                        arrVec.Unitize()
+                        arrVec = arrVec * (-3)
+                        arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                        arrVec = arrVec + vec
+
+
+                        If SPD_showAngle Then
+                            vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                            angle = GetVecAngle(vec_sun)
+                            t = i & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
+                        Else
+                            t = i & ":00"
+                        End If
+
+
+
+                        't = i & ":00"
+                        plane = source_plane
+                        plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                        arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+
+                    Else
+                        flag = 1
+                    End If
+                End If
+            Next
+        Else
+            flag = 0
+            tHours = hour
+            tMin = 0
+            Dim arrPts As New Rhino.Collections.Point3dList
+            Dim arrPtsB, arrPtsR As New Rhino.Collections.Point3dList
+            'Dim arrParam As New Rhino.Collections.RhinoList(Of Double)
+
+            If setDate = False Then
+                For j = 1 To 365 Step 3
+                    arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    If tHours >= arrSunValues(2) And tHours <= arrSunValues(3) Then
+                        tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                        vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                        Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                        arrPts.Add(arrPt)
+                        'doc.Objects.AddPoint(arrPt)
+
+                        'If j = 172 Then arrCut(0) = arrPt
+                        'If j = 355 Then arrCut(1) = arrPt
+
+                        If j <= 172 Then
+                            arrPtsR.Add(arrPt)
+                        End If
+
+                        If j = 355 Then
+                            arrPtsR.Insert(0, arrPt)
+                        End If
+
+                        If j >= 172 And j <= 355 Then
+                            arrPtsB.Add(arrPt)
+                        End If
+
+                        If j = 184 Then
+                            arrVec = vec
+                            arrVec.Unitize()
+                            arrVec = arrVec * (-3)
+                            arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                            arrVec = arrVec + vec
+
+                            t = tHours & ":00"
+                            plane = source_plane
+                            plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                            arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                        End If
+                    Else
+                        flag = 1
+                    End If
+                Next
+
+                If arrPts.Count > 0 And flag = 0 Then
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                    'arrObj.Add(doc.Objects.AddCurve(crv))
+
+                ElseIf arrPts.Count > 0 And flag = 1 Then
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                    'arrObj.Add(doc.Objects.AddCurve(crv))
+                End If
+
+            Else
+
+                j = 0
+                tMonth = month
+                tDay = day
+                tHours = hour
+                arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                If tHours >= arrSunValues(2) And tHours <= arrSunValues(3) Then
+                    tRad = (fRad * Math.Cos(Rhino.RhinoMath.ToRadians(arrSunValues(0)))) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                    vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                    Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                    arrPts.Add(arrPt)
+                    arrObj.Add(doc.Objects.AddPoint(arrPt))
+
+                    'adding an hour
+                    arrVec = vec
+                    arrVec.Unitize()
+                    arrVec = arrVec * (-3)
+                    arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                    arrVec = arrVec + vec
+
+                    If SPD_showAngle Then
+                        vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                        angle = GetVecAngle(vec_sun)
+                        t = tHours & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
+                    Else
+                        t = tHours & ":00"
+                    End If
+
+                    't = tHours & ":00"
+                    plane = source_plane
+                    plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                Else
+                    flag = 1
+                End If
+            End If
+        End If
+
+        For i As Integer = 0 To arrObj.Count - 1
+            ids.Add(arrObj(i))
+        Next
+
+        Dim ind As Integer = doc.Groups.Add(ids)
+        'Dim rand As New Random()
+        'Dim ind As Integer = doc.Groups.Add(CStr(rand.Next))
+        'doc.Groups.AddToGroup(ind, ids)
+
+        doc.Views.Redraw()
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+    '# draw stereoscopic sunpath diagram 3D - hourly
+    Private Shared Function DrawStereoscopicSunPathHourlyDiagram3D(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double) As Rhino.Commands.Result
+
+        Rhino.RhinoApp.WriteLine("DrawStereoscopicSunPathHourlyDiagram")
+
+        Dim tMonth As Double = arrVal(0)
+        Dim tDay As Double = arrVal(1)
+        Dim tHours As Double = arrVal(2)
+        Dim tMin As Double = arrVal(3)
+        Dim lat As Double = arrVal(4)
+        Dim lon As Double = arrVal(5)
+        Dim tZone As Double = arrVal(6)
+        Dim fRad As Double = arrVal(7)
+        Dim fOff As Double = arrVal(8)
+
+        Dim arrSunValues(3) As Double
+        Dim tRad As Double
+        Dim vec As New Rhino.Geometry.Vector3d
+        Dim arrVec As Rhino.Geometry.Vector3d
+        Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
+        Dim arrCut(1) As Rhino.Geometry.Point3d
+        Dim t As String
+        Dim height As Double = 1.5
+        Dim font As String = "Arial"
+        Dim plane As Rhino.Geometry.Plane
+        Dim source_plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+        Dim crv As Rhino.Geometry.Curve
+        Dim j As Integer
+        Dim arrObj As New System.Collections.Generic.List(Of Guid)()
+        Dim index As Integer
+        Dim sphere As New Rhino.Geometry.Sphere
+        Dim vec_sun As Rhino.Geometry.Vector3d
+        Dim angle As Double
+
+        'Dim arrParam(1) As Double
+        'tRad = fRad
+        ' calculate and hourly path
+        Dim flag As Integer
+        If setHour = False Then
+            For i = 0 To 23
+                flag = 0
+                tHours = i
+                tMin = 0
+                Dim arrPts As New Rhino.Collections.Point3dList
+                Dim arrPtsB, arrPtsR As New Rhino.Collections.Point3dList
+                'Dim arrParam As New Rhino.Collections.RhinoList(Of Double)
+
+                If setDate = False Then
+                    For j = 1 To 365 Step 3
+                        arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                        If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                        If i >= arrSunValues(2) And i <= arrSunValues(3) Then
+                            tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                            vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                            vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                            vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                            Dim arrPt As New Rhino.Geometry.Point3d(vec)
+
+                            arrPts.Add(arrPt)
+
+                            'If j = 172 Then arrCut(0) = arrPt
+                            'If j = 355 Then arrCut(1) = arrPt
+                            If j <= 172 Then
+                                arrPtsR.Add(arrPt)
+                            End If
+
+                            If j = 355 Then
+                                arrPtsR.Insert(0, arrPt)
+                            End If
+
+                            If j >= 172 And j <= 355 Then
+                                arrPtsB.Add(arrPt)
+                            End If
+
+                            If j = 184 Then
+                                arrVec = vec
+                                arrVec.Unitize()
+                                arrVec = arrVec * (-3)
+                                arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                                arrVec = arrVec + vec
+
+                                t = i & ":00"
+                                plane = source_plane
+                                plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                                arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                            End If
+                        Else
+                            flag = 1
+                        End If
+                    Next
+
+
+                    If arrPts.Count > 0 And flag = 0 Then
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                        'arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    ElseIf arrPts.Count > 0 And flag = 1 Then
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'set current layer
+                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'add Crv
+                        crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                        arrObj.Add(doc.Objects.AddCurve(crv))
+
+                        'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                        'arrObj.Add(doc.Objects.AddCurve(crv))
+                    End If
+
+                Else
+                    j = 0
+                    tMonth = month
+                    tDay = day
+                    arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    If i >= arrSunValues(2) And i <= arrSunValues(3) Then
+                        tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                        vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                        Dim arrPt As New Rhino.Geometry.Point3d(vec)
+
+                        If tMonth <= 6 Then
+                            index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        Else
+                            index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        End If
+
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+
+                        arrPts.Add(arrPt)
+                        arrObj.Add(doc.Objects.AddPoint(arrPt))
+
+                        'adding an hour
+                        arrVec = vec
+                        arrVec.Unitize()
+                        arrVec = arrVec * (-3)
+                        arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                        arrVec = arrVec + vec
+
+
+                        If SPD_showAngle Then
+                            vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                            angle = GetVecAngle(vec_sun)
+                            t = i & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
+                        Else
+                            t = i & ":00"
+                        End If
+
+
+
+                        plane = source_plane
+                        plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                        arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+
+                        index = doc.Layers.Find("SPD_sunDirection", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+
+                        'sun Sphere
+                        plane.Origin = New Rhino.Geometry.Point3d(vec)
+                        sphere = New Rhino.Geometry.Sphere(plane, 1.5)
+                        Dim arrow As New Rhino.Geometry.Line(arrPt, New Rhino.Geometry.Point3d(0, 0, 0))
+                        Dim attribs = doc.CreateDefaultAttributes()
+                        attribs.ObjectDecoration = Rhino.DocObjects.ObjectDecoration.None
+                        attribs.ObjectColor = Drawing.Color.Aqua
+
+                        index = doc.Layers.Find("SPD_sunDirection", True)
+                        doc.Layers.SetCurrentLayerIndex(index, True)
+
+                        arrObj.Add(doc.Objects.AddSphere(sphere))
+                        arrObj.Add(doc.Objects.AddLine(arrow, attribs))
+
+                    Else
+                        flag = 1
+                    End If
+                End If
+            Next
+        Else
+            flag = 0
+            tHours = hour
+            tMin = 0
+            Dim arrPts As New Rhino.Collections.Point3dList
+            Dim arrPtsB, arrPtsR As New Rhino.Collections.Point3dList
+            'Dim arrParam As New Rhino.Collections.RhinoList(Of Double)
+
+            If setDate = False Then
+                For j = 1 To 365 Step 3
+                    arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                    If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                    If tHours >= arrSunValues(2) And tHours <= arrSunValues(3) Then
+                        tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                        vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                        vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                        Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                        arrPts.Add(arrPt)
+                        'doc.Objects.AddPoint(arrPt)
+
+                        'If j = 172 Then arrCut(0) = arrPt
+                        'If j = 355 Then arrCut(1) = arrPt
+
+                        If j <= 172 Then
+                            arrPtsR.Add(arrPt)
+                        End If
+
+                        If j = 355 Then
+                            arrPtsR.Insert(0, arrPt)
+                        End If
+
+                        If j >= 172 And j <= 355 Then
+                            arrPtsB.Add(arrPt)
+                        End If
+
+                        If j = 184 Then
+                            arrVec = vec
+                            arrVec.Unitize()
+                            arrVec = arrVec * (-3)
+                            arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                            arrVec = arrVec + vec
+
+                            t = tHours & ":00"
+                            plane = source_plane
+                            plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                            arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+                        End If
+                    Else
+                        flag = 1
+                    End If
+                Next
+
+                If arrPts.Count > 0 And flag = 0 Then
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                    'arrObj.Add(doc.Objects.AddCurve(crv))
+
+                ElseIf arrPts.Count > 0 And flag = 1 Then
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'set current layer
+                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'add Crv
+                    crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
+                    arrObj.Add(doc.Objects.AddCurve(crv))
+
+                    'crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPts, 3)
+                    'arrObj.Add(doc.Objects.AddCurve(crv))
+                End If
+
+            Else
+
+                j = 0
+                tMonth = month
+                tDay = day
+                tHours = hour
+                arrSunValues = SunAngle.Calculate(j, tMonth, tDay, tHours, tMin, tZone, lat, lon, fOff)
+                If arrSunValues Is Nothing Then Return Rhino.Commands.Result.Cancel
+
+                If tHours >= arrSunValues(2) And tHours <= arrSunValues(3) Then
+
+                    tRad = (fRad) / (1 + Math.Sin(Rhino.RhinoMath.ToRadians(arrSunValues(0))))
+                    vec = New Rhino.Geometry.Vector3d(0, tRad, 0)
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(arrSunValues(0)), New Rhino.Geometry.Vector3d(1, 0, 0))
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
+                    Dim arrPt As New Rhino.Geometry.Point3d(vec)
+                    arrPts.Add(arrPt)
+
+                    If tMonth <= 6 Then
+                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    Else
+                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    End If
+
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    arrObj.Add(doc.Objects.AddPoint(arrPt))
+
+                    'adding an hour
+                    arrVec = vec
+                    arrVec.Unitize()
+                    arrVec = arrVec * (-3)
+                    arrVec = arrVec + New Rhino.Geometry.Vector3d(-2, 0, 0)
+                    arrVec = arrVec + vec
+
+
+                    If SPD_showAngle Then
+                        vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                        angle = GetVecAngle(vec_sun)
+                        t = tHours & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
+                    Else
+                        t = tHours & ":00"
+                    End If
+
+                    plane = source_plane
+                    plane.Origin = New Rhino.Geometry.Point3d(arrVec)
+                    arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
+
+                    'sun Sphere
+                    plane.Origin = New Rhino.Geometry.Point3d(vec)
+                    sphere = New Rhino.Geometry.Sphere(plane, 1.5)
+                    Dim arrow As New Rhino.Geometry.Line(arrPt, New Rhino.Geometry.Point3d(0, 0, 0))
+
+                    index = doc.Layers.Find("SPD_sunDirection", True)
+                    doc.Layers.SetCurrentLayerIndex(index, True)
+
+                    Dim attribs = doc.CreateDefaultAttributes()
+                    attribs.ObjectDecoration = Rhino.DocObjects.ObjectDecoration.None
+                    attribs.ObjectColor = Drawing.Color.Plum
+
+                    arrObj.Add(doc.Objects.AddSphere(sphere))
+                    arrObj.Add(doc.Objects.AddLine(arrow, attribs))
+                Else
+                    flag = 1
+                End If
+            End If
+        End If
+
+        For i As Integer = 0 To arrObj.Count - 1
+            ids.Add(arrObj(i))
+        Next
+
+        Dim ind As Integer = doc.Groups.Add(ids)
+        'Dim rand As New Random()
+        'Dim ind As Integer = doc.Groups.Add(CStr(rand.Next))
+        'doc.Groups.AddToGroup(ind, ids)
+
+        doc.Views.Redraw()
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+
+
+
+    'add SunDiagram Layers
+    Public Shared Function AddLayers_SDP(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
+        Dim layer_name As String = "SPD"
+        AddLayer(doc, layer_name)
+
+        'child layers:
+        AddChildLayer(doc, layer_name, "template", "gray") 'template layer
+        'AddChildLayer(doc, layer_name, "text", "gray") 'template description text layer
+        AddChildLayer(doc, layer_name, "monthPath_1-6", "red") 'month path 1-6 layer
+        AddChildLayer(doc, layer_name, "monthPath_7-12", "blue") 'month path 7-12 layer
+        AddChildLayer(doc, layer_name, "hourPath_1-6", "red") 'hour path 1-6 layer
+        AddChildLayer(doc, layer_name, "hourPath_7-12", "blue") 'hour path 7-12 layer
+        AddChildLayer(doc, layer_name, "sunDirection", "yellow") 'sun sphere and sun direction
+
+        Return Rhino.Commands.Result.Success
+    End Function
+
+End Class
+
