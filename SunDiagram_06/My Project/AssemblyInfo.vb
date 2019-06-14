@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following
@@ -8,17 +7,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("HdM Sun Tool")>
+<Assembly: AssemblyTitle("Sun Tool")>
 <Assembly: AssemblyDescription("Tools for Sun")>
-<Assembly: AssemblyCompany("Herzog & de Meuron")>
-<Assembly: AssemblyProduct("SunDiagram for Rhino 6")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("SunDiagram for Rhino")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("6c0f7dff-53a2-47fb-b961-f248ff656f75")>
+<Assembly: Guid("70DCE68B-9055-40F3-9A84-0FDC00FC5743")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.6.0")>
-<Assembly: AssemblyFileVersion("1.0.6.0")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>

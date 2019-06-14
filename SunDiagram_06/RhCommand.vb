@@ -1,9 +1,7 @@
-﻿Imports Rhino.DocObjects
-Imports Rhino
-Imports Rhino.Geometry
+﻿Imports Rhino
 
 Public Class RhCommand
-    Inherits Rhino.Commands.Command
+    Inherits Commands.Command
 
     Shared _instance As RhCommand
 
@@ -19,15 +17,15 @@ Public Class RhCommand
 
     Public Overrides ReadOnly Property EnglishName() As String
         Get
-            Return "HdM_SunDiagram"
+            Return "SunTool"
         End Get
     End Property
 
-    Protected Overrides Function RunCommand(ByVal doc As Rhino.RhinoDoc, ByVal mode As Rhino.Commands.RunMode) As Rhino.Commands.Result
+    Protected Overrides Function RunCommand(ByVal doc As RhinoDoc, ByVal mode As Commands.RunMode) As Commands.Result
 
         RhPlugin.Instance.OpenPanel()
 
-        Return Rhino.Commands.Result.Success
+        Return Commands.Result.Success
 
     End Function
 

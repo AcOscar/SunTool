@@ -1,6 +1,7 @@
 ﻿
 'User Interface
-<System.Runtime.InteropServices.Guid("FA12592B-3D61-4CE9-ADAE-8167D5774D76")>
+'<System.Runtime.InteropServices.Guid("FA12592B-3D61-4CE9-ADAE-8167D5774D76")>
+<System.Runtime.InteropServices.Guid("52C942F9-3338-4155-9389-B4C9A5354933")>
 Public Class Form1
 
     Public Sub New()
@@ -45,10 +46,10 @@ Public Class Form1
         SEA_TimeSeg = 100.0
     End Sub
 
-    Public Shared Function BarID() As Guid
-        Dim g As New Guid("{C5500DE9-8DB7-40e4-85BF-F3811A6BE9C3}")
-        Return g
-    End Function
+    'Public Shared Function BarID() As Guid
+    '    Dim g As New Guid("{C5500DE9-8DB7-40e4-85BF-F3811A6BE9C3}")
+    '    Return g
+    'End Function
 
     '###################################################################
     '###SET DATA

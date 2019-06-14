@@ -157,13 +157,13 @@
     <value>No</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>HdM Sun Tool</value>
+    <value>Sun Tool</value>
   </data>
   <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -604,7 +604,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="Data.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 430</value>
+    <value>313, 428</value>
   </data>
   <data name="Data.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -874,7 +874,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="SunDiagramTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 430</value>
+    <value>313, 428</value>
   </data>
   <data name="SunDiagramTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

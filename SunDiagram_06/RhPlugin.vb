@@ -15,8 +15,7 @@
 
     Protected Overrides Function OnLoad(ByRef errorMessage As String) As Rhino.PlugIns.LoadReturnCode
 
-        Rhino.UI.Panels.RegisterPanel(Me, GetType(Form1), "HdM Sun Tool", My.Resources.SunIcon)
-
+        Rhino.UI.Panels.RegisterPanel(Me, GetType(Form1), "Sun Tool", My.Resources.SunIcon)
         OpenPanel()
 
         Return Rhino.PlugIns.LoadReturnCode.Success
