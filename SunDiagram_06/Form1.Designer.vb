@@ -26,7 +26,6 @@ Partial Class Form1
         Me.SunPathDiagram = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.SunRays = New System.Windows.Forms.Button()
-        Me.SunStudy = New System.Windows.Forms.Button()
         Me.Tabs = New System.Windows.Forms.TabControl()
         Me.Data = New System.Windows.Forms.TabPage()
         Me.SetHourCB = New System.Windows.Forms.CheckBox()
@@ -43,12 +42,12 @@ Partial Class Form1
         Me.LatitudeTB = New System.Windows.Forms.TextBox()
         Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.SunDiagramTab = New System.Windows.Forms.TabPage()
-        Me.SunStudyGroupBox = New System.Windows.Forms.GroupBox()
-        Me.SunStudyCheckBox = New System.Windows.Forms.CheckBox()
         Me.SunRaysGBox = New System.Windows.Forms.GroupBox()
         Me.ShadowRaysCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SunRaysPickPoint = New System.Windows.Forms.CheckBox()
         Me.SunPath = New System.Windows.Forms.GroupBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SunPathShowAng = New System.Windows.Forms.CheckBox()
         Me.SunPathPickObj = New System.Windows.Forms.CheckBox()
         Me.SunPath3D = New System.Windows.Forms.CheckBox()
@@ -88,11 +87,11 @@ Partial Class Form1
         Me.DropShadowBox = New System.Windows.Forms.GroupBox()
         Me.DropShadowButton = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.SunPathDiagram2 = New System.Windows.Forms.Button()
         Me.Tabs.SuspendLayout()
         Me.Data.SuspendLayout()
         CType(Me.HourTB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SunDiagramTab.SuspendLayout()
-        Me.SunStudyGroupBox.SuspendLayout()
         Me.SunRaysGBox.SuspendLayout()
         Me.SunPath.SuspendLayout()
         Me.SunAnalysisTab.SuspendLayout()
@@ -123,12 +122,6 @@ Partial Class Form1
         resources.ApplyResources(Me.SunRays, "SunRays")
         Me.SunRays.Name = "SunRays"
         Me.SunRays.UseVisualStyleBackColor = True
-        '
-        'SunStudy
-        '
-        resources.ApplyResources(Me.SunStudy, "SunStudy")
-        Me.SunStudy.Name = "SunStudy"
-        Me.SunStudy.UseVisualStyleBackColor = True
         '
         'Tabs
         '
@@ -232,26 +225,11 @@ Partial Class Form1
         '
         'SunDiagramTab
         '
-        Me.SunDiagramTab.Controls.Add(Me.SunStudyGroupBox)
         Me.SunDiagramTab.Controls.Add(Me.SunRaysGBox)
         Me.SunDiagramTab.Controls.Add(Me.SunPath)
         resources.ApplyResources(Me.SunDiagramTab, "SunDiagramTab")
         Me.SunDiagramTab.Name = "SunDiagramTab"
         Me.SunDiagramTab.UseVisualStyleBackColor = True
-        '
-        'SunStudyGroupBox
-        '
-        Me.SunStudyGroupBox.Controls.Add(Me.SunStudyCheckBox)
-        Me.SunStudyGroupBox.Controls.Add(Me.SunStudy)
-        resources.ApplyResources(Me.SunStudyGroupBox, "SunStudyGroupBox")
-        Me.SunStudyGroupBox.Name = "SunStudyGroupBox"
-        Me.SunStudyGroupBox.TabStop = False
-        '
-        'SunStudyCheckBox
-        '
-        resources.ApplyResources(Me.SunStudyCheckBox, "SunStudyCheckBox")
-        Me.SunStudyCheckBox.Name = "SunStudyCheckBox"
-        Me.SunStudyCheckBox.UseVisualStyleBackColor = True
         '
         'SunRaysGBox
         '
@@ -276,6 +254,9 @@ Partial Class Form1
         '
         'SunPath
         '
+        Me.SunPath.Controls.Add(Me.SunPathDiagram2)
+        Me.SunPath.Controls.Add(Me.CheckBox2)
+        Me.SunPath.Controls.Add(Me.CheckBox1)
         Me.SunPath.Controls.Add(Me.SunPathShowAng)
         Me.SunPath.Controls.Add(Me.SunPathPickObj)
         Me.SunPath.Controls.Add(Me.SunPath3D)
@@ -283,6 +264,18 @@ Partial Class Form1
         resources.ApplyResources(Me.SunPath, "SunPath")
         Me.SunPath.Name = "SunPath"
         Me.SunPath.TabStop = False
+        '
+        'CheckBox2
+        '
+        resources.ApplyResources(Me.CheckBox2, "CheckBox2")
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'SunPathShowAng
         '
@@ -567,6 +560,12 @@ Partial Class Form1
         '
         Me.ColorDialog1.Color = System.Drawing.Color.DarkRed
         '
+        'SunPathDiagram2
+        '
+        resources.ApplyResources(Me.SunPathDiagram2, "SunPathDiagram2")
+        Me.SunPathDiagram2.Name = "SunPathDiagram2"
+        Me.SunPathDiagram2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         resources.ApplyResources(Me, "$this")
@@ -579,8 +578,6 @@ Partial Class Form1
         Me.Data.PerformLayout()
         CType(Me.HourTB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SunDiagramTab.ResumeLayout(False)
-        Me.SunStudyGroupBox.ResumeLayout(False)
-        Me.SunStudyGroupBox.PerformLayout()
         Me.SunRaysGBox.ResumeLayout(False)
         Me.SunRaysGBox.PerformLayout()
         Me.SunPath.ResumeLayout(False)
@@ -603,7 +600,6 @@ Partial Class Form1
     Friend WithEvents SunPathDiagram As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents SunRays As System.Windows.Forms.Button
-    Friend WithEvents SunStudy As System.Windows.Forms.Button
     Friend WithEvents Tabs As System.Windows.Forms.TabControl
     Friend WithEvents SunDiagramTab As System.Windows.Forms.TabPage
     Friend WithEvents SunAnalysisTab As System.Windows.Forms.TabPage
@@ -624,10 +620,8 @@ Partial Class Form1
     Friend WithEvents SunPath As System.Windows.Forms.GroupBox
     Friend WithEvents SunPathPickObj As System.Windows.Forms.CheckBox
     Friend WithEvents SunPath3D As System.Windows.Forms.CheckBox
-    Friend WithEvents SunStudyGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents SunRaysGBox As System.Windows.Forms.GroupBox
     Friend WithEvents SunRaysPickPoint As System.Windows.Forms.CheckBox
-    Friend WithEvents SunStudyCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents ShadowRaysCheckBox1 As System.Windows.Forms.CheckBox
     Public WithEvents MonthCalendar1 As System.Windows.Forms.MonthCalendar
     Friend WithEvents DropShadowBox As System.Windows.Forms.GroupBox
@@ -665,5 +659,7 @@ Partial Class Form1
     Public WithEvents SEA_TimeStart_Min As System.Windows.Forms.NumericUpDown
     Friend WithEvents SEAProgressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents SEA_Reset As System.Windows.Forms.Button
-
+    Friend WithEvents CheckBox2 As Windows.Forms.CheckBox
+    Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
+    Friend WithEvents SunPathDiagram2 As Windows.Forms.Button
 End Class

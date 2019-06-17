@@ -602,7 +602,9 @@ Public Class SE
         go.GroupSelect = True
         go.GetMultiple(1, 0)
         If go.CommandResult() <> Rhino.Commands.Result.Success Then
-            Exit Function
+            Return go.CommandResult
+
+            'Exit Function
         End If
         For i As Integer = 0 To go.ObjectCount - 1
             Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)

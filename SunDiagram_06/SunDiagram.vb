@@ -61,6 +61,7 @@ Public Class SPD
         Return Rhino.Commands.Result.Success
     End Function
 
+
     '# draw Stereoscopic Template
     Private Shared Function DrawStereoscopicTemplate(ByVal doc As Rhino.RhinoDoc, ByVal fRad As Double, ByVal fOffset As Double) As Rhino.Commands.Result
 
@@ -146,6 +147,7 @@ Public Class SPD
         doc.Views.Redraw()
 
         Return Rhino.Commands.Result.Success
+
     End Function
 
     '# draw Stereoscopic Template - monthly

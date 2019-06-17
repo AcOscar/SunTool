@@ -1,6 +1,5 @@
 ﻿
 'User Interface
-'<System.Runtime.InteropServices.Guid("FA12592B-3D61-4CE9-ADAE-8167D5774D76")>
 <System.Runtime.InteropServices.Guid("52C942F9-3338-4155-9389-B4C9A5354933")>
 Public Class Form1
 
@@ -404,8 +403,14 @@ Public Class Form1
     'display sun diagram
     Private Sub SunPathDiagram_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SunPathDiagram.Click
         SPD.Draw(Rhino.RhinoDoc.ActiveDoc)
-        'If SPD_Shadow Then DropShadow.Draw(Rhino.RhinoDoc.ActiveDoc, lon, lat, TZone, nOffset, setDate, month, day, setHour, hour)
     End Sub
+    Private Sub SunPathDiagram2_Click(sender As Object, e As EventArgs) Handles SunPathDiagram2.Click
+        SPD2.Draw(Rhino.RhinoDoc.ActiveDoc)
+
+    End Sub
+
+
+
 
     '######################################################################
     '###SUN RAYS DIAGRAM
@@ -427,20 +432,8 @@ Public Class Form1
 
 
     '######################################################################
-    '###SUN STUDY
-    '######################################################################
-
-    'sun study
-    Private Sub SunStudy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SunStudy.Click
-        Rhino.RhinoApp.WriteLine("Module under construction")
-    End Sub
-    '######################################################################
     '###SUN EXPOSURE ANALYSIS
     '######################################################################
-    'box
-    Private Sub SunExpGB1_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SunExpGB1.Enter
-
-    End Sub
 
     'proceed sun analysis
     Private Sub SEAButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SEAButton.Click
@@ -718,8 +711,5 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
 End Class
 

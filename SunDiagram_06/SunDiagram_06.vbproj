@@ -85,6 +85,7 @@
     <Compile Include="RhCommand.vb" />
     <Compile Include="RhPlugin.vb" />
     <Compile Include="SunDiagram.vb" />
+    <Compile Include="SunDiagram2.vb" />
     <Compile Include="SunExposure.vb" />
     <Compile Include="SunRays.vb" />
   </ItemGroup>
