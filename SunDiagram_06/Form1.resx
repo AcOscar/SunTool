@@ -370,7 +370,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="Data.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 471</value>
+    <value>410, 627</value>
   </data>
   <data name="Data.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -393,42 +393,6 @@
   <data name="&gt;&gt;Data.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Name" xml:space="preserve">
-    <value>ShadowRaysCheckBox1</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Name" xml:space="preserve">
-    <value>SunRaysPickPoint</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SunRaysGBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 166</value>
-  </data>
-  <data name="SunRaysGBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 86</value>
-  </data>
-  <data name="SunRaysGBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="SunRaysGBox.Text" xml:space="preserve">
-    <value>Sun Rays</value>
-  </data>
   <data name="&gt;&gt;SunRaysGBox.Name" xml:space="preserve">
     <value>SunRaysGBox</value>
   </data>
@@ -440,90 +404,6 @@
   </data>
   <data name="&gt;&gt;SunRaysGBox.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
-    <value>SunPathDiagram2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
-    <value>CheckBox2</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
-    <value>CheckBox1</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Name" xml:space="preserve">
-    <value>SunPathShowAng</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Name" xml:space="preserve">
-    <value>SunPathPickObj</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Name" xml:space="preserve">
-    <value>SunPath3D</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="SunPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="SunPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 154</value>
-  </data>
-  <data name="SunPath.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="SunPath.Text" xml:space="preserve">
-    <value>Sun Path Diagram</value>
   </data>
   <data name="&gt;&gt;SunPath.Name" xml:space="preserve">
     <value>SunPath</value>
@@ -544,7 +424,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="SunDiagramTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 471</value>
+    <value>410, 627</value>
   </data>
   <data name="SunDiagramTab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -567,6 +447,48 @@
   <data name="&gt;&gt;SunDiagramTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 295</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Show Analysed Mesh2</value>
+  </data>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
+  </data>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+    <value>SunExpGB1</value>
+  </data>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="SEA_Reset.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="SEA_Reset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SEA_Reset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 342</value>
+  </data>
+  <data name="SEA_Reset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 27</value>
+  </data>
+  <data name="SEA_Reset.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="SEA_Reset.Text" xml:space="preserve">
+    <value>Reset Mesh Colors</value>
+  </data>
   <data name="&gt;&gt;SEA_Reset.Name" xml:space="preserve">
     <value>SEA_Reset</value>
   </data>
@@ -577,7 +499,19 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_Reset.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="SEAProgressBar.AccessibleName" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SEAProgressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 326</value>
+  </data>
+  <data name="SEAProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 10</value>
+  </data>
+  <data name="SEAProgressBar.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
   <data name="&gt;&gt;SEAProgressBar.Name" xml:space="preserve">
     <value>SEAProgressBar</value>
@@ -589,7 +523,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEAProgressBar.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="SEA_TimeEnd_Min.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 23</value>
+  </data>
+  <data name="SEA_TimeEnd_Min.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 20</value>
+  </data>
+  <data name="SEA_TimeEnd_Min.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd_Min.Name" xml:space="preserve">
     <value>SEA_TimeEnd_Min</value>
@@ -601,7 +544,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd_Min.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="SEA_TimeStart_Min.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 23</value>
+  </data>
+  <data name="SEA_TimeStart_Min.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
+  </data>
+  <data name="SEA_TimeStart_Min.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart_Min.Name" xml:space="preserve">
     <value>SEA_TimeStart_Min</value>
@@ -613,7 +565,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart_Min.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="SEA_AngleMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 52</value>
+  </data>
+  <data name="SEA_AngleMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 20</value>
+  </data>
+  <data name="SEA_AngleMax.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMax.Name" xml:space="preserve">
     <value>SEA_AngleMax</value>
@@ -625,7 +586,25 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMax.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 54</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="Label11.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Max:</value>
   </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
@@ -637,7 +616,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="SEA_AngleMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 52</value>
+  </data>
+  <data name="SEA_AngleMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="SEA_AngleMin.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMin.Name" xml:space="preserve">
     <value>SEA_AngleMin</value>
@@ -649,7 +637,25 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMin.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
+  </data>
+  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 54</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Min:</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -661,7 +667,28 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
+  </data>
+  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label13.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 54</value>
+  </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Analized Angle</value>
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
@@ -673,7 +700,28 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="GradientOption_CB.Items" xml:space="preserve">
+    <value>ShowThreshold</value>
+  </data>
+  <data name="GradientOption_CB.Items1" xml:space="preserve">
+    <value>ShowGradient</value>
+  </data>
+  <data name="GradientOption_CB.Items2" xml:space="preserve">
+    <value>HoursOfExposure</value>
+  </data>
+  <data name="GradientOption_CB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 174</value>
+  </data>
+  <data name="GradientOption_CB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 21</value>
+  </data>
+  <data name="GradientOption_CB.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="GradientOption_CB.Text" xml:space="preserve">
+    <value>ShowThreshold</value>
   </data>
   <data name="&gt;&gt;GradientOption_CB.Name" xml:space="preserve">
     <value>GradientOption_CB</value>
@@ -685,7 +733,25 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;GradientOption_CB.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
+  </data>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 150</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Analyse Type</value>
   </data>
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
@@ -697,7 +763,25 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
+  </data>
+  <data name="SEA_AnalyseType.Items" xml:space="preserve">
+    <value>Sun Exposure</value>
+  </data>
+  <data name="SEA_AnalyseType.Items1" xml:space="preserve">
+    <value>Shadow Casting</value>
+  </data>
+  <data name="SEA_AnalyseType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 147</value>
+  </data>
+  <data name="SEA_AnalyseType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 21</value>
+  </data>
+  <data name="SEA_AnalyseType.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="SEA_AnalyseType.Text" xml:space="preserve">
+    <value>Sun Exposure</value>
   </data>
   <data name="&gt;&gt;SEA_AnalyseType.Name" xml:space="preserve">
     <value>SEA_AnalyseType</value>
@@ -709,7 +793,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AnalyseType.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
+  </data>
+  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 177</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Diagram Type</value>
   </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
@@ -721,7 +820,28 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
+  </data>
+  <data name="SEA_TimeSegCB.Items" xml:space="preserve">
+    <value>n.o.</value>
+  </data>
+  <data name="SEA_TimeSegCB.Items1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SEA_TimeSegCB.Items2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SEA_TimeSegCB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 261</value>
+  </data>
+  <data name="SEA_TimeSegCB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 21</value>
+  </data>
+  <data name="SEA_TimeSegCB.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="SEA_TimeSegCB.Text" xml:space="preserve">
+    <value>n.o.</value>
   </data>
   <data name="&gt;&gt;SEA_TimeSegCB.Name" xml:space="preserve">
     <value>SEA_TimeSegCB</value>
@@ -733,7 +853,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeSegCB.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
+  </data>
+  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 264</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Time Segments</value>
   </data>
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
@@ -745,7 +880,31 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
+  </data>
+  <data name="TimeUnitCBox1.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TimeUnitCBox1.Items1" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="TimeUnitCBox1.Items2" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="TimeUnitCBox1.Items3" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="TimeUnitCBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 231</value>
+  </data>
+  <data name="TimeUnitCBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 21</value>
+  </data>
+  <data name="TimeUnitCBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="TimeUnitCBox1.Text" xml:space="preserve">
+    <value>60</value>
   </data>
   <data name="&gt;&gt;TimeUnitCBox1.Name" xml:space="preserve">
     <value>TimeUnitCBox1</value>
@@ -757,7 +916,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;TimeUnitCBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
+  </data>
+  <data name="AEA_NegativeButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="AEA_NegativeButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 113</value>
+  </data>
+  <data name="AEA_NegativeButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
+  </data>
+  <data name="AEA_NegativeButton.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="AEA_NegativeButton.Text" xml:space="preserve">
+    <value>Negative</value>
   </data>
   <data name="&gt;&gt;AEA_NegativeButton.Name" xml:space="preserve">
     <value>AEA_NegativeButton</value>
@@ -769,7 +943,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;AEA_NegativeButton.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
+  </data>
+  <data name="AEA_PositiveButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="AEA_PositiveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 113</value>
+  </data>
+  <data name="AEA_PositiveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
+  </data>
+  <data name="AEA_PositiveButton.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="AEA_PositiveButton.Text" xml:space="preserve">
+    <value>Positive</value>
   </data>
   <data name="&gt;&gt;AEA_PositiveButton.Name" xml:space="preserve">
     <value>AEA_PositiveButton</value>
@@ -781,7 +970,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;AEA_PositiveButton.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
+  </data>
+  <data name="TimeExposureNumUD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 202</value>
+  </data>
+  <data name="TimeExposureNumUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="TimeExposureNumUD.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
   <data name="&gt;&gt;TimeExposureNumUD.Name" xml:space="preserve">
     <value>TimeExposureNumUD</value>
@@ -793,7 +991,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;TimeExposureNumUD.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
+  </data>
+  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 234</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 13</value>
+  </data>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Time Unit in Minutes</value>
   </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
@@ -805,7 +1018,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
+  </data>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 204</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 13</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Time Threshold in Hours</value>
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -817,7 +1045,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 118</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Color</value>
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
@@ -829,7 +1072,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
+  </data>
+  <data name="ReceivingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="ReceivingGeomButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 81</value>
+  </data>
+  <data name="ReceivingGeomButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
+  </data>
+  <data name="ReceivingGeomButton.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="ReceivingGeomButton.Text" xml:space="preserve">
+    <value>Receiving</value>
   </data>
   <data name="&gt;&gt;ReceivingGeomButton.Name" xml:space="preserve">
     <value>ReceivingGeomButton</value>
@@ -841,7 +1099,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;ReceivingGeomButton.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
+  </data>
+  <data name="OccludingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="OccludingGeomButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 81</value>
+  </data>
+  <data name="OccludingGeomButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
+  </data>
+  <data name="OccludingGeomButton.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="OccludingGeomButton.Text" xml:space="preserve">
+    <value>Casting</value>
   </data>
   <data name="&gt;&gt;OccludingGeomButton.Name" xml:space="preserve">
     <value>OccludingGeomButton</value>
@@ -853,7 +1126,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;OccludingGeomButton.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 86</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Geometry</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -865,7 +1153,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
+  </data>
+  <data name="SEA_TimeEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 23</value>
+  </data>
+  <data name="SEA_TimeEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 20</value>
+  </data>
+  <data name="SEA_TimeEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd.Name" xml:space="preserve">
     <value>SEA_TimeEnd</value>
@@ -877,7 +1174,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
+  </data>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 25</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>End:</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -889,7 +1201,16 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
+  </data>
+  <data name="SEA_TimeStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 23</value>
+  </data>
+  <data name="SEA_TimeStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
+  </data>
+  <data name="SEA_TimeStart.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart.Name" xml:space="preserve">
     <value>SEA_TimeStart</value>
@@ -901,7 +1222,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
+  </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 25</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Start:</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -913,7 +1249,25 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
+  </data>
+  <data name="SEA_Lab1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SEA_Lab1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="SEA_Lab1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="SEA_Lab1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="SEA_Lab1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="SEA_Lab1.Text" xml:space="preserve">
+    <value>Time period</value>
   </data>
   <data name="&gt;&gt;SEA_Lab1.Name" xml:space="preserve">
     <value>SEA_Lab1</value>
@@ -925,7 +1279,22 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_Lab1.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
+  </data>
+  <data name="SEAButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="SEAButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 293</value>
+  </data>
+  <data name="SEAButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 27</value>
+  </data>
+  <data name="SEAButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SEAButton.Text" xml:space="preserve">
+    <value>Show Analysed Mesh</value>
   </data>
   <data name="&gt;&gt;SEAButton.Name" xml:space="preserve">
     <value>SEAButton</value>
@@ -937,7 +1306,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEAButton.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="SunExpGB1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1419,6 +1788,54 @@
   <data name="&gt;&gt;MonthCalendar1.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Name" xml:space="preserve">
+    <value>ShadowRaysCheckBox1</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Parent" xml:space="preserve">
+    <value>SunRaysGBox</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Name" xml:space="preserve">
+    <value>SunRaysPickPoint</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Parent" xml:space="preserve">
+    <value>SunRaysGBox</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SunRaysGBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 166</value>
+  </data>
+  <data name="SunRaysGBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 86</value>
+  </data>
+  <data name="SunRaysGBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="SunRaysGBox.Text" xml:space="preserve">
+    <value>Sun Rays</value>
+  </data>
+  <data name="&gt;&gt;SunRaysGBox.Name" xml:space="preserve">
+    <value>SunRaysGBox</value>
+  </data>
+  <data name="&gt;&gt;SunRaysGBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunRaysGBox.Parent" xml:space="preserve">
+    <value>SunDiagramTab</value>
+  </data>
+  <data name="&gt;&gt;SunRaysGBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ShadowRaysCheckBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1472,6 +1889,129 @@
   </data>
   <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
+    <value>SunPathDiagram2</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
+    <value>CheckBox2</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
+    <value>CheckBox1</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Name" xml:space="preserve">
+    <value>SunPathShowAng</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Name" xml:space="preserve">
+    <value>SunPathPickObj</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Name" xml:space="preserve">
+    <value>SunPath3D</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SunPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="SunPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 154</value>
+  </data>
+  <data name="SunPath.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="SunPath.Text" xml:space="preserve">
+    <value>Sun Path Diagram</value>
+  </data>
+  <data name="&gt;&gt;SunPath.Name" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPath.Parent" xml:space="preserve">
+    <value>SunDiagramTab</value>
+  </data>
+  <data name="&gt;&gt;SunPath.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SunPathDiagram2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SunPathDiagram2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 121</value>
+  </data>
+  <data name="SunPathDiagram2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 27</value>
+  </data>
+  <data name="SunPathDiagram2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="SunPathDiagram2.Text" xml:space="preserve">
+    <value>Show Sun Path 2</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
+    <value>SunPathDiagram2</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="CheckBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1617,843 +2157,6 @@
   <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="SEA_Reset.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="SEA_Reset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SEA_Reset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 342</value>
-  </data>
-  <data name="SEA_Reset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 27</value>
-  </data>
-  <data name="SEA_Reset.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="SEA_Reset.Text" xml:space="preserve">
-    <value>Reset Mesh Colors</value>
-  </data>
-  <data name="&gt;&gt;SEA_Reset.Name" xml:space="preserve">
-    <value>SEA_Reset</value>
-  </data>
-  <data name="&gt;&gt;SEA_Reset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_Reset.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_Reset.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SEAProgressBar.AccessibleName" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SEAProgressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 326</value>
-  </data>
-  <data name="SEAProgressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 10</value>
-  </data>
-  <data name="SEAProgressBar.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="&gt;&gt;SEAProgressBar.Name" xml:space="preserve">
-    <value>SEAProgressBar</value>
-  </data>
-  <data name="&gt;&gt;SEAProgressBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEAProgressBar.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEAProgressBar.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SEA_TimeEnd_Min.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 23</value>
-  </data>
-  <data name="SEA_TimeEnd_Min.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 20</value>
-  </data>
-  <data name="SEA_TimeEnd_Min.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd_Min.Name" xml:space="preserve">
-    <value>SEA_TimeEnd_Min</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd_Min.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd_Min.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd_Min.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="SEA_TimeStart_Min.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 23</value>
-  </data>
-  <data name="SEA_TimeStart_Min.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
-  </data>
-  <data name="SEA_TimeStart_Min.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart_Min.Name" xml:space="preserve">
-    <value>SEA_TimeStart_Min</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart_Min.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart_Min.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart_Min.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="SEA_AngleMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 52</value>
-  </data>
-  <data name="SEA_AngleMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 20</value>
-  </data>
-  <data name="SEA_AngleMax.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMax.Name" xml:space="preserve">
-    <value>SEA_AngleMax</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMax.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMax.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 54</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
-  </data>
-  <data name="Label11.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Max:</value>
-  </data>
-  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
-    <value>Label11</value>
-  </data>
-  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="SEA_AngleMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 52</value>
-  </data>
-  <data name="SEA_AngleMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 20</value>
-  </data>
-  <data name="SEA_AngleMin.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMin.Name" xml:space="preserve">
-    <value>SEA_AngleMin</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMin.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_AngleMin.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 54</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 13</value>
-  </data>
-  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Min:</value>
-  </data>
-  <data name="&gt;&gt;Label12.Name" xml:space="preserve">
-    <value>Label12</value>
-  </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label13.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 54</value>
-  </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
-  </data>
-  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>Analized Angle</value>
-  </data>
-  <data name="&gt;&gt;Label13.Name" xml:space="preserve">
-    <value>Label13</value>
-  </data>
-  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="GradientOption_CB.Items" xml:space="preserve">
-    <value>ShowThreshold</value>
-  </data>
-  <data name="GradientOption_CB.Items1" xml:space="preserve">
-    <value>ShowGradient</value>
-  </data>
-  <data name="GradientOption_CB.Items2" xml:space="preserve">
-    <value>HoursOfExposure</value>
-  </data>
-  <data name="GradientOption_CB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 174</value>
-  </data>
-  <data name="GradientOption_CB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
-  </data>
-  <data name="GradientOption_CB.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="GradientOption_CB.Text" xml:space="preserve">
-    <value>ShowThreshold</value>
-  </data>
-  <data name="&gt;&gt;GradientOption_CB.Name" xml:space="preserve">
-    <value>GradientOption_CB</value>
-  </data>
-  <data name="&gt;&gt;GradientOption_CB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GradientOption_CB.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;GradientOption_CB.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 150</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Analyse Type</value>
-  </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
-  </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="SEA_AnalyseType.Items" xml:space="preserve">
-    <value>Sun Exposure</value>
-  </data>
-  <data name="SEA_AnalyseType.Items1" xml:space="preserve">
-    <value>Shadow Casting</value>
-  </data>
-  <data name="SEA_AnalyseType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 147</value>
-  </data>
-  <data name="SEA_AnalyseType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
-  </data>
-  <data name="SEA_AnalyseType.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="SEA_AnalyseType.Text" xml:space="preserve">
-    <value>Sun Exposure</value>
-  </data>
-  <data name="&gt;&gt;SEA_AnalyseType.Name" xml:space="preserve">
-    <value>SEA_AnalyseType</value>
-  </data>
-  <data name="&gt;&gt;SEA_AnalyseType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_AnalyseType.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_AnalyseType.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 177</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Diagram Type</value>
-  </data>
-  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
-    <value>Label10</value>
-  </data>
-  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="SEA_TimeSegCB.Items" xml:space="preserve">
-    <value>n.o.</value>
-  </data>
-  <data name="SEA_TimeSegCB.Items1" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SEA_TimeSegCB.Items2" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="SEA_TimeSegCB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 261</value>
-  </data>
-  <data name="SEA_TimeSegCB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
-  </data>
-  <data name="SEA_TimeSegCB.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="SEA_TimeSegCB.Text" xml:space="preserve">
-    <value>n.o.</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeSegCB.Name" xml:space="preserve">
-    <value>SEA_TimeSegCB</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeSegCB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeSegCB.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeSegCB.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 264</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
-  </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Time Segments</value>
-  </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
-  </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="TimeUnitCBox1.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TimeUnitCBox1.Items1" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="TimeUnitCBox1.Items2" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="TimeUnitCBox1.Items3" xml:space="preserve">
-    <value>60</value>
-  </data>
-  <data name="TimeUnitCBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 231</value>
-  </data>
-  <data name="TimeUnitCBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
-  </data>
-  <data name="TimeUnitCBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="TimeUnitCBox1.Text" xml:space="preserve">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;TimeUnitCBox1.Name" xml:space="preserve">
-    <value>TimeUnitCBox1</value>
-  </data>
-  <data name="&gt;&gt;TimeUnitCBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TimeUnitCBox1.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;TimeUnitCBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="AEA_NegativeButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="AEA_NegativeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 113</value>
-  </data>
-  <data name="AEA_NegativeButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
-  </data>
-  <data name="AEA_NegativeButton.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="AEA_NegativeButton.Text" xml:space="preserve">
-    <value>Negative</value>
-  </data>
-  <data name="&gt;&gt;AEA_NegativeButton.Name" xml:space="preserve">
-    <value>AEA_NegativeButton</value>
-  </data>
-  <data name="&gt;&gt;AEA_NegativeButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AEA_NegativeButton.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;AEA_NegativeButton.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="AEA_PositiveButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="AEA_PositiveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 113</value>
-  </data>
-  <data name="AEA_PositiveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
-  </data>
-  <data name="AEA_PositiveButton.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="AEA_PositiveButton.Text" xml:space="preserve">
-    <value>Positive</value>
-  </data>
-  <data name="&gt;&gt;AEA_PositiveButton.Name" xml:space="preserve">
-    <value>AEA_PositiveButton</value>
-  </data>
-  <data name="&gt;&gt;AEA_PositiveButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AEA_PositiveButton.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;AEA_PositiveButton.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="TimeExposureNumUD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 202</value>
-  </data>
-  <data name="TimeExposureNumUD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 20</value>
-  </data>
-  <data name="TimeExposureNumUD.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;TimeExposureNumUD.Name" xml:space="preserve">
-    <value>TimeExposureNumUD</value>
-  </data>
-  <data name="&gt;&gt;TimeExposureNumUD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TimeExposureNumUD.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;TimeExposureNumUD.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 234</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Time Unit in Minutes</value>
-  </data>
-  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
-    <value>Label7</value>
-  </data>
-  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 204</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 13</value>
-  </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Time Threshold in Hours</value>
-  </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 118</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
-  </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="ReceivingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
-  <data name="ReceivingGeomButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 81</value>
-  </data>
-  <data name="ReceivingGeomButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
-  </data>
-  <data name="ReceivingGeomButton.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="ReceivingGeomButton.Text" xml:space="preserve">
-    <value>Receiving</value>
-  </data>
-  <data name="&gt;&gt;ReceivingGeomButton.Name" xml:space="preserve">
-    <value>ReceivingGeomButton</value>
-  </data>
-  <data name="&gt;&gt;ReceivingGeomButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ReceivingGeomButton.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;ReceivingGeomButton.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="OccludingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
-  <data name="OccludingGeomButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 81</value>
-  </data>
-  <data name="OccludingGeomButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 23</value>
-  </data>
-  <data name="OccludingGeomButton.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="OccludingGeomButton.Text" xml:space="preserve">
-    <value>Casting</value>
-  </data>
-  <data name="&gt;&gt;OccludingGeomButton.Name" xml:space="preserve">
-    <value>OccludingGeomButton</value>
-  </data>
-  <data name="&gt;&gt;OccludingGeomButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OccludingGeomButton.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;OccludingGeomButton.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 86</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
-  </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Geometry</value>
-  </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
-  </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="SEA_TimeEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 23</value>
-  </data>
-  <data name="SEA_TimeEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 20</value>
-  </data>
-  <data name="SEA_TimeEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd.Name" xml:space="preserve">
-    <value>SEA_TimeEnd</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeEnd.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 25</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>End:</value>
-  </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
-  </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>26</value>
-  </data>
-  <data name="SEA_TimeStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 23</value>
-  </data>
-  <data name="SEA_TimeStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
-  </data>
-  <data name="SEA_TimeStart.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart.Name" xml:space="preserve">
-    <value>SEA_TimeStart</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_TimeStart.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 25</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Start:</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
-  </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
-  <data name="SEA_Lab1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SEA_Lab1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="SEA_Lab1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="SEA_Lab1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
-  </data>
-  <data name="SEA_Lab1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="SEA_Lab1.Text" xml:space="preserve">
-    <value>Time period</value>
-  </data>
-  <data name="&gt;&gt;SEA_Lab1.Name" xml:space="preserve">
-    <value>SEA_Lab1</value>
-  </data>
-  <data name="&gt;&gt;SEA_Lab1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEA_Lab1.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEA_Lab1.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
-  <data name="SEAButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="SEAButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 293</value>
-  </data>
-  <data name="SEAButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 27</value>
-  </data>
-  <data name="SEAButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="SEAButton.Text" xml:space="preserve">
-    <value>Show Analysed Mesh</value>
-  </data>
-  <data name="&gt;&gt;SEAButton.Name" xml:space="preserve">
-    <value>SEAButton</value>
-  </data>
-  <data name="&gt;&gt;SEAButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SEAButton.Parent" xml:space="preserve">
-    <value>SunExpGB1</value>
-  </data>
-  <data name="&gt;&gt;SEAButton.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
   <data name="DropShadowButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 28</value>
   </data>
@@ -2481,33 +2184,6 @@
   <metadata name="ColorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="SunPathDiagram2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SunPathDiagram2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 121</value>
-  </data>
-  <data name="SunPathDiagram2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 27</value>
-  </data>
-  <data name="SunPathDiagram2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="SunPathDiagram2.Text" xml:space="preserve">
-    <value>Show Sun Path 2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
-    <value>SunPathDiagram2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

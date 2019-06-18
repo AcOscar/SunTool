@@ -46,6 +46,7 @@ Partial Class Form1
         Me.ShadowRaysCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SunRaysPickPoint = New System.Windows.Forms.CheckBox()
         Me.SunPath = New System.Windows.Forms.GroupBox()
+        Me.SunPathDiagram2 = New System.Windows.Forms.Button()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SunPathShowAng = New System.Windows.Forms.CheckBox()
@@ -53,6 +54,7 @@ Partial Class Form1
         Me.SunPath3D = New System.Windows.Forms.CheckBox()
         Me.SunAnalysisTab = New System.Windows.Forms.TabPage()
         Me.SunExpGB1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SEA_Reset = New System.Windows.Forms.Button()
         Me.SEAProgressBar = New System.Windows.Forms.ProgressBar()
         Me.SEA_TimeEnd_Min = New System.Windows.Forms.NumericUpDown()
@@ -87,7 +89,6 @@ Partial Class Form1
         Me.DropShadowBox = New System.Windows.Forms.GroupBox()
         Me.DropShadowButton = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-        Me.SunPathDiagram2 = New System.Windows.Forms.Button()
         Me.Tabs.SuspendLayout()
         Me.Data.SuspendLayout()
         CType(Me.HourTB, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -265,6 +266,12 @@ Partial Class Form1
         Me.SunPath.Name = "SunPath"
         Me.SunPath.TabStop = False
         '
+        'SunPathDiagram2
+        '
+        resources.ApplyResources(Me.SunPathDiagram2, "SunPathDiagram2")
+        Me.SunPathDiagram2.Name = "SunPathDiagram2"
+        Me.SunPathDiagram2.UseVisualStyleBackColor = True
+        '
         'CheckBox2
         '
         resources.ApplyResources(Me.CheckBox2, "CheckBox2")
@@ -305,6 +312,7 @@ Partial Class Form1
         '
         'SunExpGB1
         '
+        Me.SunExpGB1.Controls.Add(Me.Button1)
         Me.SunExpGB1.Controls.Add(Me.SEA_Reset)
         Me.SunExpGB1.Controls.Add(Me.SEAProgressBar)
         Me.SunExpGB1.Controls.Add(Me.SEA_TimeEnd_Min)
@@ -339,6 +347,12 @@ Partial Class Form1
         resources.ApplyResources(Me.SunExpGB1, "SunExpGB1")
         Me.SunExpGB1.Name = "SunExpGB1"
         Me.SunExpGB1.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'SEA_Reset
         '
@@ -560,12 +574,6 @@ Partial Class Form1
         '
         Me.ColorDialog1.Color = System.Drawing.Color.DarkRed
         '
-        'SunPathDiagram2
-        '
-        resources.ApplyResources(Me.SunPathDiagram2, "SunPathDiagram2")
-        Me.SunPathDiagram2.Name = "SunPathDiagram2"
-        Me.SunPathDiagram2.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         resources.ApplyResources(Me, "$this")
@@ -662,4 +670,5 @@ Partial Class Form1
     Friend WithEvents CheckBox2 As Windows.Forms.CheckBox
     Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
     Friend WithEvents SunPathDiagram2 As Windows.Forms.Button
+    Friend WithEvents Button1 As Windows.Forms.Button
 End Class

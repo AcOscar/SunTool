@@ -1,10 +1,11 @@
 ﻿'sun exposure
-Public Class SE
+Public Class SunExposure2
 
     Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc, ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
 
         'add a "SEA_mesh" layer
         'AddLayers_SEA(doc)
+        RhStopWatch.Start()
 
         'get array of values
         Dim arr() As Double
@@ -92,7 +93,6 @@ Public Class SE
             vertex_rec = New Rhino.Collections.Point3dList
             vecNorms = New Rhino.Collections.RhinoList(Of Rhino.Geometry.Vector3d)
 
-            'Dim myObj = doc.Objects.Find(SEA_RecObj(i))
             objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
 
             'debugger
@@ -215,12 +215,22 @@ Public Class SE
                     SEAProgressBar.Value = SEA_Progress
                 Next
 
-                For j = 0 To vertex_rec.Count - 1
+                ' Dim arr As Double() = New Double(999999) {}
+                Parallel.[For](0, vertex_rec.Count - 1, Function(j)
+                                                            'arr(j) = Math.Pow(j, 0.333) * Math.Sqrt(Math.Sin(j))
+                                                            mesh.VertexColors.SetColor(j, cols(j))
 
-                    mesh.VertexColors.SetColor(j, cols(j))
-                    'mesh.VertexColors.SetColor(mesh.Faces.GetFace(j), cols(j))
+                                                        End Function)
 
-                Next
+
+
+
+                'For j = 0 To vertex_rec.Count - 1
+
+                '    mesh.VertexColors.SetColor(j, cols(j))
+                '    'mesh.VertexColors.SetColor(mesh.Faces.GetFace(j), cols(j))
+
+                'Next
                 Dim attribs As Rhino.DocObjects.ObjectAttributes = objRef.[Object]().Attributes
                 'Dim index = doc.Layers.Find("SEA_mesh", True)
                 'attribs.LayerIndex = index
@@ -232,6 +242,7 @@ Public Class SE
                 For j = 0 To SEA_OccObj.Count - 1
                     If SEA_OccObj(j) = oldGuid Then SEA_OccObj(j) = newGuid
                 Next
+
                 If Not newGuid = Nothing Then GuidsTemp.Add(newGuid)
                 'End If
             Catch ex As Exception
@@ -246,8 +257,12 @@ Public Class SE
 
         doc.Views.Redraw()
 
+        RhStopWatch.Stop()
+
         Return Rhino.Commands.Result.Success
     End Function
+
+
 
     'it returns how many time units ( in the given set of time) the given mesh is exposed to the sun
     Public Shared Function GenerateArrayfRays(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double, ByVal TUnits As Double, ByVal vertx As Rhino.Geometry.Point3d, ByVal vecN As Rhino.Geometry.Vector3d, ByVal startT As Double, ByVal endT As Double, ByVal id As Guid) As Integer
@@ -485,7 +500,7 @@ Public Class SE
         Return Rhino.Commands.Result.Success
     End Function
 
-  
+
     'add color diagram
     Public Shared Function AddColorDiagram(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
         Dim ids_col As New List(Of Guid)
@@ -615,7 +630,7 @@ Public Class SE
 
                 'doc.Objects.ModifyAttributes(objref, attribs, True)
                 mesh.VertexColors.Clear()
-             
+
                 Try
                     doc.Objects.Delete(objref, True)
                     doc.Objects.AddMesh(mesh, attribs)

@@ -2,6 +2,7 @@
 Public Class SE
 
     Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc, ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
+        RhStopWatch.Start()
 
         'add a "SEA_mesh" layer
         'AddLayers_SEA(doc)
@@ -245,6 +246,8 @@ Public Class SE
         If SEA_GOption = 2 Then AddColorDiagram(doc)
 
         doc.Views.Redraw()
+
+        RhStopWatch.Stop()
 
         Return Rhino.Commands.Result.Success
     End Function

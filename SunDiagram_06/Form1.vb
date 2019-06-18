@@ -607,42 +607,39 @@ Public Class Form1
     'choose Analyse Type
     Private Sub GradientOption_CB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GradientOption_CB.SelectedIndexChanged
 
-        Dim ind As Integer = GradientOption_CB.SelectedIndex
-        Dim obj = GradientOption_CB.Items.Item(ind)
+        Select Case GradientOption_CB.SelectedItem.ToString
+            Case "ShowThreshold"
+                SEA_GOption = 0
 
-        If CStr(obj) = "ShowThreshold" Then
-            SEA_GOption = 0 'MinExposure Time
-        ElseIf CStr(obj) = "ShowGradient" Then
-            SEA_GOption = 1 'Gradient
-        Else
-            SEA_GOption = 2 'Precised
-        End If
+                TimeExposureNumUD.Enabled = True
 
-        If SEA_GOption = 0 Then
-            'threshold
-            TimeExposureNumUD.Enabled = True
-            SEA_TimeSegCB.Enabled = True
+                SEA_TimeSegCB.Enabled = True
 
-            AEA_NegativeButton.Enabled = True
-            AEA_PositiveButton.Enabled = True
+                AEA_NegativeButton.Enabled = True
+                AEA_PositiveButton.Enabled = True
 
-        ElseIf SEA_GOption = 1 Then
-            'gradient
-            TimeExposureNumUD.Enabled = False
+            Case "ShowGradient"
+                SEA_GOption = 1
 
-            SEA_TimeSegCB.Enabled = False
+                TimeExposureNumUD.Enabled = False
 
-            AEA_NegativeButton.Enabled = True
-            AEA_PositiveButton.Enabled = True
-        Else
-            TimeExposureNumUD.Enabled = False
-            SEA_TimeSegCB.Enabled = False
+                SEA_TimeSegCB.Enabled = False
 
-            AEA_NegativeButton.Enabled = False
-            AEA_PositiveButton.Enabled = False
+                AEA_NegativeButton.Enabled = True
+                AEA_PositiveButton.Enabled = True
 
-        End If
-        'Rhino.RhinoApp.WriteLine(CStr(SEA_AType))
+            Case Else 'HoursOfExposure
+                SEA_GOption = 2
+
+                TimeExposureNumUD.Enabled = False
+
+                SEA_TimeSegCB.Enabled = False
+
+                AEA_NegativeButton.Enabled = False
+                AEA_PositiveButton.Enabled = False
+
+        End Select
+
     End Sub
 
     'set time threshold
@@ -679,7 +676,6 @@ Public Class Form1
             SEA_AnType = 1
         End If
 
-
     End Sub
 
     'choose number of segments
@@ -698,9 +694,6 @@ Public Class Form1
         'Rhino.RhinoApp.WriteLine(CStr(SEA_TimeSeg))
     End Sub
 
-
-
-
     '######################################################################
     '###SHADOW ANALYSIS
     '######################################################################
@@ -708,6 +701,13 @@ Public Class Form1
     Private Sub DropShadowButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DropShadowButton.Click
 
         DropShadow.Draw(Rhino.RhinoDoc.ActiveDoc)
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        SunExposure2.Analyse(Rhino.RhinoDoc.ActiveDoc, SEAProgressBar)
+        SEAProgressBar.Value = 0
 
     End Sub
 
