@@ -1,4 +1,9 @@
 ﻿Module MyFunction
+    Enum SEA_GOptionValues
+        Threshold
+        Gradient
+        Precised
+    End Enum
 
     'Public variables:
     Public lat, lon, TZone, nOffset As Double
@@ -19,18 +24,31 @@
     Public SEA_StartH, SEA_EndH, SEA_StartHVal, Sea_EndHVal As Double
     Public SEA_StartMinVal, SEA_EndMinVal As Double
     Public SEA_MinAngle, SEA_MaxAngle As Double
+    Public SEA_MinAngleRad, SEA_MaxAngleRad As Double
+
     Public SEA_Threshold As Double
     Public SEA_TimeUnits As Integer
     Public SEA_TimeSeg As Double
     Public SEA_AnType As Integer '0 - SunExposure, 1 - ShadowCast
-    Public SEA_GOption As Integer '0 - Threshold, 1 - Gradient, 2 - Precised
-    Public SEA_Progress As Integer = 0
+    'Public SEA_GOption As Integer '0 - Threshold, 1 - Gradient, 2 - Precised
+    Public SEA_GOption As SEA_GOptionValues
+
+
+    'Public SEA_Progress As Integer = 0
 
     Public text_height As Double = 0.8
     Public text_font As String = "Verdana"
     Public text_plane As New Rhino.Geometry.Plane
 
-    'create array with default values for the sun calculations
+    ''' <summary>
+    ''' create array with default values for the sun calculations
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="lon"></param>
+    ''' <param name="lat"></param>
+    ''' <param name="tZone"></param>
+    ''' <param name="nOffset"></param>
+    ''' <returns></returns>
     Public Function GetData(ByVal doc As Rhino.RhinoDoc, ByVal lon As Double, ByVal lat As Double, ByVal tZone As Double, ByVal nOffset As Double) As Double()
 
         'Dim arrVal As New ArrayList
@@ -60,7 +78,13 @@
         Return arr
     End Function
 
-    'returns unitized sun vector 
+    ''' <summary>
+    ''' returns unitized sun vector
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="fAltitude"></param>
+    ''' <param name="fAzimuth"></param>
+    ''' <returns></returns>
     Public Function GetSunVector(ByVal doc As Rhino.RhinoDoc, ByVal fAltitude As Double, ByVal fAzimuth As Double) As Rhino.Geometry.Vector3d
 
         Dim vec As Rhino.Geometry.Vector3d = Nothing
@@ -74,7 +98,12 @@
         Return vec
     End Function
 
-    'add layer
+    ''' <summary>
+    ''' add layer
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="layer_name"></param>
+    ''' <returns></returns>
     Public Function AddLayer(ByVal doc As Rhino.RhinoDoc, ByVal layer_name As String) As Rhino.Commands.Result
 
         ' Does a layer with the same name already exist?
@@ -93,7 +122,14 @@
         Return Rhino.Commands.Result.Success
     End Function
 
-    'add child layers
+    ''' <summary>
+    ''' add child layers
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="parent_name"></param>
+    ''' <param name="child_name"></param>
+    ''' <param name="color"></param>
+    ''' <returns></returns>
     Public Function AddChildLayer(ByVal doc As Rhino.RhinoDoc, ByVal parent_name As String, ByVal child_name As String, ByVal color As String) As Rhino.Commands.Result
 
         ' Was a layer named entered?
@@ -124,16 +160,18 @@
             childlayer.Color = System.Drawing.Color.Black
         End If
 
-
         index = doc.Layers.Add(childlayer)
         If index < 0 Then
             'Rhino.RhinoApp.WriteLine("Unable to add {0} layer.", name)
             Return Rhino.Commands.Result.Failure
         End If
+
         Return Rhino.Commands.Result.Success
+
     End Function
 
-    Public Function Map(ByVal a As Double, ByVal min As Double, ByVal max As Double, ByVal refMin As Double, ByVal refMax As Double) As Integer
+    Public Function Map(ByVal a As Double, ByVal min As Double, ByVal max As Double,
+                        ByVal refMin As Byte, ByVal refMax As Byte) As Integer
 
         Dim res As Double
 
@@ -143,6 +181,7 @@
         'Rhino.RhinoApp.WriteLine(CStr(a) & "_" & CStr(min) & "_" & CStr(max) & "_" & CStr(refMin) & "_" & CStr(refMax))
 
         Return CType(res, Integer)
+
     End Function
 
     Public Function GetColorSteps() As List(Of System.Drawing.Color)

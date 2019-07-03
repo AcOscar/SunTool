@@ -1,10 +1,9 @@
 ﻿'sun exposure
 Public Class SunExposure2
 
-    Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc, ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
+    Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc,
+                                   ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
 
-        'add a "SEA_mesh" layer
-        'AddLayers_SEA(doc)
         RhStopWatch.Start()
 
         'get array of values
@@ -28,11 +27,13 @@ Public Class SunExposure2
         Dim numberTotal As Integer = 0
         Dim mesh As New Rhino.Geometry.Mesh
         Dim pts As Rhino.Geometry.Collections.MeshVertexList
+
+
         Dim faceNormals As Rhino.Geometry.Collections.MeshVertexNormalList
         Dim faces As Rhino.Geometry.Collections.MeshFaceList
         Dim str_startMin, str_endMin As String
 
-        SEA_Progress = 0
+        SEAProgressBar.Value = 0
 
         If SEA_OccObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
 
@@ -78,17 +79,19 @@ Public Class SunExposure2
         End If
 
         Rhino.RhinoApp.WriteLine(" start time : " & CStr(startH) & ":" & str_startMin & " ;end time :" & CStr(endH) & ":" & str_endMin)
-        'Rhino.RhinoApp.WriteLine(CStr(exp_Max))
 
-        'for the progress bar - calculate how many vertexes we already have
+        'for the progress bar - calculate how many vertices we have
         For i = 0 To SEA_RecObj.Count - 1
             objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
             mesh = objRef.Mesh
             pts = mesh.Vertices
-            numberTotal = numberTotal + (pts.Count - 1)
+            numberTotal += (pts.Count)
         Next
 
+        SEAProgressBar.Maximum = numberTotal
+
         For i = 0 To SEA_RecObj.Count - 1
+
             'Finding Vertex of mesh
             vertex_rec = New Rhino.Collections.Point3dList
             vecNorms = New Rhino.Collections.RhinoList(Of Rhino.Geometry.Vector3d)
@@ -97,7 +100,6 @@ Public Class SunExposure2
 
             'debugger
             Try
-                'If Not objRef Is Nothing Then
                 mesh = objRef.Mesh
                 pts = mesh.Vertices
                 faceNormals = mesh.Normals
@@ -108,21 +110,8 @@ Public Class SunExposure2
                     For j = 0 To pts.Count - 1
                         ptTemp = New Rhino.Geometry.Point3d(pts(j))
                         vertex_rec.Add(ptTemp)
-                        'doc.Objects.AddPoint(pts(j))
                     Next
                 End If
-
-                'arr of CenterptsOf a face and normals
-                'If Not faces Is Nothing Then
-                '    For j = 0 To faces.Count - 1
-                '        ptTemp = faces.GetFaceCenter(j)
-                '        vertex_rec.Add(ptTemp)
-                '        'doc.Objects.AddPoint(ptTemp)
-                '    Next
-                'End If
-
-                'Dim faceNormals = mesh.FaceNormals
-
 
                 'arr of normals in vertexes
                 If Not faceNormals Is Nothing Then
@@ -132,13 +121,6 @@ Public Class SunExposure2
                     Next
                 End If
 
-                'Rhino.RhinoApp.WriteLine("nbr of vertxs : " & vertex_rec.Count & "nbr of normals: " & vecNorms.Count)
-
-                'For i = 0 To vertex_rec.Count - 1
-                '    Dim line As New Rhino.Geometry.Line(vertex_rec(i), New Rhino.Geometry.Point3d(vertex_rec(i) + vecNorms(i)))
-                '    doc.Objects.AddLine(line)
-                'Next
-
                 'getting the threshold exposure value
                 threshold = SEA_Threshold * tu
 
@@ -147,93 +129,79 @@ Public Class SunExposure2
                 'coloring mesh vertexes
                 For j = 0 To vertex_rec.Count - 1
                     exp_Units = GenerateArrayfRays(doc, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, SEA_RecObj(i))
+                    'exp_Units = GenerateArrayfRays(doc, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, curSEA_RecObj)
                     Dim check_Val As Double
                     check_Val = exp_Units
-                    'if AnalyseType = Shadow Casting then 
-                    'If SEA_AnType = 1 Then check_Val = exp_Max - exp_Units
 
-                    If SEA_GOption = 0 Then
-                        'if GradienOption = Threshold Diagram
-                        'Rhino.RhinoApp.WriteLine(check_Val & " _ " & threshold & " _ " & CStr(check_Val >= threshold))
-                        If check_Val >= threshold Then
-                            colTemp = SEA_colorPos
-                        Else
-                            colTemp = SEA_colorNeg
-                            'AddText(doc, vertex_rec(j), CStr(check_Val), 1)
-                        End If
-                    ElseIf SEA_GOption = 1 Then
-                        'gradient
-                        'colTemp = Drawing.Color.AliceBlue
+                    Select Case SEA_GOption
+                        Case SEA_GOptionValues.Threshold
 
-                        Dim r = Map(check_Val, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)
-                        If r < 0 Then
-                            r = 0
-                        ElseIf r > 255 Then
-                            r = 255
-                        End If
-                        Dim g = Map(check_Val, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)
-                        If g < 0 Then
-                            g = 0
-                        ElseIf g > 255 Then
-                            g = 255
-                        End If
-                        Dim b = Map(check_Val, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)
-                        If b < 0 Then
-                            b = 0
-                        ElseIf b > 255 Then
-                            b = 255
-                        End If
+                            If check_Val >= threshold Then
+                                colTemp = SEA_colorPos
+                            Else
+                                colTemp = SEA_colorNeg
+                            End If
 
-                        colTemp = Drawing.Color.FromArgb(255, r, g, b)
-                        'Rhino.RhinoApp.WriteLine(CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)) & "_" & CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)) & "_" & CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)))
-                        'Rhino.RhinoApp.WriteLine(CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)))
-                    Else
-                        'precised
-                        Dim arr_col As New List(Of System.Drawing.Color)
-                        Dim comp_Val As Integer
+                        Case SEA_GOptionValues.Gradient
 
-                        comp_Val = CInt(Math.Floor(check_Val / tu))
+                            Dim r = Map(check_Val, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)
+                            If r < 0 Then
+                                r = 0
+                            ElseIf r > 255 Then
+                                r = 255
+                            End If
+                            Dim g = Map(check_Val, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)
+                            If g < 0 Then
+                                g = 0
+                            ElseIf g > 255 Then
+                                g = 255
+                            End If
+                            Dim b = Map(check_Val, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)
+                            If b < 0 Then
+                                b = 0
+                            ElseIf b > 255 Then
+                                b = 255
+                            End If
 
-                        arr_col = GetColorSteps()
+                            colTemp = Drawing.Color.FromArgb(255, r, g, b)
 
+                        Case SEA_GOptionValues.Precised
 
-                        If comp_Val > (arr_col.Count - 1) Then comp_Val = arr_col.Count - 1
+                            Dim arr_col As New List(Of System.Drawing.Color)
+                            Dim comp_Val As Integer
 
+                            comp_Val = CInt(Math.Floor(check_Val / tu))
 
-                        colTemp = arr_col(comp_Val)
+                            arr_col = GetColorSteps()
 
+                            If comp_Val > (arr_col.Count - 1) Then comp_Val = arr_col.Count - 1
 
-                    End If
+                            colTemp = arr_col(comp_Val)
+
+                    End Select
 
                     cols.Add(colTemp)
 
-                    'progress bar
-                    counter = counter + 1
-                    SEA_Progress = CInt((counter / numberTotal) * 100)
-                    If SEA_Progress > 100 Then SEA_Progress = 100
-                    'Rhino.RhinoApp.WriteLine(counter & " _ " & numberTotal & " _ " & SEA_Progress)
-                    SEAProgressBar.Value = SEA_Progress
+                    'update progress bar
+                    counter += 1
+                    SEAProgressBar.Value = counter
+
                 Next
 
                 ' Dim arr As Double() = New Double(999999) {}
-                Parallel.[For](0, vertex_rec.Count - 1, Function(j)
-                                                            'arr(j) = Math.Pow(j, 0.333) * Math.Sqrt(Math.Sin(j))
-                                                            mesh.VertexColors.SetColor(j, cols(j))
+                'Parallel.[For](0, vertex_rec.Count - 1, Sub(j)
+                '                                            'arr(j) = Math.Pow(j, 0.333) * Math.Sqrt(Math.Sin(j))
+                '                                            mesh.VertexColors.SetColor(j, cols(j))
 
-                                                        End Function)
+                '                                        End Sub)
 
+                For j = 0 To vertex_rec.Count - 1
 
+                    mesh.VertexColors.SetColor(j, cols(j))
+                    'mesh.VertexColors.SetColor(mesh.Faces.GetFace(j), cols(j))
 
-
-                'For j = 0 To vertex_rec.Count - 1
-
-                '    mesh.VertexColors.SetColor(j, cols(j))
-                '    'mesh.VertexColors.SetColor(mesh.Faces.GetFace(j), cols(j))
-
-                'Next
+                Next
                 Dim attribs As Rhino.DocObjects.ObjectAttributes = objRef.[Object]().Attributes
-                'Dim index = doc.Layers.Find("SEA_mesh", True)
-                'attribs.LayerIndex = index
 
                 oldGuid = objRef.ObjectId
                 doc.Objects.Delete(objRef, True)
@@ -244,28 +212,48 @@ Public Class SunExposure2
                 Next
 
                 If Not newGuid = Nothing Then GuidsTemp.Add(newGuid)
-                'End If
+
             Catch ex As Exception
                 Rhino.RhinoApp.WriteLine("Redefine receiving geometry")
-                'Return Rhino.Commands.Result.Failure
+#If DEBUG Then
+                Rhino.RhinoApp.WriteLine(ex.ToString)
+#End If
+
             End Try
         Next
 
         SEA_RecObj = GuidsTemp
 
-        If SEA_GOption = 2 Then AddColorDiagram(doc)
+        If SEA_GOption = SEA_GOptionValues.Precised Then AddColorDiagram(doc)
 
         doc.Views.Redraw()
 
         RhStopWatch.Stop()
 
         Return Rhino.Commands.Result.Success
+
     End Function
 
-
-
-    'it returns how many time units ( in the given set of time) the given mesh is exposed to the sun
-    Public Shared Function GenerateArrayfRays(ByVal doc As Rhino.RhinoDoc, ByVal arrVal() As Double, ByVal TUnits As Double, ByVal vertx As Rhino.Geometry.Point3d, ByVal vecN As Rhino.Geometry.Vector3d, ByVal startT As Double, ByVal endT As Double, ByVal id As Guid) As Integer
+    ''' <summary>
+    ''' it returns how many time units ( in the given set of time) the given mesh is exposed to the sun
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="arrVal"></param>
+    ''' <param name="TUnits"></param>
+    ''' <param name="vertx"></param>
+    ''' <param name="vecN"></param>
+    ''' <param name="startT"></param>
+    ''' <param name="endT"></param>
+    ''' <param name="id"></param>
+    ''' <returns></returns>
+    Public Shared Function GenerateArrayfRays(ByVal doc As Rhino.RhinoDoc,
+                                              ByVal arrVal() As Double,
+                                              ByVal TUnits As Double,
+                                              ByRef vertx As Rhino.Geometry.Point3d,
+                                              ByRef vecN As Rhino.Geometry.Vector3d,
+                                              ByVal startT As Double,
+                                              ByVal endT As Double,
+                                              ByVal id As Guid) As Integer
 
         Dim exposureU As Integer = 0
         Dim arrExposure As New List(Of Integer)
@@ -282,7 +270,7 @@ Public Class SunExposure2
 
         Dim angle As Double
 
-        Dim arrSunValues(3) As Double
+        'Dim arrSunValues(3) As Double
 
         Dim vec As Rhino.Geometry.Vector3d
         'Rhino.RhinoApp.WriteLine(CStr(startT) & " _ " & CStr(endT))
@@ -324,11 +312,15 @@ Public Class SunExposure2
         Dim tempEx As Integer
         Dim objRef As Rhino.DocObjects.ObjRef
         Dim oi As Integer
-
+        Dim angleVec As Double
         'Rhino.RhinoApp.WriteLine("iMin : " & iMin & " iMax : " & iMax & " minsS : " & minsS)
+        Dim piHalf As Double = Math.PI / 2
+        Dim mySunAngle As New SunAngle2(0, tMonth, tDay, TZone, lat, lon, fOff)
 
         For i = iMin To iMax
             'h = i
+
+
             For j = 0 To jMax
                 'mins = minsS * 60 + j * quartCount * 15
                 mins = minsS * 60 + j * minCount
@@ -337,13 +329,18 @@ Public Class SunExposure2
 
                 mins = mins Mod 60
                 'Rhino.RhinoApp.WriteLine(CStr(i) & " _ " & CStr(mins) & " _ " & CStr(h))
-                arrSunValues = SunAngle.Calculate(0, tMonth, tDay, h, mins, TZone, lat, lon, fOff)
+                'arrSunValues = SunAngle.Calculate(0, tMonth, tDay, h, mins, TZone, lat, lon, fOff)
+                mySunAngle.Calculate(h, mins)
 
                 'tempEx = 1
                 'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)))
-                If Math.Round((h + mins / 60), 2) >= Math.Round(arrSunValues(2), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(arrSunValues(3), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
+                'If Math.Round((h + mins / 60), 2) >= Math.Round(arrSunValues(2), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(arrSunValues(3), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
+                If Math.Round((h + mins / 60), 2) >= Math.Round(mySunAngle.Sunrise, 2) And
+                    Math.Round((h + mins / 60), 2) <= Math.Round(mySunAngle.Sunset, 2) And
+                    Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
                     'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)) & " _ " & CStr(Math.Round(arrSunValues(2), 2)) & " _ " & CStr(Math.Round(arrSunValues(3), 2)) & " _ " & CStr(Math.Round(endT, 2)))
-                    vec = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                    'vec = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                    vec = GetSunVector(doc, mySunAngle.Altitude, mySunAngle.Azimuth)
                     angle = GetVecAngle(vec)
 
 
@@ -352,9 +349,11 @@ Public Class SunExposure2
                     ray = New Rhino.Geometry.Ray3d(vertx + doc.ModelAbsoluteTolerance * vec, vec)
 
                     'check if ray crosses the receiving geometry
-                    Dim angleVec As Double = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
+                    'Dim angleVec As Double = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
+                    angleVec = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
 
-                    If Math.Abs(Rhino.RhinoMath.ToDegrees(angleVec)) <= 90 And (angle >= SEA_MinAngle And angle <= SEA_MaxAngle) Then
+                    'If Math.Abs(Rhino.RhinoMath.ToDegrees(angleVec)) <= 90 And (angle >= SEA_MinAngle And angle <= SEA_MaxAngle) Then
+                    If Math.Abs((angleVec)) <= piHalf And (angle >= SEA_MinAngle And angle <= SEA_MaxAngle) Then
                         'check if ray crosses the occluding geometry
                         oi = 0
                         If SEA_AnType = 0 Then
@@ -373,7 +372,7 @@ Public Class SunExposure2
                                     tempEx = 1
                                     'Return Rhino.Commands.Result.Failure
                                 End Try
-                                oi = oi + 1
+                                oi += 1
                             Loop
                         Else
                             'shadow casting
@@ -402,7 +401,7 @@ Public Class SunExposure2
                                     tempEx = 0
                                     'Return Rhino.Commands.Result.Failure
                                 End Try
-                                oi = oi + 1
+                                oi += 1
                             Loop
                         End If
 
@@ -488,11 +487,15 @@ Public Class SunExposure2
             ex_Val = sumAll
         End If
 
-        GetExposureUnits = ex_Val
+        Return ex_Val
 
     End Function
 
-    'add SunDiagram Layers
+    ''' <summary>
+    ''' add SunDiagram Layers
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <returns></returns>
     Public Shared Function AddLayers_SEA(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
         Dim layer_name As String = "SEA_mesh"
         AddLayer(doc, layer_name)
@@ -501,7 +504,11 @@ Public Class SunExposure2
     End Function
 
 
-    'add color diagram
+    ''' <summary>
+    ''' add color diagram
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <returns></returns>
     Public Shared Function AddColorDiagram(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
         Dim ids_col As New List(Of Guid)
         Dim rec As New Rhino.Geometry.Rectangle3d
@@ -597,7 +604,11 @@ Public Class SunExposure2
 
     End Function
 
-    'add legend Layers
+    ''' <summary>
+    ''' add legend Layers
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <returns></returns>
     Public Shared Function AddLayers_legend(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
         Dim layer_name As String = "SE_legend"
 
@@ -606,6 +617,11 @@ Public Class SunExposure2
         Return Rhino.Commands.Result.Success
     End Function
 
+    ''' <summary>
+    ''' delete all mesh color values
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <returns></returns>
     Public Shared Function ResetMesh(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
 
         Dim mesh As Rhino.Geometry.Mesh

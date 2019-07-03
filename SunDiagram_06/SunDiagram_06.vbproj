@@ -65,6 +65,7 @@
     <Compile Include="Form1.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="SunAngle2.vb" />
     <Compile Include="GetSunAngle.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -118,7 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="RhinoCommon, Version=6.12.19029.6381, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5.0 (64-bit)\System\RhinoCommon.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5 (64-bit)\System\RhinoCommon.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>

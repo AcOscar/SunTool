@@ -31,6 +31,7 @@ Public Class SE
         Dim faceNormals As Rhino.Geometry.Collections.MeshVertexNormalList
         Dim faces As Rhino.Geometry.Collections.MeshFaceList
         Dim str_startMin, str_endMin As String
+        Dim SEA_Progress As Integer
 
         SEA_Progress = 0
 
@@ -153,63 +154,57 @@ Public Class SE
                     'if AnalyseType = Shadow Casting then 
                     'If SEA_AnType = 1 Then check_Val = exp_Max - exp_Units
 
-                    If SEA_GOption = 0 Then
-                        'if GradienOption = Threshold Diagram
-                        'Rhino.RhinoApp.WriteLine(check_Val & " _ " & threshold & " _ " & CStr(check_Val >= threshold))
-                        If check_Val >= threshold Then
-                            colTemp = SEA_colorPos
-                        Else
-                            colTemp = SEA_colorNeg
-                            'AddText(doc, vertex_rec(j), CStr(check_Val), 1)
-                        End If
-                    ElseIf SEA_GOption = 1 Then
-                        'gradient
-                        'colTemp = Drawing.Color.AliceBlue
+                    Select Case SEA_GOption
+                        Case SEA_GOptionValues.Threshold
 
-                        Dim r = Map(check_Val, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)
-                        If r < 0 Then
-                            r = 0
-                        ElseIf r > 255 Then
-                            r = 255
-                        End If
-                        Dim g = Map(check_Val, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)
-                        If g < 0 Then
-                            g = 0
-                        ElseIf g > 255 Then
-                            g = 255
-                        End If
-                        Dim b = Map(check_Val, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)
-                        If b < 0 Then
-                            b = 0
-                        ElseIf b > 255 Then
-                            b = 255
-                        End If
+                            If check_Val >= threshold Then
+                                colTemp = SEA_colorPos
+                            Else
+                                colTemp = SEA_colorNeg
+                            End If
 
-                        colTemp = Drawing.Color.FromArgb(255, r, g, b)
-                        'Rhino.RhinoApp.WriteLine(CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)) & "_" & CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)) & "_" & CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)))
-                        'Rhino.RhinoApp.WriteLine(CStr(Map(exp_Units, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)))
-                    Else
-                        'precised
-                        Dim arr_col As New List(Of System.Drawing.Color)
-                        Dim comp_Val As Integer
+                        Case SEA_GOptionValues.Gradient
 
-                        comp_Val = CInt(Math.Floor(check_Val / tu))
+                            Dim r = Map(check_Val, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)
+                            If r < 0 Then
+                                r = 0
+                            ElseIf r > 255 Then
+                                r = 255
+                            End If
+                            Dim g = Map(check_Val, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)
+                            If g < 0 Then
+                                g = 0
+                            ElseIf g > 255 Then
+                                g = 255
+                            End If
+                            Dim b = Map(check_Val, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)
+                            If b < 0 Then
+                                b = 0
+                            ElseIf b > 255 Then
+                                b = 255
+                            End If
 
-                        arr_col = GetColorSteps()
+                            colTemp = Drawing.Color.FromArgb(255, r, g, b)
 
+                        Case SEA_GOptionValues.Precised
 
-                        If comp_Val > (arr_col.Count - 1) Then comp_Val = arr_col.Count - 1
+                            Dim arr_col As New List(Of System.Drawing.Color)
+                            Dim comp_Val As Integer
 
+                            comp_Val = CInt(Math.Floor(check_Val / tu))
 
-                        colTemp = arr_col(comp_Val)
+                            arr_col = GetColorSteps()
 
+                            If comp_Val > (arr_col.Count - 1) Then comp_Val = arr_col.Count - 1
 
-                    End If
+                            colTemp = arr_col(comp_Val)
+
+                    End Select
 
                     cols.Add(colTemp)
 
                     'progress bar
-                    counter = counter + 1
+                    counter += 1
                     SEA_Progress = CInt((counter / numberTotal) * 100)
                     If SEA_Progress > 100 Then SEA_Progress = 100
                     'Rhino.RhinoApp.WriteLine(counter & " _ " & numberTotal & " _ " & SEA_Progress)

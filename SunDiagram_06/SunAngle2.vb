@@ -1,7 +1,63 @@
-﻿Public Class SunAngle
+﻿Public Class SunAngle2
 
     'source code:
     'http://wiki.naturalfrequency.com/wiki/Solar_Position_Calculator#Manual
+
+
+
+
+    Private fLongitude As Double
+    Private FTimeZone As Double
+    Private fLatitude As Double
+    Private fDifference As Double
+    Private fDeclination As Double
+    Private fEquation As Double
+
+
+    Private fLocalTime As Double
+    Private fSolarTime As Double
+    Private fAltitude As Double
+    Private fAzimuth As Double
+    Private fSunrise As Double
+    Private fSunset As Double
+
+    Private iJulianDate As Double
+
+    Private t As Double
+
+
+    Private fOffset As Double
+    Private _Altitude As Double
+    Private _Azimuth As Double
+    Private _Sunrise As Double
+    Private _Sunset As Double
+
+    ReadOnly Property Altitude As Double
+        Get
+            Return _Altitude
+        End Get
+    End Property
+
+    ReadOnly Property Azimuth As Double
+        Get
+            Return _Azimuth
+        End Get
+    End Property
+    ReadOnly Property Sunrise As Double
+        Get
+            Return _Sunrise
+        End Get
+    End Property
+    ReadOnly Property Sunset As Double
+        Get
+            Return _Sunset
+        End Get
+    End Property
+
+
+    Private ReadOnly arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
+
+
 
 
     ''' <summary>
@@ -23,55 +79,59 @@
     ''' (3) = fSunset
     ''' </returns>
 
+    Public Sub New(ByVal JulianDate As Double,
+                   ByVal TimeMonth As Double,
+                   ByVal TimeDay As Double,
+                   ByVal TimeZone As Double,
+                   ByVal Latitude As Double,
+                   ByVal Longitude As Double,
+                   ByVal Offset As Double)
 
-    Public Shared Function Calculate(ByVal iJulianDate As Double,
-                                     ByVal iTimeMonth As Double,
-                                     ByVal iTimeDay As Double,
-                                     ByVal iTimeHours As Double,
-                                     ByVal iTimeMinutes As Double,
-                                     ByVal FTimeZone As Double,
-                                     ByVal fLatitude As Double,
-                                     ByVal fLongitude As Double,
-                                     ByVal fOffset As Double) As Double()
+
 
         'debugger
         'If iTimeMonth < 1 Or iTimeMonth > 12 Or iTimeHours < 0 Or iTimeHours > 24 Or iTimeMinutes < 0 Or iTimeMinutes > 60 Or fLatitude > 90 Or fLongitude > 90 Then Return Nothin
-        If iTimeMonth < 1 Or iTimeMonth > 12 Or iTimeHours < 0 Or iTimeHours > 24 Or fLatitude > 90 Or fLatitude < -90 Or fLongitude > 180 Or fLongitude < -180 Then Return Nothing
-
-        Dim arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
+        If TimeMonth < 1 Or TimeMonth > 12 Or
+            fLatitude > 90 Or fLatitude < -90 Or
+            fLongitude > 180 Or fLongitude < -180 Then Return
+        fOffset = Offset
+        'Dim arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
 
         ' Calculated data.
-        Dim fDifference As Double
-        Dim fDeclination As Double
-        Dim fEquation As Double
+        'Dim fDifference As Double
+        'Dim fDeclination As Double
+        'Dim fEquation As Double
 
         ' Print Flag
-        Dim intPrint As Integer = 0
+        'Dim intPrint As Integer = 0
 
         ' Solar information.
-        Dim fLocalTime As Double
-        Dim fSolarTime As Double
-        Dim fAltitude As Double
-        Dim fAzimuth As Double
-        Dim fSunrise As Double
-        Dim fSunset As Double
+        'Dim fLocalTime As Double
+        'Dim fSolarTime As Double
+        'Dim fAltitude As Double
+        'Dim fAzimuth As Double
+        'Dim fSunrise As Double
+        'Dim fSunset As Double
 
         ' Temp data.
         'Dim t, local_noon, test, fHourAngle, sin1, cos2, arrReturn(3)
 
         ' calculate location data.
-        fLatitude = fLatitude * (Math.PI / 180.0)
-        FTimeZone = FTimeZone * 15 * (Math.PI / 180.0)
-        fLongitude = fLongitude * (Math.PI / 180.0)
-        fLocalTime = iTimeHours + (iTimeMinutes / 60.0)
+        fLatitude = Latitude * (Math.PI / 180.0)
+        FTimeZone = TimeZone * 15 * (Math.PI / 180.0)
+        fLongitude = Longitude * (Math.PI / 180.0)
 
-        ' Calculatejulian date.
-        Dim a As Integer = CType(iTimeMonth, Integer)
+        ' Calculate julian date.
+        Dim a As Integer = CType(TimeMonth, Integer)
 
-        If iJulianDate = 0 Then iJulianDate = arrMonth(a - 1) + iTimeDay
+        If JulianDate = 0 Then
+            iJulianDate = arrMonth(a - 1) + TimeDay
+        Else
+            iJulianDate = JulianDate
+        End If
 
         ' Calculate solar declination as per Carruthers et al.
-        Dim t As Double = 2 * Math.PI * ((iJulianDate - 1) / 365.0)
+        t = 2 * Math.PI * ((iJulianDate - 1) / 365.0)
 
         fDeclination = (0.322003 _
          - 22.971 * Math.Cos(t) _
@@ -81,6 +141,7 @@
          + 0.019334 * Math.Sin(2 * t) _
          + 0.05928 * Math.Sin(3 * t)
          )
+
 
         ' Convert to radians.
         fDeclination = fDeclination * (Math.PI / 180.0)
@@ -106,7 +167,6 @@
 
         ' Convert solar noon to local noon.
         Dim local_noon As Double = 12.0 - fEquation - fDifference
-
         ' Calculate angle normal to meridian plane.
         If (fLatitude > (0.99 * (Math.PI / 2.0))) Then fLatitude = (0.99 * (Math.PI / 2.0))
         If (fLatitude < -(0.99 * (Math.PI / 2.0))) Then fLatitude = -(0.99 * (Math.PI / 2.0))
@@ -125,6 +185,23 @@
         fSunrise = local_noon - t
         fSunset = local_noon + t
 
+
+
+    End Sub
+    'Public Function Calculate(ByVal iJulianDate As Double,
+    '                                 ByVal iTimeMonth As Double,
+    '                                 ByVal iTimeDay As Double,
+    '                                 ByVal iTimeHours As Double,
+    '                                 ByVal iTimeMinutes As Double,
+    '                                 ByVal FTimeZone As Double,
+    '                                 ByVal fLatitude As Double,
+    '                                 ByVal fLongitude As Double,
+    '                                 ByVal fOffset As Double) As Double()
+    Public Sub Calculate(ByVal iTimeHours As Double,
+                              ByVal iTimeMinutes As Double)
+
+        fLocalTime = iTimeHours + (iTimeMinutes / 60.0)
+
         ' Check validity of local time.
         If (fLocalTime > fSunset) Then fLocalTime = fSunset
         If (fLocalTime < fSunrise) Then fLocalTime = fSunrise
@@ -138,7 +215,8 @@
         Dim fHourAngle As Double = (15 * (fSolarTime - 12)) * (Math.PI / 180.0)
 
         ' Calculate current altitude.
-        t = (Math.Sin(fDeclination) * Math.Sin(fLatitude)) + (Math.Cos(fDeclination) * Math.Cos(fLatitude) * Math.Cos(fHourAngle))
+        t = (Math.Sin(fDeclination) * Math.Sin(fLatitude)) +
+            (Math.Cos(fDeclination) * Math.Cos(fLatitude) * Math.Cos(fHourAngle))
         fAltitude = Math.Asin(t)
 
         ' Calculate current azimuth.
@@ -190,25 +268,31 @@
         fAzimuth = fAzimuth * 180 / Math.PI
 
         'print out the calculated values
-        If intPrint = 1 Then
-            Rhino.RhinoApp.WriteLine("Julian Date : " & iJulianDate &
-             ", Date : " & iTimeDay & "." & iTimeMonth &
-             ", Time : " & iTimeHours & ":" & Math.Round(iTimeMinutes) &
-             ", Altitude : " & Math.Round(fAltitude * 100) / 100 &
-             ", fAzimuth : " & 180 - Math.Round(fAzimuth * 100) / 100 &
-             ", fsunrise : " & Math.Round(fSunrise * 100) / 100 &
-             ", fsunset : " & Math.Round(fSunset * 100) / 100)
-        End If
+#If DEBUG Then
+        'Rhino.RhinoApp.WriteLine("Julian Date : " & iJulianDate &
+        '     ", Time : " & iTimeHours & ":" & Math.Round(iTimeMinutes) &
+        '     ", Altitude : " & Math.Round(fAltitude * 100) / 100 &
+        '     ", fAzimuth : " & 180 - Math.Round(fAzimuth * 100) / 100 &
+        '     ", fsunrise : " & Math.Round(fSunrise * 100) / 100 &
+        '     ", fsunset : " & Math.Round(fSunset * 100) / 100)
+        'Rhino.RhinoApp.WriteLine("Julian Date : " & iJulianDate &
+        '     ", Date : " & iTimeDay & "." & iTimeMonth &
+        '     ", Time : " & iTimeHours & ":" & Math.Round(iTimeMinutes) &
+        '     ", Altitude : " & Math.Round(fAltitude * 100) / 100 &
+        '     ", fAzimuth : " & 180 - Math.Round(fAzimuth * 100) / 100 &
+        '     ", fsunrise : " & Math.Round(fSunrise * 100) / 100 &
+        '     ", fsunset : " & Math.Round(fSunset * 100) / 100)
 
-        Dim arrReturn(3) As Double
+#End If
 
-        arrReturn(0) = fAltitude
-        arrReturn(1) = fAzimuth + fOffset
-        arrReturn(2) = fSunrise
-        arrReturn(3) = fSunset
 
-        Calculate = arrReturn
 
-    End Function
+
+        _Altitude = fAltitude
+        _Azimuth = fAzimuth + fOffset
+        _Sunrise = fSunrise
+        _Sunset = fSunset
+
+    End Sub
 
 End Class

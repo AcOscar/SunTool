@@ -409,9 +409,6 @@ Public Class Form1
 
     End Sub
 
-
-
-
     '######################################################################
     '###SUN RAYS DIAGRAM
     '######################################################################
@@ -511,16 +508,25 @@ Public Class Form1
     'min Angle to analyse
     Private Sub SEA_AngleMin_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SEA_AngleMin.ValueChanged
         SEA_MinAngle = SEA_AngleMin.Value
+        SEA_MinAngleRad = SEA_MinAngle / (180 / Math.PI)
         If SEA_MaxAngle < SEA_MinAngle Then
             SEA_MaxAngle = SEA_MinAngle
+
+            SEA_MaxAngleRad = SEA_MaxAngle / (180 / Math.PI)
+
         End If
     End Sub
 
     'max Angle to analyse
     Private Sub SEA_AngleMax_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SEA_AngleMax.ValueChanged
         SEA_MaxAngle = SEA_AngleMax.Value
+        SEA_MaxAngleRad = SEA_MaxAngle / (180 / Math.PI)
+
         If SEA_MaxAngle < SEA_MinAngle Then
             SEA_MaxAngle = SEA_MinAngle
+
+            SEA_MaxAngleRad = SEA_MaxAngle / (180 / Math.PI)
+
         End If
     End Sub
 
@@ -609,7 +615,7 @@ Public Class Form1
 
         Select Case GradientOption_CB.SelectedItem.ToString
             Case "ShowThreshold"
-                SEA_GOption = 0
+                SEA_GOption = SEA_GOptionValues.Threshold
 
                 TimeExposureNumUD.Enabled = True
 
@@ -619,7 +625,7 @@ Public Class Form1
                 AEA_PositiveButton.Enabled = True
 
             Case "ShowGradient"
-                SEA_GOption = 1
+                SEA_GOption = SEA_GOptionValues.Gradient
 
                 TimeExposureNumUD.Enabled = False
 
@@ -629,7 +635,7 @@ Public Class Form1
                 AEA_PositiveButton.Enabled = True
 
             Case Else 'HoursOfExposure
-                SEA_GOption = 2
+                SEA_GOption = SEA_GOptionValues.Precised
 
                 TimeExposureNumUD.Enabled = False
 
