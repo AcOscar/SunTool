@@ -548,7 +548,10 @@ Public Class Form1
         'Dim ids As New List(Of Guid)()
         For i As Integer = 0 To go.ObjectCount - 1
             Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
-            If Not IsNothing(objref.Mesh) Then SEA_OccObj.Add(go.[Object](i).ObjectId)
+            If Not IsNothing(objref.Mesh) Then
+                SEA_OccObj.Add(go.[Object](i).ObjectId)
+                SEA_OccObjMesh.Add(objref.Mesh)
+            End If
         Next
 
         If Not SEA_OccObj Is Nothing Then

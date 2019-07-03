@@ -1,6 +1,6 @@
 ﻿'sun exposure
 Public Class SunExposure2
-
+    'Private Shared ModelAbsoluteTolerance As Double
     Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc,
                                    ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
 
@@ -128,7 +128,7 @@ Public Class SunExposure2
 
                 'coloring mesh vertexes
                 For j = 0 To vertex_rec.Count - 1
-                    exp_Units = GenerateArrayfRays(doc, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, SEA_RecObj(i))
+                    exp_Units = GenerateArrayfRays(doc.ModelAbsoluteTolerance, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, SEA_RecObj(i))
                     'exp_Units = GenerateArrayfRays(doc, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, curSEA_RecObj)
                     Dim check_Val As Double
                     check_Val = exp_Units
@@ -246,7 +246,7 @@ Public Class SunExposure2
     ''' <param name="endT"></param>
     ''' <param name="id"></param>
     ''' <returns></returns>
-    Public Shared Function GenerateArrayfRays(ByVal doc As Rhino.RhinoDoc,
+    Public Shared Function GenerateArrayfRays(ByVal ModelAbsoluteTolerance As Double,
                                               ByVal arrVal() As Double,
                                               ByVal TUnits As Double,
                                               ByRef vertx As Rhino.Geometry.Point3d,
@@ -270,21 +270,12 @@ Public Class SunExposure2
 
         Dim angle As Double
 
-        'Dim arrSunValues(3) As Double
-
         Dim vec As Rhino.Geometry.Vector3d
-        'Rhino.RhinoApp.WriteLine(CStr(startT) & " _ " & CStr(endT))
         Dim iter As Integer = CType((endT - startT) * TUnits, Integer)
-        'Dim iMin As Integer = CType(startT, Integer)
         Dim iMin As Integer = CType(Math.Floor(startT), Integer)
         minsS = startT - iMin
-        'Rhino.RhinoApp.WriteLine(CStr(iMin) & " _ " & CStr(minsS))
         Dim iMax As Integer = CType(endT, Integer)
-        'Dim iter As Integer = CType((SEA_EndH - SEA_StartH) * TUnits, Integer)
-        'Dim iMin As Integer = CType(SEA_StartH, Integer)
-        'Dim iMax As Integer = CType(SEA_EndH, Integer)
         Dim h, mins As Double
-        'Dim quartCount As Integer
         Dim minCount As Integer
         Dim jMax As Integer
         If TUnits = 1 Then
@@ -310,7 +301,7 @@ Public Class SunExposure2
         End If
         Dim param As Double
         Dim tempEx As Integer
-        Dim objRef As Rhino.DocObjects.ObjRef
+        'Dim objRef As Rhino.DocObjects.ObjRef
         Dim oi As Integer
         Dim angleVec As Double
         'Rhino.RhinoApp.WriteLine("iMin : " & iMin & " iMax : " & iMax & " minsS : " & minsS)
@@ -339,14 +330,23 @@ Public Class SunExposure2
                     Math.Round((h + mins / 60), 2) <= Math.Round(mySunAngle.Sunset, 2) And
                     Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
                     'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)) & " _ " & CStr(Math.Round(arrSunValues(2), 2)) & " _ " & CStr(Math.Round(arrSunValues(3), 2)) & " _ " & CStr(Math.Round(endT, 2)))
-                    'vec = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
-                    vec = GetSunVector(doc, mySunAngle.Altitude, mySunAngle.Azimuth)
-                    angle = GetVecAngle(vec)
+
+                    vec = New Rhino.Geometry.Vector3d(0, 1, 0)
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(mySunAngle.Altitude), New Rhino.Geometry.Vector3d(1, 0, 0))
+                    vec.Rotate(Rhino.RhinoMath.ToRadians(-mySunAngle.Azimuth), New Rhino.Geometry.Vector3d(0, 0, 1))
+
+                    Dim len As Double
+
+                    len = vec.Length
+
+                    If len = 0 Then Return 0
+
+                    angle = Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
 
 
                     'ray = New Rhino.Geometry.Ray3d(vertx, vec)
                     'we want the ray to be offsetted from the mesh in order to make sure that the calculations are not corrupted by the selfcasting
-                    ray = New Rhino.Geometry.Ray3d(vertx + doc.ModelAbsoluteTolerance * vec, vec)
+                    ray = New Rhino.Geometry.Ray3d(vertx + ModelAbsoluteTolerance * vec, vec)
 
                     'check if ray crosses the receiving geometry
                     'Dim angleVec As Double = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
@@ -360,67 +360,60 @@ Public Class SunExposure2
                             'sun analysis
                             tempEx = 1
                             'Analyse Type = Exposure analysys
-                            Do Until oi = SEA_OccObj.Count Or tempEx = 0
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_OccObj(oi))
-                                Try
-                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
-                                    'If param > 0.1 Then tempEx = 0
-                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then tempEx = 0
+                            Try
+                                Do Until oi = SEA_OccObj.Count
 
-                                Catch ex As Exception
-                                    'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
-                                    tempEx = 1
-                                    'Return Rhino.Commands.Result.Failure
-                                End Try
-                                oi += 1
-                            Loop
+                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
+
+                                    If (param >= ModelAbsoluteTolerance And
+                                        id <> SEA_OccObj(oi)) Or
+                                        (param > ModelAbsoluteTolerance) Then
+                                        tempEx = 0
+                                        Exit Do
+                                    End If
+
+                                    oi += 1
+                                Loop
+                            Catch ex As Exception
+                                'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
+                                tempEx = 1
+
+                            End Try
                         Else
                             'shadow casting
                             tempEx = 0
                             'Analyse Type = Shadow casting
-                            Do Until oi = SEA_OccObj.Count Or tempEx = 1
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_OccObj(oi))
-                                Try
-                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
-                                    'If param > 0.1 Then tempEx = 1
-                                    'Dim idd As Guid
-                                    'Dim attribs = doc.CreateDefaultAttributes()
-                                    'attribs.ColorSource = Rhino.DocObjects.ObjectColorSource.ColorFromObject
-                                    'attribs.Name = CStr(h & ":" & mins)
-                                    'idd = doc.Objects.AddLine(New Rhino.Geometry.Line(vertx, ray.PointAt(1)))
-                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then
-                                        tempEx = 1
-                                        'attribs.ObjectColor = Drawing.Color.Blue
-                                    Else
-                                        'attribs.ObjectColor = Drawing.Color.Red
-                                    End If
-                                    'doc.Objects.ModifyAttributes(idd, attribs, True)
+                            Try
+                                Do Until oi = SEA_OccObj.Count 'Or tempEx = 1
 
-                                Catch ex As Exception
-                                    'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
-                                    tempEx = 0
-                                    'Return Rhino.Commands.Result.Failure
-                                End Try
-                                oi += 1
-                            Loop
+                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
+
+                                    If (param >= ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or
+                                        (param > ModelAbsoluteTolerance) Then
+
+                                        tempEx = 1
+
+                                        Exit Do
+
+                                    End If
+
+                                    oi += 1
+
+                                Loop
+
+                            Catch ex As Exception
+                                'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
+                                tempEx = 0
+                                'Return Rhino.Commands.Result.Failure
+                            End Try
                         End If
 
                     Else
                         tempEx = 0
-                        'if AnalyseType = Shadow Casting - AVOID SELFCASTING 
-                        'If SEA_AnType = 1 Then tempEx = 1
                     End If
 
-                    ' exposureUTemp = exposureUTemp + tempEx
                     arrExposure.Add(tempEx)
 
-                    'if notShaded then show line
-                    'If tempEx = 1 Then
-                    'Dim attribs = doc.CreateDefaultAttributes()
-                    'attribs.Name = CStr(h) & "_" & CStr(mins)
-                    'Dim line As New Rhino.Geometry.Line(vertx, New Rhino.Geometry.Point3d(vertx + vec))
-                    'doc.Objects.AddLine(line, attribs)
-                    'End If
                 End If
             Next
 
@@ -658,6 +651,32 @@ Public Class SunExposure2
         Next
 
         Return Rhino.Commands.Result.Success
+    End Function
+
+    'Public Function GetSunVector2(ByVal fAltitude As Double, ByVal fAzimuth As Double) As Rhino.Geometry.Vector3d
+    Public Shared Function GetSunVector2(ByVal mySunangel As SunAngle2) As Rhino.Geometry.Vector3d
+
+        Dim vec As Rhino.Geometry.Vector3d '= Nothing
+
+        vec = New Rhino.Geometry.Vector3d(0, 1, 0)
+        vec.Rotate(Rhino.RhinoMath.ToRadians(mySunangel.Altitude), New Rhino.Geometry.Vector3d(1, 0, 0))
+        vec.Rotate(Rhino.RhinoMath.ToRadians(-mySunangel.Azimuth), New Rhino.Geometry.Vector3d(0, 0, 1))
+        'Dim sunPt = New Rhino.Geometry.Point3d(vec)
+
+        Return vec
+    End Function
+
+    'get sunray angle
+    Public Shared Function GetVecAngle2(ByVal vec As Rhino.Geometry.Vector3d) As Double
+
+        Dim len As Double
+
+        len = vec.Length
+
+        If len = 0 Then Return 0
+
+        Return Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
+
     End Function
 
 End Class

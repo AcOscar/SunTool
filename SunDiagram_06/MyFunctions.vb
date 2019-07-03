@@ -20,6 +20,7 @@
     Public SEA_colorNeg As Drawing.Color = Drawing.Color.Red
     Public SEA_colorPos As Drawing.Color = Drawing.Color.White
     Public SEA_OccObj As New List(Of Guid)()
+    Public SEA_OccObjMesh As New List(Of Rhino.Geometry.Mesh)()
     Public SEA_RecObj As New List(Of Guid)()
     Public SEA_StartH, SEA_EndH, SEA_StartHVal, Sea_EndHVal As Double
     Public SEA_StartMinVal, SEA_EndMinVal As Double
@@ -290,16 +291,6 @@
         Return angle
 
     End Function
-    Public Function GetVecAngle2(ByVal vec As Rhino.Geometry.Vector3d) As Double
 
-        Dim len As Double
-
-        len = vec.Length
-
-        If len = 0 Then Return 0
-
-        Return Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
-
-    End Function
 
 End Module
