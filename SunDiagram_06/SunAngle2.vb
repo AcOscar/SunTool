@@ -29,55 +29,45 @@
     Private fOffset As Double
     Private _Altitude As Double
     Private _Azimuth As Double
-    Private _Sunrise As Double
-    Private _Sunset As Double
+    'Private _Sunset As Double
 
-    ReadOnly Property Altitude As Double
+    Private sin1 As Double
+    Private cos2 As Double
+
+    Private fHourAngle As Double
+
+
+    Private SinfDeclination As Double
+    Private CosfDeclination As Double
+    Private SinfLatitude As Double
+    Private CosfLatitude As Double
+    Private CosfHourAngle As Double
+    Private prodcfhacfd As Double
+
+    Public ReadOnly Property Altitude As Double
         Get
             Return _Altitude
         End Get
     End Property
 
-    ReadOnly Property Azimuth As Double
+    Public ReadOnly Property Azimuth As Double
         Get
             Return _Azimuth
         End Get
     End Property
-    ReadOnly Property Sunrise As Double
-        Get
-            Return _Sunrise
-        End Get
-    End Property
-    ReadOnly Property Sunset As Double
-        Get
-            Return _Sunset
-        End Get
-    End Property
+
+    Public ReadOnly Property Sunrise As Double
+
+    Public ReadOnly Property Sunset As Double
+    'Get
+    '    Return _Sunset
+    'End Get
 
 
     Private ReadOnly arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
 
+    Private Const pihalf = Math.PI / 2
 
-
-
-    ''' <summary>
-    ''' get sun angle
-    ''' </summary>
-    ''' <param name="iJulianDate"></param>
-    ''' <param name="iTimeMonth"></param>
-    ''' <param name="iTimeDay"></param>
-    ''' <param name="iTimeHours"></param>
-    ''' <param name="iTimeMinutes"></param>
-    ''' <param name="FTimeZone"></param>
-    ''' <param name="fLatitude"></param>
-    ''' <param name="fLongitude"></param>
-    ''' <param name="fOffset"></param>
-    ''' <returns>
-    ''' (0) = fAltitude
-    ''' (1) = fAzimuth + fOffset
-    ''' (2) = fSunrise
-    ''' (3) = fSunset
-    ''' </returns>
 
     Public Sub New(ByVal JulianDate As Double,
                    ByVal TimeMonth As Double,
@@ -185,26 +175,18 @@
         fSunrise = local_noon - t
         fSunset = local_noon + t
 
-
+        _Sunrise = fSunrise
+        _Sunset = fSunset
 
     End Sub
-    'Public Function Calculate(ByVal iJulianDate As Double,
-    '                                 ByVal iTimeMonth As Double,
-    '                                 ByVal iTimeDay As Double,
-    '                                 ByVal iTimeHours As Double,
-    '                                 ByVal iTimeMinutes As Double,
-    '                                 ByVal FTimeZone As Double,
-    '                                 ByVal fLatitude As Double,
-    '                                 ByVal fLongitude As Double,
-    '                                 ByVal fOffset As Double) As Double()
     Public Sub Calculate(ByVal iTimeHours As Double,
-                              ByVal iTimeMinutes As Double)
+                         ByVal iTimeMinutes As Double)
 
         fLocalTime = iTimeHours + (iTimeMinutes / 60.0)
 
         ' Check validity of local time.
-        If (fLocalTime > fSunset) Then fLocalTime = fSunset
-        If (fLocalTime < fSunrise) Then fLocalTime = fSunrise
+        If (fLocalTime > Sunset) Then fLocalTime = Sunset
+        If (fLocalTime < Sunrise) Then fLocalTime = Sunrise
         If (fLocalTime > 24.0) Then fLocalTime = 24.0
         If (fLocalTime < 0.0) Then fLocalTime = 0.0
 
@@ -212,22 +194,28 @@
         fSolarTime = fLocalTime + fEquation + fDifference
 
         ' Calculate hour angle.
-        Dim fHourAngle As Double = (15 * (fSolarTime - 12)) * (Math.PI / 180.0)
+        fHourAngle = (15 * (fSolarTime - 12)) * (Math.PI / 180.0)
+
+        SinfDeclination = Math.Sin(fDeclination)
+        CosfDeclination = Math.Cos(fDeclination)
+        SinfLatitude = Math.Sin(fLatitude)
+        CosfLatitude = Math.Cos(fLatitude)
+        CosfHourAngle = Math.Cos(fHourAngle)
+        prodcfhacfd = CosfHourAngle * CosfDeclination
+
 
         ' Calculate current altitude.
-        t = (Math.Sin(fDeclination) * Math.Sin(fLatitude)) +
-            (Math.Cos(fDeclination) * Math.Cos(fLatitude) * Math.Cos(fHourAngle))
+        t = (SinfDeclination * SinfLatitude) +
+            (prodcfhacfd * CosfLatitude)
         fAltitude = Math.Asin(t)
 
         ' Calculate current azimuth.
-        t = (Math.Sin(fDeclination) * Math.Cos(fLatitude)) _
-         - (Math.Cos(fDeclination) * Math.Sin(fLatitude) _
-         * Math.Cos(fHourAngle))
+        t = (SinfDeclination * CosfLatitude) -
+        (prodcfhacfd * SinfLatitude)
 
-        ' Avoid division by zero error.
-        Dim sin1, cos2 As Double
+        'Avoid division by zero error.
         If (fAltitude < (Math.PI / 2.0)) Then
-            sin1 = (-Math.Cos(fDeclination) * Math.Sin(fHourAngle)) / Math.Cos(fAltitude)
+            sin1 = (-CosfDeclination * Math.Sin(fHourAngle)) / Math.Cos(fAltitude)
             cos2 = t / Math.Cos(fAltitude)
         Else
             sin1 = 0.0
@@ -241,19 +229,20 @@
         If (cos2 > 1.0) Then cos2 = 1.0
 
         ' Calculate azimuth subject to quadrant.
-        If (sin1 < -0.99999) Then
-            fAzimuth = Math.Asin(sin1)
-        ElseIf ((sin1 > 0.0) And (cos2 < 0.0)) Then
-            If (sin1 >= 1.0) Then
-                fAzimuth = -(Math.PI / 2.0)
+        'If (sin1 < -0.99999) Then
+        '    fAzimuth = Math.Asin(sin1)
+        If ((sin1 > 0.0) And (cos2 < 0.0)) Then
+            If (sin1 = 1.0) Then
+                fAzimuth = -(pihalf)
             Else
-                fAzimuth = (Math.PI / 2.0) + ((Math.PI / 2.0) - Math.Asin(sin1))
+                fAzimuth = (pihalf) + ((pihalf) - Math.Asin(sin1))
+                fAzimuth = (pihalf) + ((pihalf) - Math.Asin(sin1))
             End If
         ElseIf ((sin1 < 0.0) And (cos2 < 0.0)) Then
-            If (sin1 <= -1.0) Then
-                fAzimuth = (Math.PI / 2.0)
+            If (sin1 = -1.0) Then
+                fAzimuth = (pihalf)
             Else
-                fAzimuth = -(Math.PI / 2.0) - ((Math.PI / 2.0) + Math.Asin(sin1))
+                fAzimuth = -(pihalf) - ((pihalf) + Math.Asin(sin1))
             End If
         Else
             fAzimuth = Math.Asin(sin1)
@@ -264,34 +253,8 @@
             fAzimuth = -fAzimuth
         End If
 
-        fAltitude = fAltitude * 180 / Math.PI
-        fAzimuth = fAzimuth * 180 / Math.PI
-
-        'print out the calculated values
-#If DEBUG Then
-        'Rhino.RhinoApp.WriteLine("Julian Date : " & iJulianDate &
-        '     ", Time : " & iTimeHours & ":" & Math.Round(iTimeMinutes) &
-        '     ", Altitude : " & Math.Round(fAltitude * 100) / 100 &
-        '     ", fAzimuth : " & 180 - Math.Round(fAzimuth * 100) / 100 &
-        '     ", fsunrise : " & Math.Round(fSunrise * 100) / 100 &
-        '     ", fsunset : " & Math.Round(fSunset * 100) / 100)
-        'Rhino.RhinoApp.WriteLine("Julian Date : " & iJulianDate &
-        '     ", Date : " & iTimeDay & "." & iTimeMonth &
-        '     ", Time : " & iTimeHours & ":" & Math.Round(iTimeMinutes) &
-        '     ", Altitude : " & Math.Round(fAltitude * 100) / 100 &
-        '     ", fAzimuth : " & 180 - Math.Round(fAzimuth * 100) / 100 &
-        '     ", fsunrise : " & Math.Round(fSunrise * 100) / 100 &
-        '     ", fsunset : " & Math.Round(fSunset * 100) / 100)
-
-#End If
-
-
-
-
-        _Altitude = fAltitude
-        _Azimuth = fAzimuth + fOffset
-        _Sunrise = fSunrise
-        _Sunset = fSunset
+        _Altitude = fAltitude * 180 / Math.PI
+        _Azimuth = fAzimuth * 180 / Math.PI + fOffset
 
     End Sub
 

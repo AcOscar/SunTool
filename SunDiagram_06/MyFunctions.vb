@@ -290,4 +290,16 @@
         Return angle
 
     End Function
+    Public Function GetVecAngle2(ByVal vec As Rhino.Geometry.Vector3d) As Double
+
+        Dim len As Double
+
+        len = vec.Length
+
+        If len = 0 Then Return 0
+
+        Return Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
+
+    End Function
+
 End Module
