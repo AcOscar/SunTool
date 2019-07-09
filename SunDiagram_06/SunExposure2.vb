@@ -1,19 +1,21 @@
 ﻿'sun exposure
+Imports System.Drawing
+
 Public Class SunExposure2
-    'Private Shared ModelAbsoluteTolerance As Double
     Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc,
                                    ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
 
         RhStopWatch.Start()
 
         'get array of values
-        Dim arr() As Double
-        arr = GetData(doc, lon, lat, TZone, nOffset)
+        'Dim arr() As Double
+        'arr = GetData(doc, lon, lat, TZone, nOffset)
 
         'variables
         Dim objRef As Rhino.DocObjects.ObjRef
         Dim ptTemp As Rhino.Geometry.Point3d
         Dim vecNtemp As Rhino.Geometry.Vector3d
+
         Dim threshold As Double
         Dim exp_Units As Integer
         Dim arrVal = GetData(doc, lon, lat, TZone, nOffset)
@@ -37,9 +39,14 @@ Public Class SunExposure2
 
         If SEA_OccObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
 
+        'Dim SunAng As New SunAngle2(0, month, day, 12, 0, TZone, lat, lon, nOffset)
+
+
         'Setting the ex_Max
         Dim arrSunValues(3) As Double
         arrSunValues = SunAngle.Calculate(0, month, day, 12, 0, TZone, lat, lon, nOffset)
+
+
 
         Dim startT, endT As Double
 
@@ -58,6 +65,7 @@ Public Class SunExposure2
         Else
             endT = arrSunValues(3)
         End If
+
         Dim exp_Max As Double = (endT - startT) * tu '(sunset - sunrise) * tUnits
 
         Dim startH, startMin, endH, endMin As Double
@@ -69,6 +77,9 @@ Public Class SunExposure2
 
         str_startMin = CStr(startMin)
         str_endMin = CStr(endMin)
+        Dim r, g, b As Integer
+        Dim arr_col As List(Of System.Drawing.Color)
+        Dim comp_Val As Integer
 
         If Len(str_startMin) = 1 Then
             str_startMin = "0" & str_startMin
@@ -129,7 +140,7 @@ Public Class SunExposure2
                 'coloring mesh vertexes
                 For j = 0 To vertex_rec.Count - 1
                     exp_Units = GenerateArrayfRays(doc.ModelAbsoluteTolerance, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, SEA_RecObj(i))
-                    'exp_Units = GenerateArrayfRays(doc, arrVal, tu, vertex_rec(j), vecNorms(j), startT, endT, curSEA_RecObj)
+
                     Dim check_Val As Double
                     check_Val = exp_Units
 
@@ -144,31 +155,13 @@ Public Class SunExposure2
 
                         Case SEA_GOptionValues.Gradient
 
-                            Dim r = Map(check_Val, 0, exp_Max, SEA_colorNeg.R, SEA_colorPos.R)
-                            If r < 0 Then
-                                r = 0
-                            ElseIf r > 255 Then
-                                r = 255
-                            End If
-                            Dim g = Map(check_Val, 0, exp_Max, SEA_colorNeg.G, SEA_colorPos.G)
-                            If g < 0 Then
-                                g = 0
-                            ElseIf g > 255 Then
-                                g = 255
-                            End If
-                            Dim b = Map(check_Val, 0, exp_Max, SEA_colorNeg.B, SEA_colorPos.B)
-                            If b < 0 Then
-                                b = 0
-                            ElseIf b > 255 Then
-                                b = 255
-                            End If
+                            r = check_Val * (SEA_colorPos.R - SEA_colorNeg.R) / exp_Max + SEA_colorNeg.R
+                            g = check_Val * (SEA_colorPos.G - SEA_colorNeg.G) / exp_Max + SEA_colorNeg.G
+                            b = check_Val * (SEA_colorPos.B - SEA_colorNeg.B) / exp_Max + SEA_colorNeg.B
 
                             colTemp = Drawing.Color.FromArgb(255, r, g, b)
 
                         Case SEA_GOptionValues.Precised
-
-                            Dim arr_col As New List(Of System.Drawing.Color)
-                            Dim comp_Val As Integer
 
                             comp_Val = CInt(Math.Floor(check_Val / tu))
 
@@ -234,6 +227,7 @@ Public Class SunExposure2
 
     End Function
 
+
     ''' <summary>
     ''' it returns how many time units ( in the given set of time) the given mesh is exposed to the sun
     ''' </summary>
@@ -255,7 +249,7 @@ Public Class SunExposure2
                                               ByVal endT As Double,
                                               ByVal id As Guid) As Integer
 
-        Dim exposureU As Integer = 0
+        Dim exposureU As Integer
         Dim arrExposure As New List(Of Integer)
         Dim minsS As Double
 
@@ -278,27 +272,30 @@ Public Class SunExposure2
         Dim h, mins As Double
         Dim minCount As Integer
         Dim jMax As Integer
-        If TUnits = 1 Then
-            'Unit = 60min
-            'quartCount = 4
-            minCount = 60
-            jMax = 0
-        ElseIf TUnits = 2 Then
-            'Unit = 30min
-            'quartCount = 2
-            minCount = 30
-            jMax = 1
-        ElseIf TUnits = 4 Then
-            'Unit = 15min
-            'quartCount = 1
-            minCount = 15
-            jMax = 3
-        Else
-            'Unit = 1min
-            'quartCount = 1 / 15
-            minCount = 1
-            jMax = 59
-        End If
+
+        Select Case TUnits
+            Case 1
+                'Unit = 60min
+                'quartCount = 4
+                minCount = 60
+                jMax = 0
+            Case 2
+                'Unit = 30min
+                'quartCount = 2
+                minCount = 30
+                jMax = 1
+            Case 4
+                'Unit = 15min
+                'quartCount = 1
+                minCount = 15
+                jMax = 3
+            Case Else
+                'Unit = 1min
+                'quartCount = 1 / 15
+                minCount = 1
+                jMax = 59
+        End Select
+
         Dim param As Double
         Dim tempEx As Integer
         'Dim objRef As Rhino.DocObjects.ObjRef
@@ -307,6 +304,11 @@ Public Class SunExposure2
         'Rhino.RhinoApp.WriteLine("iMin : " & iMin & " iMax : " & iMax & " minsS : " & minsS)
         Dim piHalf As Double = Math.PI / 2
         Dim mySunAngle As New SunAngle2(0, tMonth, tDay, TZone, lat, lon, fOff)
+
+        Dim RoundTime As Double
+        Dim len As Double
+
+
 
         For i = iMin To iMax
             'h = i
@@ -326,34 +328,33 @@ Public Class SunExposure2
                 'tempEx = 1
                 'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)))
                 'If Math.Round((h + mins / 60), 2) >= Math.Round(arrSunValues(2), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(arrSunValues(3), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
-                If Math.Round((h + mins / 60), 2) >= Math.Round(mySunAngle.Sunrise, 2) And
-                    Math.Round((h + mins / 60), 2) <= Math.Round(mySunAngle.Sunset, 2) And
-                    Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
+                RoundTime = Math.Round((h + mins / 60), 2)
+
+                If RoundTime >= Math.Round(mySunAngle.Sunrise, 2) AndAlso
+                    RoundTime <= Math.Round(mySunAngle.Sunset, 2) AndAlso
+                    RoundTime <= Math.Round(endT, 2) Then
                     'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)) & " _ " & CStr(Math.Round(arrSunValues(2), 2)) & " _ " & CStr(Math.Round(arrSunValues(3), 2)) & " _ " & CStr(Math.Round(endT, 2)))
 
                     vec = New Rhino.Geometry.Vector3d(0, 1, 0)
                     vec.Rotate(Rhino.RhinoMath.ToRadians(mySunAngle.Altitude), New Rhino.Geometry.Vector3d(1, 0, 0))
                     vec.Rotate(Rhino.RhinoMath.ToRadians(-mySunAngle.Azimuth), New Rhino.Geometry.Vector3d(0, 0, 1))
 
-                    Dim len As Double
 
                     len = vec.Length
+
 
                     If len = 0 Then Return 0
 
                     angle = Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
 
-
-                    'ray = New Rhino.Geometry.Ray3d(vertx, vec)
-                    'we want the ray to be offsetted from the mesh in order to make sure that the calculations are not corrupted by the selfcasting
-                    ray = New Rhino.Geometry.Ray3d(vertx + ModelAbsoluteTolerance * vec, vec)
-
                     'check if ray crosses the receiving geometry
-                    'Dim angleVec As Double = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
                     angleVec = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
+                    Dim myMesh As Rhino.Geometry.Mesh
 
-                    'If Math.Abs(Rhino.RhinoMath.ToDegrees(angleVec)) <= 90 And (angle >= SEA_MinAngle And angle <= SEA_MaxAngle) Then
-                    If Math.Abs((angleVec)) <= piHalf And (angle >= SEA_MinAngle And angle <= SEA_MaxAngle) Then
+
+                    If Math.Abs(angleVec) <= piHalf AndAlso (angle >= SEA_MinAngle AndAlso angle <= SEA_MaxAngle) Then
+                        'we want the ray to be offsetted from the mesh in order to make sure that the calculations are not corrupted by the selfcasting
+                        ray = New Rhino.Geometry.Ray3d(vertx + ModelAbsoluteTolerance * vec, vec)
                         'check if ray crosses the occluding geometry
                         oi = 0
                         If SEA_AnType = 0 Then
@@ -362,11 +363,10 @@ Public Class SunExposure2
                             'Analyse Type = Exposure analysys
                             Try
                                 Do Until oi = SEA_OccObj.Count
-
-                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
-
-                                    If (param >= ModelAbsoluteTolerance And
-                                        id <> SEA_OccObj(oi)) Or
+                                    myMesh = SEA_OccObjMesh(oi)
+                                    'param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
+                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(myMesh, ray)
+                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_OccObj(oi)) OrElse
                                         (param > ModelAbsoluteTolerance) Then
                                         tempEx = 0
                                         Exit Do
@@ -375,8 +375,11 @@ Public Class SunExposure2
                                     oi += 1
                                 Loop
                             Catch ex As Exception
-                                'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
+                                Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
                                 tempEx = 1
+#If DEBUG Then
+                                Rhino.RhinoApp.WriteLine(ex.ToString)
+#End If
 
                             End Try
                         Else
@@ -388,7 +391,7 @@ Public Class SunExposure2
 
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
 
-                                    If (param >= ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or
+                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_OccObj(oi)) OrElse
                                         (param > ModelAbsoluteTolerance) Then
 
                                         tempEx = 1
@@ -402,9 +405,12 @@ Public Class SunExposure2
                                 Loop
 
                             Catch ex As Exception
-                                'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
+                                Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
                                 tempEx = 0
-                                'Return Rhino.Commands.Result.Failure
+#If DEBUG Then
+                                Rhino.RhinoApp.WriteLine(ex.ToString)
+#End If
+
                             End Try
                         End If
 
@@ -418,9 +424,11 @@ Public Class SunExposure2
             Next
 
         Next
+
         exposureU = GetExposureUnits(arrExposure)
-        'Rhino.RhinoApp.WriteLine(CStr(exposureU))
+
         Return exposureU
+
     End Function
 
     Public Shared Function GetExposureUnits(ByVal arrExposure As List(Of Integer)) As Integer
@@ -483,19 +491,6 @@ Public Class SunExposure2
         Return ex_Val
 
     End Function
-
-    ''' <summary>
-    ''' add SunDiagram Layers
-    ''' </summary>
-    ''' <param name="doc"></param>
-    ''' <returns></returns>
-    Public Shared Function AddLayers_SEA(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
-        Dim layer_name As String = "SEA_mesh"
-        AddLayer(doc, layer_name)
-
-        Return Rhino.Commands.Result.Success
-    End Function
-
 
     ''' <summary>
     ''' add color diagram
@@ -610,73 +605,5 @@ Public Class SunExposure2
         Return Rhino.Commands.Result.Success
     End Function
 
-    ''' <summary>
-    ''' delete all mesh color values
-    ''' </summary>
-    ''' <param name="doc"></param>
-    ''' <returns></returns>
-    Public Shared Function ResetMesh(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
-
-        Dim mesh As Rhino.Geometry.Mesh
-
-        Dim go As New Rhino.Input.Custom.GetObject()
-        go.SetCommandPrompt("pick mesh to reset")
-        go.GeometryAttributeFilter = Rhino.Input.Custom.GeometryAttributeFilter.ClosedMesh Or Rhino.Input.Custom.GeometryAttributeFilter.OpenMesh
-        go.SubObjectSelect = False
-        go.GroupSelect = True
-        go.GetMultiple(1, 0)
-        If go.CommandResult() <> Rhino.Commands.Result.Success Then
-            Return go.CommandResult
-
-            'Exit Function
-        End If
-        For i As Integer = 0 To go.ObjectCount - 1
-            Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
-            If Not IsNothing(objref.Mesh) Then
-                mesh = objref.Mesh
-
-                Dim attribs As Rhino.DocObjects.ObjectAttributes = objref.[Object]().Attributes
-
-                'doc.Objects.ModifyAttributes(objref, attribs, True)
-                mesh.VertexColors.Clear()
-
-                Try
-                    doc.Objects.Delete(objref, True)
-                    doc.Objects.AddMesh(mesh, attribs)
-                Catch ex As Exception
-
-                End Try
-
-            End If
-        Next
-
-        Return Rhino.Commands.Result.Success
-    End Function
-
-    'Public Function GetSunVector2(ByVal fAltitude As Double, ByVal fAzimuth As Double) As Rhino.Geometry.Vector3d
-    Public Shared Function GetSunVector2(ByVal mySunangel As SunAngle2) As Rhino.Geometry.Vector3d
-
-        Dim vec As Rhino.Geometry.Vector3d '= Nothing
-
-        vec = New Rhino.Geometry.Vector3d(0, 1, 0)
-        vec.Rotate(Rhino.RhinoMath.ToRadians(mySunangel.Altitude), New Rhino.Geometry.Vector3d(1, 0, 0))
-        vec.Rotate(Rhino.RhinoMath.ToRadians(-mySunangel.Azimuth), New Rhino.Geometry.Vector3d(0, 0, 1))
-        'Dim sunPt = New Rhino.Geometry.Point3d(vec)
-
-        Return vec
-    End Function
-
-    'get sunray angle
-    Public Shared Function GetVecAngle2(ByVal vec As Rhino.Geometry.Vector3d) As Double
-
-        Dim len As Double
-
-        len = vec.Length
-
-        If len = 0 Then Return 0
-
-        Return Rhino.RhinoMath.ToDegrees(Math.Asin(vec.Z / len))
-
-    End Function
 
 End Class

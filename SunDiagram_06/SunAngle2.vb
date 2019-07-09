@@ -4,8 +4,6 @@
     'http://wiki.naturalfrequency.com/wiki/Solar_Position_Calculator#Manual
 
 
-
-
     Private fLongitude As Double
     Private FTimeZone As Double
     Private fLatitude As Double
@@ -25,12 +23,15 @@
 
     Private t As Double
 
-
+    ''' <summary>
+    ''' offset to north
+    ''' </summary>
     Private fOffset As Double
     Private _Altitude As Double
     Private _Azimuth As Double
     'Private _Sunset As Double
 
+    'helpers
     Private sin1 As Double
     Private cos2 As Double
 
@@ -42,8 +43,8 @@
     Private SinfLatitude As Double
     Private CosfLatitude As Double
     Private CosfHourAngle As Double
-    Private prodcfhacfd As Double
-
+    Private prod_cfha_cfd As Double
+    Private CosfAltitude As Double
     Public ReadOnly Property Altitude As Double
         Get
             Return _Altitude
@@ -59,9 +60,6 @@
     Public ReadOnly Property Sunrise As Double
 
     Public ReadOnly Property Sunset As Double
-    'Get
-    '    Return _Sunset
-    'End Get
 
 
     Private ReadOnly arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
@@ -69,6 +67,16 @@
     Private Const pihalf = Math.PI / 2
 
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="JulianDate"></param>
+    ''' <param name="TimeMonth"></param>
+    ''' <param name="TimeDay"></param>
+    ''' <param name="TimeZone"></param>
+    ''' <param name="Latitude"></param>
+    ''' <param name="Longitude"></param>
+    ''' <param name="Offset"></param>
     Public Sub New(ByVal JulianDate As Double,
                    ByVal TimeMonth As Double,
                    ByVal TimeDay As Double,
@@ -77,34 +85,11 @@
                    ByVal Longitude As Double,
                    ByVal Offset As Double)
 
-
-
-        'debugger
-        'If iTimeMonth < 1 Or iTimeMonth > 12 Or iTimeHours < 0 Or iTimeHours > 24 Or iTimeMinutes < 0 Or iTimeMinutes > 60 Or fLatitude > 90 Or fLongitude > 90 Then Return Nothin
         If TimeMonth < 1 Or TimeMonth > 12 Or
-            fLatitude > 90 Or fLatitude < -90 Or
-            fLongitude > 180 Or fLongitude < -180 Then Return
+            Latitude > 90 Or Latitude < -90 Or
+            Longitude > 180 Or Longitude < -180 Then Return
+
         fOffset = Offset
-        'Dim arrMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
-
-        ' Calculated data.
-        'Dim fDifference As Double
-        'Dim fDeclination As Double
-        'Dim fEquation As Double
-
-        ' Print Flag
-        'Dim intPrint As Integer = 0
-
-        ' Solar information.
-        'Dim fLocalTime As Double
-        'Dim fSolarTime As Double
-        'Dim fAltitude As Double
-        'Dim fAzimuth As Double
-        'Dim fSunrise As Double
-        'Dim fSunset As Double
-
-        ' Temp data.
-        'Dim t, local_noon, test, fHourAngle, sin1, cos2, arrReturn(3)
 
         ' calculate location data.
         fLatitude = Latitude * (Math.PI / 180.0)
@@ -131,7 +116,6 @@
          + 0.019334 * Math.Sin(2 * t) _
          + 0.05928 * Math.Sin(3 * t)
          )
-
 
         ' Convert to radians.
         fDeclination = fDeclination * (Math.PI / 180.0)
@@ -201,55 +185,67 @@
         SinfLatitude = Math.Sin(fLatitude)
         CosfLatitude = Math.Cos(fLatitude)
         CosfHourAngle = Math.Cos(fHourAngle)
-        prodcfhacfd = CosfHourAngle * CosfDeclination
+        prod_cfha_cfd = CosfHourAngle * CosfDeclination
 
 
         ' Calculate current altitude.
         t = (SinfDeclination * SinfLatitude) +
-            (prodcfhacfd * CosfLatitude)
+            (prod_cfha_cfd * CosfLatitude)
         fAltitude = Math.Asin(t)
 
         ' Calculate current azimuth.
         t = (SinfDeclination * CosfLatitude) -
-        (prodcfhacfd * SinfLatitude)
+        (prod_cfha_cfd * SinfLatitude)
+
+        CosfAltitude = Math.Cos(fAltitude)
 
         'Avoid division by zero error.
-        If (fAltitude < (Math.PI / 2.0)) Then
-            sin1 = (-CosfDeclination * Math.Sin(fHourAngle)) / Math.Cos(fAltitude)
-            cos2 = t / Math.Cos(fAltitude)
+        If (fAltitude < pihalf) Then
+            sin1 = (-CosfDeclination * Math.Sin(fHourAngle)) / CosfAltitude
+            cos2 = t / CosfAltitude
         Else
             sin1 = 0.0
             cos2 = 0.0
         End If
 
         ' Some range checking.
-        If (sin1 > 1.0) Then sin1 = 1.0
-        If (sin1 < -1.0) Then sin1 = -1.0
-        If (cos2 < -1.0) Then cos2 = -1.0
-        If (cos2 > 1.0) Then cos2 = 1.0
+        If (sin1 > 1.0) Then
+            sin1 = 1.0
+        End If
+        If (sin1 < -1.0) Then
+            sin1 = -1.0
+        End If
+        If (cos2 < -1.0) Then
+            cos2 = -1.0
+        End If
+        If (cos2 > 1.0) Then
+            cos2 = 1.0
+        End If
 
         ' Calculate azimuth subject to quadrant.
         'If (sin1 < -0.99999) Then
         '    fAzimuth = Math.Asin(sin1)
-        If ((sin1 > 0.0) And (cos2 < 0.0)) Then
+        If ((sin1 > 0.0) AndAlso (cos2 < 0.0)) Then
             If (sin1 = 1.0) Then
                 fAzimuth = -(pihalf)
             Else
-                fAzimuth = (pihalf) + ((pihalf) - Math.Asin(sin1))
-                fAzimuth = (pihalf) + ((pihalf) - Math.Asin(sin1))
+                'fAzimuth = (pihalf) + ((pihalf) - Math.Asin(sin1))
+                fAzimuth = Math.PI - Math.Asin(sin1)
+
             End If
-        ElseIf ((sin1 < 0.0) And (cos2 < 0.0)) Then
+        ElseIf ((sin1 < 0.0) AndAlso (cos2 < 0.0)) Then
             If (sin1 = -1.0) Then
                 fAzimuth = (pihalf)
             Else
-                fAzimuth = -(pihalf) - ((pihalf) + Math.Asin(sin1))
+                'fAzimuth = -(pihalf) - ((pihalf) + Math.Asin(sin1))
+                fAzimuth = -Math.PI - Math.Asin(sin1)
             End If
         Else
             fAzimuth = Math.Asin(sin1)
         End If
 
         ' A little last-ditch range check.
-        If ((fAzimuth < 0.0) And (fLocalTime < 10.0)) Then
+        If ((fAzimuth < 0.0) AndAlso (fLocalTime < 10.0)) Then
             fAzimuth = -fAzimuth
         End If
 

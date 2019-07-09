@@ -1,13 +1,25 @@
-﻿Module MyFunction
+﻿Imports System.Drawing
+
+Module MyFunction
     Enum SEA_GOptionValues
         Threshold
         Gradient
         Precised
     End Enum
 
+    Enum SEA_AnTypeValues
+        SunExposure
+        ShadowCast
+    End Enum
+
+
     'Public variables:
-    Public lat, lon, TZone, nOffset As Double
-    Public setDate, setHour As Boolean
+    Public lat As Double
+    Public lon As Double
+    Public TZone As Double
+    Public nOffset As Double
+    Public setDate As Boolean
+    Public setHour As Boolean
     Public day As Double
     Public month As Double
     Public hour As Double
@@ -22,20 +34,22 @@
     Public SEA_OccObj As New List(Of Guid)()
     Public SEA_OccObjMesh As New List(Of Rhino.Geometry.Mesh)()
     Public SEA_RecObj As New List(Of Guid)()
-    Public SEA_StartH, SEA_EndH, SEA_StartHVal, Sea_EndHVal As Double
+    Public SEA_StartH As Double
+    Public SEA_EndH As Double
+    Public SEA_StartHVal As Double
+    Public Sea_EndHVal As Double
     Public SEA_StartMinVal, SEA_EndMinVal As Double
     Public SEA_MinAngle, SEA_MaxAngle As Double
-    Public SEA_MinAngleRad, SEA_MaxAngleRad As Double
+    Public SEA_MinAngleRad As Double
+    Public SEA_MaxAngleRad As Double
 
     Public SEA_Threshold As Double
     Public SEA_TimeUnits As Integer
     Public SEA_TimeSeg As Double
-    Public SEA_AnType As Integer '0 - SunExposure, 1 - ShadowCast
-    'Public SEA_GOption As Integer '0 - Threshold, 1 - Gradient, 2 - Precised
+
+    Public SEA_AnType As SEA_AnTypeValues
+
     Public SEA_GOption As SEA_GOptionValues
-
-
-    'Public SEA_Progress As Integer = 0
 
     Public text_height As Double = 0.8
     Public text_font As String = "Verdana"

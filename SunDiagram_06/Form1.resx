@@ -207,6 +207,24 @@
   <data name="Tabs.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>FlatButtons</value>
   </data>
+  <data name="SetHourCB.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SetHourCB.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="SetHourCB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 212</value>
+  </data>
+  <data name="SetHourCB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="SetHourCB.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="SetHourCB.Text" xml:space="preserve">
+    <value>Set Hour</value>
+  </data>
   <data name="&gt;&gt;SetHourCB.Name" xml:space="preserve">
     <value>SetHourCB</value>
   </data>
@@ -218,6 +236,24 @@
   </data>
   <data name="&gt;&gt;SetHourCB.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="SetDateCB.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SetDateCB.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="SetDateCB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 16</value>
+  </data>
+  <data name="SetDateCB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="SetDateCB.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="SetDateCB.Text" xml:space="preserve">
+    <value>Set Date</value>
   </data>
   <data name="&gt;&gt;SetDateCB.Name" xml:space="preserve">
     <value>SetDateCB</value>
@@ -231,6 +267,18 @@
   <data name="&gt;&gt;SetDateCB.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="HourTB.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="HourTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 238</value>
+  </data>
+  <data name="HourTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 20</value>
+  </data>
+  <data name="HourTB.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
   <data name="&gt;&gt;HourTB.Name" xml:space="preserve">
     <value>HourTB</value>
   </data>
@@ -242,6 +290,24 @@
   </data>
   <data name="&gt;&gt;HourTB.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="NorthOffset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="NorthOffset.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="NorthOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 347</value>
+  </data>
+  <data name="NorthOffset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="NorthOffset.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="NorthOffset.Text" xml:space="preserve">
+    <value>NorthOffset:</value>
   </data>
   <data name="&gt;&gt;NorthOffset.Name" xml:space="preserve">
     <value>NorthOffset</value>
@@ -255,6 +321,21 @@
   <data name="&gt;&gt;NorthOffset.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="NorthOffTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 364</value>
+  </data>
+  <data name="NorthOffTB.MaxLength" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="NorthOffTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="NorthOffTB.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="NorthOffTB.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;NorthOffTB.Name" xml:space="preserve">
     <value>NorthOffTB</value>
   </data>
@@ -266,6 +347,24 @@
   </data>
   <data name="&gt;&gt;NorthOffTB.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="TimeZone.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TimeZone.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="TimeZone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 348</value>
+  </data>
+  <data name="TimeZone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="TimeZone.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="TimeZone.Text" xml:space="preserve">
+    <value>TimeZone:</value>
   </data>
   <data name="&gt;&gt;TimeZone.Name" xml:space="preserve">
     <value>TimeZone</value>
@@ -279,6 +378,24 @@
   <data name="&gt;&gt;TimeZone.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="Longitude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Longitude.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="Longitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 301</value>
+  </data>
+  <data name="Longitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="Longitude.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="Longitude.Text" xml:space="preserve">
+    <value>Longitude:</value>
+  </data>
   <data name="&gt;&gt;Longitude.Name" xml:space="preserve">
     <value>Longitude</value>
   </data>
@@ -290,6 +407,24 @@
   </data>
   <data name="&gt;&gt;Longitude.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="Latitude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Latitude.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="Latitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 301</value>
+  </data>
+  <data name="Latitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Latitude.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Latitude.Text" xml:space="preserve">
+    <value>Latitude:</value>
   </data>
   <data name="&gt;&gt;Latitude.Name" xml:space="preserve">
     <value>Latitude</value>
@@ -303,6 +438,24 @@
   <data name="&gt;&gt;Latitude.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="CityLocationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CityLocationLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="CityLocationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 278</value>
+  </data>
+  <data name="CityLocationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="CityLocationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="CityLocationLabel.Text" xml:space="preserve">
+    <value>City location:</value>
+  </data>
   <data name="&gt;&gt;CityLocationLabel.Name" xml:space="preserve">
     <value>CityLocationLabel</value>
   </data>
@@ -314,6 +467,21 @@
   </data>
   <data name="&gt;&gt;CityLocationLabel.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="TimeZoneTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 364</value>
+  </data>
+  <data name="TimeZoneTB.MaxLength" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="TimeZoneTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="TimeZoneTB.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="TimeZoneTB.Text" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;TimeZoneTB.Name" xml:space="preserve">
     <value>TimeZoneTB</value>
@@ -327,6 +495,21 @@
   <data name="&gt;&gt;TimeZoneTB.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="LongitudeTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 317</value>
+  </data>
+  <data name="LongitudeTB.MaxLength" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="LongitudeTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="LongitudeTB.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="LongitudeTB.Text" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="&gt;&gt;LongitudeTB.Name" xml:space="preserve">
     <value>LongitudeTB</value>
   </data>
@@ -339,6 +522,21 @@
   <data name="&gt;&gt;LongitudeTB.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="LatitudeTB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 317</value>
+  </data>
+  <data name="LatitudeTB.MaxLength" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="LatitudeTB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="LatitudeTB.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="LatitudeTB.Text" xml:space="preserve">
+    <value>47</value>
+  </data>
   <data name="&gt;&gt;LatitudeTB.Name" xml:space="preserve">
     <value>LatitudeTB</value>
   </data>
@@ -350,6 +548,15 @@
   </data>
   <data name="&gt;&gt;LatitudeTB.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="MonthCalendar1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="MonthCalendar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 38</value>
+  </data>
+  <data name="MonthCalendar1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;MonthCalendar1.Name" xml:space="preserve">
     <value>MonthCalendar1</value>
@@ -393,6 +600,72 @@
   <data name="&gt;&gt;Data.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ShadowRaysCheckBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ShadowRaysCheckBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 25</value>
+  </data>
+  <data name="ShadowRaysCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="ShadowRaysCheckBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ShadowRaysCheckBox1.Text" xml:space="preserve">
+    <value>Shadow Rays</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Name" xml:space="preserve">
+    <value>ShadowRaysCheckBox1</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.Parent" xml:space="preserve">
+    <value>SunRaysGBox</value>
+  </data>
+  <data name="&gt;&gt;ShadowRaysCheckBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="SunRaysPickPoint.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SunRaysPickPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="SunRaysPickPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="SunRaysPickPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="SunRaysPickPoint.Text" xml:space="preserve">
+    <value>Pick Point</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Name" xml:space="preserve">
+    <value>SunRaysPickPoint</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.Parent" xml:space="preserve">
+    <value>SunRaysGBox</value>
+  </data>
+  <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SunRaysGBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 166</value>
+  </data>
+  <data name="SunRaysGBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 86</value>
+  </data>
+  <data name="SunRaysGBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="SunRaysGBox.Text" xml:space="preserve">
+    <value>Sun Rays</value>
+  </data>
   <data name="&gt;&gt;SunRaysGBox.Name" xml:space="preserve">
     <value>SunRaysGBox</value>
   </data>
@@ -404,6 +677,189 @@
   </data>
   <data name="&gt;&gt;SunRaysGBox.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="SunPathDiagram2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SunPathDiagram2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 121</value>
+  </data>
+  <data name="SunPathDiagram2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 27</value>
+  </data>
+  <data name="SunPathDiagram2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="SunPathDiagram2.Text" xml:space="preserve">
+    <value>Show Sun Path 2</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
+    <value>SunPathDiagram2</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CheckBox2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CheckBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 58</value>
+  </data>
+  <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="CheckBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="CheckBox2.Text" xml:space="preserve">
+    <value>Hour</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
+    <value>CheckBox2</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CheckBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CheckBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 58</value>
+  </data>
+  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="CheckBox1.Text" xml:space="preserve">
+    <value>One Day</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
+    <value>CheckBox1</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SunPathShowAng.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SunPathShowAng.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SunPathShowAng.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 25</value>
+  </data>
+  <data name="SunPathShowAng.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 17</value>
+  </data>
+  <data name="SunPathShowAng.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="SunPathShowAng.Text" xml:space="preserve">
+    <value>Show Angle</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Name" xml:space="preserve">
+    <value>SunPathShowAng</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathShowAng.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="SunPathPickObj.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SunPathPickObj.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 25</value>
+  </data>
+  <data name="SunPathPickObj.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 17</value>
+  </data>
+  <data name="SunPathPickObj.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="SunPathPickObj.Text" xml:space="preserve">
+    <value>Pick Building</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Name" xml:space="preserve">
+    <value>SunPathPickObj</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPathPickObj.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="SunPath3D.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SunPath3D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="SunPath3D.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="SunPath3D.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="SunPath3D.Text" xml:space="preserve">
+    <value>Display 3D</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Name" xml:space="preserve">
+    <value>SunPath3D</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.Parent" xml:space="preserve">
+    <value>SunPath</value>
+  </data>
+  <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SunPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="SunPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 154</value>
+  </data>
+  <data name="SunPath.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="SunPath.Text" xml:space="preserve">
+    <value>Sun Path Diagram</value>
   </data>
   <data name="&gt;&gt;SunPath.Name" xml:space="preserve">
     <value>SunPath</value>
@@ -1335,6 +1791,18 @@
   <data name="&gt;&gt;SunExpGB1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="DropShadowButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 28</value>
+  </data>
+  <data name="DropShadowButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 27</value>
+  </data>
+  <data name="DropShadowButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="DropShadowButton.Text" xml:space="preserve">
+    <value>Drop Shadow</value>
+  </data>
   <data name="&gt;&gt;DropShadowButton.Name" xml:space="preserve">
     <value>DropShadowButton</value>
   </data>
@@ -1424,762 +1892,6 @@
   </data>
   <data name="&gt;&gt;Tabs.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="SetHourCB.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SetHourCB.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="SetHourCB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 212</value>
-  </data>
-  <data name="SetHourCB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
-  </data>
-  <data name="SetHourCB.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="SetHourCB.Text" xml:space="preserve">
-    <value>Set Hour</value>
-  </data>
-  <data name="&gt;&gt;SetHourCB.Name" xml:space="preserve">
-    <value>SetHourCB</value>
-  </data>
-  <data name="&gt;&gt;SetHourCB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SetHourCB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;SetHourCB.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SetDateCB.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SetDateCB.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="SetDateCB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 16</value>
-  </data>
-  <data name="SetDateCB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
-  </data>
-  <data name="SetDateCB.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="SetDateCB.Text" xml:space="preserve">
-    <value>Set Date</value>
-  </data>
-  <data name="&gt;&gt;SetDateCB.Name" xml:space="preserve">
-    <value>SetDateCB</value>
-  </data>
-  <data name="&gt;&gt;SetDateCB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SetDateCB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;SetDateCB.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="HourTB.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="HourTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 238</value>
-  </data>
-  <data name="HourTB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
-  </data>
-  <data name="HourTB.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;HourTB.Name" xml:space="preserve">
-    <value>HourTB</value>
-  </data>
-  <data name="&gt;&gt;HourTB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;HourTB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;HourTB.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="NorthOffset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="NorthOffset.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="NorthOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 347</value>
-  </data>
-  <data name="NorthOffset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
-  </data>
-  <data name="NorthOffset.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="NorthOffset.Text" xml:space="preserve">
-    <value>NorthOffset:</value>
-  </data>
-  <data name="&gt;&gt;NorthOffset.Name" xml:space="preserve">
-    <value>NorthOffset</value>
-  </data>
-  <data name="&gt;&gt;NorthOffset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NorthOffset.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;NorthOffset.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="NorthOffTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 364</value>
-  </data>
-  <data name="NorthOffTB.MaxLength" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="NorthOffTB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="NorthOffTB.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="NorthOffTB.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;NorthOffTB.Name" xml:space="preserve">
-    <value>NorthOffTB</value>
-  </data>
-  <data name="&gt;&gt;NorthOffTB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NorthOffTB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;NorthOffTB.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="TimeZone.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TimeZone.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="TimeZone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 348</value>
-  </data>
-  <data name="TimeZone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="TimeZone.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="TimeZone.Text" xml:space="preserve">
-    <value>TimeZone:</value>
-  </data>
-  <data name="&gt;&gt;TimeZone.Name" xml:space="preserve">
-    <value>TimeZone</value>
-  </data>
-  <data name="&gt;&gt;TimeZone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TimeZone.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;TimeZone.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="Longitude.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Longitude.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="Longitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 301</value>
-  </data>
-  <data name="Longitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="Longitude.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="Longitude.Text" xml:space="preserve">
-    <value>Longitude:</value>
-  </data>
-  <data name="&gt;&gt;Longitude.Name" xml:space="preserve">
-    <value>Longitude</value>
-  </data>
-  <data name="&gt;&gt;Longitude.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Longitude.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;Longitude.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Latitude.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Latitude.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="Latitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 301</value>
-  </data>
-  <data name="Latitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="Latitude.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="Latitude.Text" xml:space="preserve">
-    <value>Latitude:</value>
-  </data>
-  <data name="&gt;&gt;Latitude.Name" xml:space="preserve">
-    <value>Latitude</value>
-  </data>
-  <data name="&gt;&gt;Latitude.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Latitude.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;Latitude.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="CityLocationLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CityLocationLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="CityLocationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 278</value>
-  </data>
-  <data name="CityLocationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
-  </data>
-  <data name="CityLocationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="CityLocationLabel.Text" xml:space="preserve">
-    <value>City location:</value>
-  </data>
-  <data name="&gt;&gt;CityLocationLabel.Name" xml:space="preserve">
-    <value>CityLocationLabel</value>
-  </data>
-  <data name="&gt;&gt;CityLocationLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CityLocationLabel.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;CityLocationLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="TimeZoneTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 364</value>
-  </data>
-  <data name="TimeZoneTB.MaxLength" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="TimeZoneTB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="TimeZoneTB.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="TimeZoneTB.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;TimeZoneTB.Name" xml:space="preserve">
-    <value>TimeZoneTB</value>
-  </data>
-  <data name="&gt;&gt;TimeZoneTB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TimeZoneTB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;TimeZoneTB.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="LongitudeTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 317</value>
-  </data>
-  <data name="LongitudeTB.MaxLength" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="LongitudeTB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="LongitudeTB.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="LongitudeTB.Text" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;LongitudeTB.Name" xml:space="preserve">
-    <value>LongitudeTB</value>
-  </data>
-  <data name="&gt;&gt;LongitudeTB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LongitudeTB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;LongitudeTB.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="LatitudeTB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 317</value>
-  </data>
-  <data name="LatitudeTB.MaxLength" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="LatitudeTB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="LatitudeTB.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="LatitudeTB.Text" xml:space="preserve">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;LatitudeTB.Name" xml:space="preserve">
-    <value>LatitudeTB</value>
-  </data>
-  <data name="&gt;&gt;LatitudeTB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LatitudeTB.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;LatitudeTB.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="MonthCalendar1.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="MonthCalendar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 38</value>
-  </data>
-  <data name="MonthCalendar1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Name" xml:space="preserve">
-    <value>MonthCalendar1</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Parent" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Name" xml:space="preserve">
-    <value>ShadowRaysCheckBox1</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Name" xml:space="preserve">
-    <value>SunRaysPickPoint</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SunRaysGBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 166</value>
-  </data>
-  <data name="SunRaysGBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 86</value>
-  </data>
-  <data name="SunRaysGBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="SunRaysGBox.Text" xml:space="preserve">
-    <value>Sun Rays</value>
-  </data>
-  <data name="&gt;&gt;SunRaysGBox.Name" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;SunRaysGBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunRaysGBox.Parent" xml:space="preserve">
-    <value>SunDiagramTab</value>
-  </data>
-  <data name="&gt;&gt;SunRaysGBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ShadowRaysCheckBox1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ShadowRaysCheckBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 25</value>
-  </data>
-  <data name="ShadowRaysCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
-  </data>
-  <data name="ShadowRaysCheckBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="ShadowRaysCheckBox1.Text" xml:space="preserve">
-    <value>Shadow Rays</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Name" xml:space="preserve">
-    <value>ShadowRaysCheckBox1</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;ShadowRaysCheckBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SunRaysPickPoint.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SunRaysPickPoint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="SunRaysPickPoint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="SunRaysPickPoint.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="SunRaysPickPoint.Text" xml:space="preserve">
-    <value>Pick Point</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Name" xml:space="preserve">
-    <value>SunRaysPickPoint</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.Parent" xml:space="preserve">
-    <value>SunRaysGBox</value>
-  </data>
-  <data name="&gt;&gt;SunRaysPickPoint.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
-    <value>SunPathDiagram2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
-    <value>CheckBox2</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
-    <value>CheckBox1</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Name" xml:space="preserve">
-    <value>SunPathShowAng</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Name" xml:space="preserve">
-    <value>SunPathPickObj</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Name" xml:space="preserve">
-    <value>SunPath3D</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="SunPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="SunPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 154</value>
-  </data>
-  <data name="SunPath.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="SunPath.Text" xml:space="preserve">
-    <value>Sun Path Diagram</value>
-  </data>
-  <data name="&gt;&gt;SunPath.Name" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPath.Parent" xml:space="preserve">
-    <value>SunDiagramTab</value>
-  </data>
-  <data name="&gt;&gt;SunPath.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SunPathDiagram2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SunPathDiagram2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 121</value>
-  </data>
-  <data name="SunPathDiagram2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 27</value>
-  </data>
-  <data name="SunPathDiagram2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="SunPathDiagram2.Text" xml:space="preserve">
-    <value>Show Sun Path 2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Name" xml:space="preserve">
-    <value>SunPathDiagram2</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathDiagram2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="CheckBox2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CheckBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 58</value>
-  </data>
-  <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
-  </data>
-  <data name="CheckBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="CheckBox2.Text" xml:space="preserve">
-    <value>Hour</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
-    <value>CheckBox2</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CheckBox1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CheckBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 58</value>
-  </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 17</value>
-  </data>
-  <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
-    <value>One Day</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
-    <value>CheckBox1</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="SunPathShowAng.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SunPathShowAng.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SunPathShowAng.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 25</value>
-  </data>
-  <data name="SunPathShowAng.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
-  </data>
-  <data name="SunPathShowAng.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="SunPathShowAng.Text" xml:space="preserve">
-    <value>Show Angle</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Name" xml:space="preserve">
-    <value>SunPathShowAng</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathShowAng.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="SunPathPickObj.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SunPathPickObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 25</value>
-  </data>
-  <data name="SunPathPickObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 17</value>
-  </data>
-  <data name="SunPathPickObj.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="SunPathPickObj.Text" xml:space="preserve">
-    <value>Pick Building</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Name" xml:space="preserve">
-    <value>SunPathPickObj</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPathPickObj.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="SunPath3D.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SunPath3D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="SunPath3D.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
-  </data>
-  <data name="SunPath3D.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="SunPath3D.Text" xml:space="preserve">
-    <value>Display 3D</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Name" xml:space="preserve">
-    <value>SunPath3D</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.Parent" xml:space="preserve">
-    <value>SunPath</value>
-  </data>
-  <data name="&gt;&gt;SunPath3D.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="DropShadowButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 28</value>
-  </data>
-  <data name="DropShadowButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 27</value>
-  </data>
-  <data name="DropShadowButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="DropShadowButton.Text" xml:space="preserve">
-    <value>Drop Shadow</value>
-  </data>
-  <data name="&gt;&gt;DropShadowButton.Name" xml:space="preserve">
-    <value>DropShadowButton</value>
-  </data>
-  <data name="&gt;&gt;DropShadowButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DropShadowButton.Parent" xml:space="preserve">
-    <value>DropShadowBox</value>
-  </data>
-  <data name="&gt;&gt;DropShadowButton.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="ColorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

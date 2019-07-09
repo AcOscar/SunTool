@@ -12,10 +12,12 @@ Public Class Form1
         lon = Double.Parse(LongitudeTB.Text)
         TZone = Double.Parse(TimeZoneTB.Text)
         nOffset = Double.Parse(NorthOffTB.Text)
-        Dim arr() As Double
-        arr = getData()
-        month = arr(1)
-        day = arr(0)
+        'Dim arr() As Double
+        'arr =
+        getData()
+        'month = arr(1)
+        'day = arr(0)
+
         hour = HourTB.Value
         SPD_is3D = SunPath3D.Checked
         SPD_pickBld = SunPathPickObj.Checked
@@ -32,37 +34,15 @@ Public Class Form1
         Dim ci As System.Globalization.CultureInfo = New System.Globalization.CultureInfo("en-gb")
         Dim instance As New System.Data.DataSet
         instance.Locale = ci
-        'Rhino.RhinoApp.WriteLine(instance.Locale.DisplayName)
-
-        'Dim myTS As New ArrayList()
-        'myTS.Add("n.o.")
-        'myTS.Add("1")
-        'myTS.Add("2")
-        'SEA_TimeSegCB.DisplayMember = "LongName"
-        'SEA_TimeSegCB.ValueMember = "ShortName"
-        'SEA_TimeSegCB.DataSource = myTS
 
         SEA_TimeSeg = 100.0
     End Sub
-
-    'Public Shared Function BarID() As Guid
-    '    Dim g As New Guid("{C5500DE9-8DB7-40e4-85BF-F3811A6BE9C3}")
-    '    Return g
-    'End Function
 
     '###################################################################
     '###SET DATA
     '###################################################################
     'set Latitude
     Private Sub LatitudeTB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LatitudeTB.TextChanged
-        'Dim text As String = LatitudeTB.Text
-        'Dim isConv As Boolean = controlDouble(text)
-        'If isConv Then
-        '    lat = Double.Parse(text)
-        'Else
-        '    LatitudeTB.Text = "47.57"
-        '    lat = 47.57
-        'End If
         Try
             lat = Double.Parse(LatitudeTB.Text)
 
@@ -71,95 +51,21 @@ Public Class Form1
             lat = 47
         End Try
 
-        'Rhino.RhinoApp.WriteLine("lat : " & CStr(lat))
     End Sub
-
-    ''set Latitude
-    'Private Sub LatitudeTB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LatitudeTB.TextChanged
-    '    Dim arr1(), arr2() As String
-    '    Dim val As Double
-
-    '    Try
-    '        val = Double.Parse(LatitudeTB.Text)
-
-    '    Catch ex As FormatException
-    '        LatitudeTB.Text = "47.57"
-    '        lat = 47.57
-    '    End Try
-
-    '    'shitty debugging to make sure that data is read correctly
-    '    arr1 = Split(LatitudeTB.Text, ".")
-    '    arr2 = Split(LatitudeTB.Text, ",")
-
-    '    ' Rhino.RhinoApp.WriteLine(CStr(arr1.Length) & " _ " & CStr(arr2.Length))
-
-    '    '47
-    '    If arr1.Length = 1 And arr2.Length = 1 Then
-    '        Try
-    '            lat = Double.Parse(LatitudeTB.Text)
-
-    '        Catch ex As FormatException
-    '            LatitudeTB.Text = "47.57"
-    '            lat = 47.57
-    '        End Try
-
-    '        '47.57
-    '    ElseIf arr1.Length = 2 And arr2.Length = 1 Then
-    '        Try
-    '            lat = Double.Parse(arr1(0) & "." & arr1(1))
-
-    '        Catch ex As FormatException
-    '            LatitudeTB.Text = "47.57"
-    '            lat = 47.57
-    '        End Try
-
-    '        If CInt(lat) <> Double.Parse(arr1(0)) Then
-    '            Try
-    '                lat = Double.Parse(arr1(0) & "," & arr1(1))
-
-    '            Catch ex As FormatException
-    '                LatitudeTB.Text = "47.57"
-    '                lat = 47.57
-    '            End Try
-    '        End If
-
-    '        '47,57
-    '    ElseIf arr2.Length = 1 Then
-    '        Try
-    '            lat = Double.Parse(arr2(0) & "." & arr2(1))
-    '        Catch ex As FormatException
-    '            LatitudeTB.Text = "47.57"
-    '            lat = 47.57
-    '        End Try
-
-    '        If CInt(lat) <> Double.Parse(arr2(0)) Then
-    '            Try
-    '                lat = Double.Parse(arr2(0) & "," & arr2(1))
-
-    '            Catch ex As FormatException
-    '                LatitudeTB.Text = "47.57"
-    '                lat = 47.57
-    '            End Try
-    '        End If
-    '    Else
-    '        LatitudeTB.Text = "47.57"
-    '        lat = 47.57
-    '    End If
-
-    '    Rhino.RhinoApp.WriteLine("lat : " & CStr(lat))
-    'End Sub
-
 
     'check if text is convertible to Double
     Private Function controlDouble(ByVal text As String) As Boolean
         Dim val As Double
         Dim result As Boolean = True
+
         Try
             val = Double.Parse(text)
         Catch ex As FormatException
             result = False
         End Try
+
         Return result
+
     End Function
 
 
@@ -172,80 +78,6 @@ Public Class Form1
             lon = 8
         End Try
     End Sub
-
-    'Private Sub LongitudeTB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LatitudeTB.TextChanged
-    '    Dim arr1(), arr2() As String
-    '    Dim val As Double
-
-    '    Try
-    '        val = Double.Parse(LongitudeTB.Text)
-
-    '    Catch ex As FormatException
-    '        LongitudeTB.Text = "7.6"
-    '        lon = 7.6
-    '    End Try
-
-    '    'shitty debugging to make sure that data is read correctly
-    '    arr1 = Split(LongitudeTB.Text, ".")
-    '    arr2 = Split(LongitudeTB.Text, ",")
-
-    '    Rhino.RhinoApp.WriteLine(CStr(arr1.Length) & " _ " & CStr(arr2.Length))
-
-    '    '47
-    '    If arr1.Length = 1 And arr2.Length = 1 Then
-    '        Try
-    '            lon = Double.Parse(LongitudeTB.Text)
-
-    '        Catch ex As FormatException
-    '            LongitudeTB.Text = "7.6"
-    '            lon = 7.6
-    '        End Try
-
-    '        '47.57
-    '    ElseIf arr1.Length = 2 And arr2.Length = 1 Then
-    '        Try
-    '            lon = Double.Parse(arr1(0) & "." & arr1(1))
-
-    '        Catch ex As FormatException
-    '            LongitudeTB.Text = "7.6"
-    '            lon = 7.6
-    '        End Try
-
-    '        If CInt(lon) <> Double.Parse(arr1(0)) Then
-    '            Try
-    '                lon = Double.Parse(arr1(0) & "," & arr1(1))
-
-    '            Catch ex As FormatException
-    '                LongitudeTB.Text = "7.6"
-    '                lon = 7.6
-    '            End Try
-    '        End If
-
-    '        '47,57
-    '    ElseIf arr2.Length = 1 Then
-    '        Try
-    '            lon = Double.Parse(arr2(0) & "." & arr2(1))
-    '        Catch ex As FormatException
-    '            LongitudeTB.Text = "7.6"
-    '            lon = 7.6
-    '        End Try
-
-    '        If CInt(lon) <> Double.Parse(arr2(0)) Then
-    '            Try
-    '                lon = Double.Parse(arr2(0) & "," & arr2(1))
-
-    '            Catch ex As FormatException
-    '                LongitudeTB.Text = "7.6"
-    '                lon = 7.6
-    '            End Try
-    '        End If
-    '    Else
-    '        LongitudeTB.Text = "7.6"
-    '        lon = 7.6
-    '    End If
-
-    '    Rhino.RhinoApp.WriteLine("lon : " & CStr(lon))
-    'End Sub
 
     'Set Time Zone
     Private Sub TimeZoneTB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeZoneTB.TextChanged
@@ -273,9 +105,10 @@ Public Class Form1
     Private Sub SetDateCB_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SetDateCB.CheckedChanged
         setDate = SetDateCB.Checked
         Dim arr() As Double
-        arr = getData()
-        month = arr(1)
-        day = arr(0)
+        'arr = 
+        getData()
+        'month = arr(1)
+        'day = arr(0)
 
         If setDate Then
             'MonthCalendar1.TitleBackColor = Drawing.Color.DarkBlue
@@ -300,10 +133,8 @@ Public Class Form1
         hour = HourTB.Value
 
         If setHour Then
-            'HourTB.BackColor = Drawing.Color.White
             HourTB.Enabled = True
         Else
-            'HourTB.BackColor = Drawing.Color.LightGray
             HourTB.Enabled = False
         End If
 
@@ -312,53 +143,41 @@ Public Class Form1
     'calendar
     Private Sub MonthCalendar1_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles MonthCalendar1.DateChanged
         If setDate Then
-            MonthCalendar1.ImeMode = Windows.Forms.ImeMode.On
-            Dim temp As String = CStr(MonthCalendar1.SelectionStart.Date)
-            Dim arr() As Double
-            arr = getData()
-            month = arr(1)
-            day = arr(0)
-            'Rhino.RhinoApp.WriteLine(CStr(day) & " _ " & CStr(month))
-        Else
-            MonthCalendar1.ImeMode = Windows.Forms.ImeMode.Off
+
+            'MonthCalendar1.ImeMode = Windows.Forms.ImeMode.On
+
+            'Dim temp As String = CStr(MonthCalendar1.SelectionStart.Date)
+
+            'Dim arr() As Double
+
+            ' arr = 
+            getData()
+            'month = arr(1)
+            'day = arr(0)
+
+            'Else
+
+            '    MonthCalendar1.ImeMode = Windows.Forms.ImeMode.Off
+
         End If
+
     End Sub
 
     'get data from the calendar
-    Private Function getData() As Double()
+    Private Sub getData() 'As Double()
 
-        Dim temp As String = CStr(MonthCalendar1.SelectionStart.Date)
+        ' Dim temp As String = CStr(MonthCalendar1.SelectionStart.Date)
         Dim myDate As Date = MonthCalendar1.SelectionStart.Date
-        'Dim germKb As Boolean = True
-        'Rhino.RhinoApp.WriteLine(temp)
-        'Dim arr() As String
-        Dim data(1) As Double
-        data(1) = myDate.Month
-        data(0) = myDate.Day
-        'arr = Split(temp, ".")
 
-        'Try
-        '    data(1) = CDbl(arr(0))
-        'Catch ex As Exception
-        '    arr = Split(temp, "/")
-        '    germKb = False
-        'End Try
+        'Dim data(1) As Double
+        'data(1) = myDate.Month
+        'data(0) = myDate.Day
+        month = myDate.Month
+        day = myDate.Day
 
-        'If IsArray(arr) And germKb Then
-        '    data(0) = CDbl(arr(0)) ' month
-        '    data(1) = CDbl(arr(1)) ' day
+        ' Return data
 
-        'ElseIf IsArray(arr) Then
-        '    data(1) = CDbl(arr(0)) ' month
-        '    data(0) = CDbl(arr(1)) ' day
-        'Else
-        '    Rhino.RhinoApp.WriteLine("Change setting of your keybord to English - date tool doesn't work")
-        '    data(1) = 1
-        '    data(0) = 1
-        'End If
-        'Rhino.RhinoApp.WriteLine("day : " & data(0) & " month : " & data(1))
-        Return data
-    End Function
+    End Sub
 
     'set hour
     Private Sub HourTB_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourTB.ValueChanged
@@ -383,11 +202,6 @@ Public Class Form1
     Private Sub SunPathPickObj_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SunPathPickObj.CheckedChanged
         SPD_pickBld = SunPathPickObj.Checked
 
-        'If SPD_pickBld Then
-        '    SunPathShadows.Enabled = True
-        'Else
-        '    SunPathShadows.Enabled = False
-        'End If
     End Sub
 
     'show angle in the sun path
@@ -451,9 +265,7 @@ Public Class Form1
 
         If SEA_EndH < SEA_StartH Then
             SEA_EndH = SEA_StartH
-            'SEA_TimeEnd.Value = SEA_EndH
         End If
-
 
     End Sub
 
@@ -468,7 +280,6 @@ Public Class Form1
 
         If SEA_EndH < SEA_StartH Then
             SEA_EndH = SEA_StartH
-            'SEA_TimeEnd.Value = SEA_EndH
         End If
 
     End Sub
@@ -482,7 +293,6 @@ Public Class Form1
 
         If SEA_EndH < SEA_StartH Then
             SEA_EndH = SEA_StartH
-            'SEA_TimeEnd.Value = (SEA_EndH)
         End If
     End Sub
 
@@ -499,7 +309,6 @@ Public Class Form1
 
         If SEA_EndH < SEA_StartH Then
             SEA_EndH = SEA_StartH
-            'SEA_TimeEnd.Value = SEA_EndH
         End If
 
     End Sub
@@ -534,6 +343,7 @@ Public Class Form1
     Private Sub OccludingGeomButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OccludingGeomButton.Click
 
         SEA_OccObj = New List(Of Guid)()
+        SEA_OccObjMesh = New List(Of Rhino.Geometry.Mesh)
 
         Dim go As New Rhino.Input.Custom.GetObject()
         go.SetCommandPrompt("pick shadow casting objects As mesh")
@@ -545,7 +355,6 @@ Public Class Form1
             Exit Sub
         End If
 
-        'Dim ids As New List(Of Guid)()
         For i As Integer = 0 To go.ObjectCount - 1
             Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then
@@ -598,11 +407,9 @@ Public Class Form1
 
     'pick negativeColor
     Private Sub AEA_NegativeButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AEA_NegativeButton.Click
-        'If ColorDialog1.ShowDialog() = DialogResult.OK Then
         ColorDialog1.ShowDialog()
         AEA_NegativeButton.BackColor = ColorDialog1.Color
         SEA_colorNeg = ColorDialog1.Color
-        'End If
 
     End Sub
 
@@ -659,31 +466,30 @@ Public Class Form1
     'choose time units
     Private Sub TimeUnitCBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeUnitCBox1.SelectedIndexChanged
 
-        Dim ind As Integer = TimeUnitCBox1.SelectedIndex
-        Dim obj = TimeUnitCBox1.Items.Item(ind)
-
-        If CStr(obj) = "60" Then
-            SEA_TimeUnits = 1
-        ElseIf CStr(obj) = "30" Then
-            SEA_TimeUnits = 2
-        ElseIf CStr(obj) = "15" Then
-            SEA_TimeUnits = 4
-        Else
-            SEA_TimeUnits = 60
-        End If
+        Select Case TimeUnitCBox1.SelectedItem.ToString
+            Case "60"
+                SEA_TimeUnits = 1
+            Case "30"
+                SEA_TimeUnits = 2
+            Case "15"
+                SEA_TimeUnits = 4
+            Case Else
+                SEA_TimeUnits = 60
+        End Select
 
     End Sub
 
     'choose type of analyse - sun exposure or shadow analyse
     Private Sub SEA_AnalyseType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SEA_AnalyseType.SelectedIndexChanged, SEA_AnalyseType.SelectedIndexChanged
-        Dim ind As Integer = SEA_AnalyseType.SelectedIndex
-        Dim obj = SEA_AnalyseType.Items.Item(ind)
 
-        If CStr(obj) = "Sun Exposure" Then
-            SEA_AnType = 0
-        Else
-            SEA_AnType = 1
-        End If
+        Select Case SEA_AnalyseType.SelectedItem.ToString
+            Case "Sun Exposure"
+                SEA_AnType = SEA_AnTypeValues.SunExposure
+
+            Case Else
+                SEA_AnType = SEA_AnTypeValues.ShadowCast
+
+        End Select
 
     End Sub
 
@@ -700,7 +506,6 @@ Public Class Form1
             SEA_TimeSeg = 2
         End If
 
-        'Rhino.RhinoApp.WriteLine(CStr(SEA_TimeSeg))
     End Sub
 
     '######################################################################

@@ -221,6 +221,7 @@ Partial Class Form1
         'MonthCalendar1
         '
         resources.ApplyResources(Me.MonthCalendar1, "MonthCalendar1")
+        Me.MonthCalendar1.MaxSelectionCount = 1
         Me.MonthCalendar1.Name = "MonthCalendar1"
         Me.MonthCalendar1.TitleBackColor = System.Drawing.SystemColors.ControlDark
         '

@@ -17,6 +17,7 @@
     ''' <param name="fLongitude"></param>
     ''' <param name="fOffset"></param>
     ''' <returns>
+    ''' Altitude and Azimuth of the Angle to the sun at the given time and the sunrise und sunset at that day
     ''' (0) = fAltitude
     ''' (1) = fAzimuth + fOffset
     ''' (2) = fSunrise

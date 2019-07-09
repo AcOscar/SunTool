@@ -347,6 +347,7 @@ Public Class SE
                             Do Until oi = SEA_OccObj.Count Or tempEx = 0
                                 objRef = New Rhino.DocObjects.ObjRef(SEA_OccObj(oi))
                                 Try
+
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
                                     'If param > 0.1 Then tempEx = 0
                                     If (param >= doc.ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then tempEx = 0
