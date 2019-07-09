@@ -1,16 +1,16 @@
 ﻿Imports System.Drawing
 
 Module MyFunction
-    Enum SEA_GOptionValues
-        Threshold
-        Gradient
-        Precised
-    End Enum
+    'Enum SEA_GOptionValues
+    '    Threshold
+    '    Gradient
+    '    Precised
+    'End Enum
 
-    Enum SEA_AnTypeValues
-        SunExposure
-        ShadowCast
-    End Enum
+    'Enum SEA_AnTypeValues
+    '    SunExposure
+    '    ShadowCast
+    'End Enum
 
 
     'Public variables:

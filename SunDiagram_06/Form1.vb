@@ -525,5 +525,38 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim myStudy As New SunStudy
+
+        myStudy.Sun = New Rhino.Render.Sun
+
+        myStudy.Sun.SetPosition(MonthCalendar1.SelectionStart.Date, lat, lon)
+
+        myStudy.ReceivingGeometry = SEA_RecObj
+
+        myStudy.CastingGeometry = SEA_OccObj
+
+        myStudy.StartTime = New DateTime(MonthCalendar1.SelectionStart.Date.Date.Year, MonthCalendar1.SelectionStart.Date.Date.Month, MonthCalendar1.SelectionStart.Date.Date.Day, SEA_TimeStart.Value, SEA_TimeStart_Min.Value, 0)
+
+        myStudy.EndTime = New DateTime(MonthCalendar1.SelectionStart.Date.Date.Year, MonthCalendar1.SelectionStart.Date.Date.Month, MonthCalendar1.SelectionStart.Date.Date.Day, SEA_TimeEnd.Value, SEA_TimeEnd_Min.Value, 0)
+
+        myStudy.AnalizedAngleMin = SEA_MinAngle
+
+        myStudy.AnalizedAngleMax = SEA_MaxAngle
+
+        myStudy.AnalyseType = SEA_AnType
+
+        myStudy.DiagramType = SEA_GOption
+
+        myStudy.TimeThreshold = SEA_Threshold
+
+        myStudy.TimeUnit = SEA_TimeUnits
+
+        myStudy.TimeSegments = SEA_TimeSeg
+
+        myStudy.Analyse()
+
+    End Sub
 End Class
 

@@ -58,6 +58,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SEA_AnTypeValues.vb" />
+    <Compile Include="SEA_GOptionValues.vb" />
     <Compile Include="DrawShadow.vb" />
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -65,6 +67,7 @@
     <Compile Include="Form1.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="MyFunctions.vb" />
     <Compile Include="SunAngle2.vb" />
     <Compile Include="GetSunAngle.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -82,7 +85,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MyFunctions.vb" />
     <Compile Include="RhCommand.vb" />
     <Compile Include="RhPlugin.vb" />
     <Compile Include="RhStopWatch.vb" />
@@ -91,6 +93,7 @@
     <Compile Include="SunExposure.vb" />
     <Compile Include="SunExposure2.vb" />
     <Compile Include="SunRays.vb" />
+    <Compile Include="SunStudy.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

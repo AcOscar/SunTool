@@ -903,11 +903,38 @@
   <data name="&gt;&gt;SunDiagramTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 293</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 23</value>
+  </data>
+  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
+    <value>Button2</value>
+  </data>
+  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
+    <value>SunExpGB1</value>
+  </data>
+  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 295</value>
+    <value>131, 293</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 23</value>
+    <value>98, 23</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -925,7 +952,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="SEA_Reset.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -955,7 +982,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_Reset.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="SEAProgressBar.AccessibleName" xml:space="preserve">
     <value />
@@ -979,7 +1006,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEAProgressBar.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="SEA_TimeEnd_Min.Location" type="System.Drawing.Point, System.Drawing">
     <value>263, 23</value>
@@ -1000,7 +1027,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd_Min.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="SEA_TimeStart_Min.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 23</value>
@@ -1021,7 +1048,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart_Min.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="SEA_AngleMax.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 52</value>
@@ -1042,7 +1069,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMax.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1072,7 +1099,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="SEA_AngleMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 52</value>
@@ -1093,7 +1120,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AngleMin.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1123,7 +1150,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1156,7 +1183,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="GradientOption_CB.Items" xml:space="preserve">
     <value>ShowThreshold</value>
@@ -1189,7 +1216,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;GradientOption_CB.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1219,7 +1246,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="SEA_AnalyseType.Items" xml:space="preserve">
     <value>Sun Exposure</value>
@@ -1249,7 +1276,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_AnalyseType.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1276,7 +1303,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="SEA_TimeSegCB.Items" xml:space="preserve">
     <value>n.o.</value>
@@ -1309,7 +1336,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeSegCB.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1336,7 +1363,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="TimeUnitCBox1.Items" xml:space="preserve">
     <value>1</value>
@@ -1372,7 +1399,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;TimeUnitCBox1.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="AEA_NegativeButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1399,7 +1426,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;AEA_NegativeButton.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="AEA_PositiveButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1426,7 +1453,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;AEA_PositiveButton.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="TimeExposureNumUD.Location" type="System.Drawing.Point, System.Drawing">
     <value>130, 202</value>
@@ -1447,7 +1474,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;TimeExposureNumUD.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1474,7 +1501,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1501,7 +1528,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1528,7 +1555,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="ReceivingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
@@ -1555,7 +1582,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;ReceivingGeomButton.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="OccludingGeomButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
@@ -1582,7 +1609,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;OccludingGeomButton.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1609,7 +1636,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="SEA_TimeEnd.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 23</value>
@@ -1630,7 +1657,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeEnd.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1657,7 +1684,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="SEA_TimeStart.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 23</value>
@@ -1678,7 +1705,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_TimeStart.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1705,7 +1732,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
   </data>
   <data name="SEA_Lab1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1735,7 +1762,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEA_Lab1.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="SEAButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1744,7 +1771,7 @@
     <value>6, 293</value>
   </data>
   <data name="SEAButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 27</value>
+    <value>119, 23</value>
   </data>
   <data name="SEAButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1762,7 +1789,7 @@
     <value>SunExpGB1</value>
   </data>
   <data name="&gt;&gt;SEAButton.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="SunExpGB1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>

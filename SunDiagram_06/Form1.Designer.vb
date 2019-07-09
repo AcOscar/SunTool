@@ -89,6 +89,7 @@ Partial Class Form1
         Me.DropShadowBox = New System.Windows.Forms.GroupBox()
         Me.DropShadowButton = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Tabs.SuspendLayout()
         Me.Data.SuspendLayout()
         CType(Me.HourTB, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -313,6 +314,7 @@ Partial Class Form1
         '
         'SunExpGB1
         '
+        Me.SunExpGB1.Controls.Add(Me.Button2)
         Me.SunExpGB1.Controls.Add(Me.Button1)
         Me.SunExpGB1.Controls.Add(Me.SEA_Reset)
         Me.SunExpGB1.Controls.Add(Me.SEAProgressBar)
@@ -575,6 +577,12 @@ Partial Class Form1
         '
         Me.ColorDialog1.Color = System.Drawing.Color.DarkRed
         '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         resources.ApplyResources(Me, "$this")
@@ -672,4 +680,5 @@ Partial Class Form1
     Friend WithEvents CheckBox1 As Windows.Forms.CheckBox
     Friend WithEvents SunPathDiagram2 As Windows.Forms.Button
     Friend WithEvents Button1 As Windows.Forms.Button
+    Friend WithEvents Button2 As Windows.Forms.Button
 End Class
