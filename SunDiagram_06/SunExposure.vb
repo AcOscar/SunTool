@@ -35,7 +35,7 @@ Public Class SE
 
         SEA_Progress = 0
 
-        If SEA_OccObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
+        If SEA_CastObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
 
         'Setting the ex_Max
         Dim arrSunValues(3) As Double
@@ -225,8 +225,8 @@ Public Class SE
                 doc.Objects.Delete(objRef, True)
                 newGuid = doc.Objects.AddMesh(mesh, attribs)
 
-                For j = 0 To SEA_OccObj.Count - 1
-                    If SEA_OccObj(j) = oldGuid Then SEA_OccObj(j) = newGuid
+                For j = 0 To SEA_CastObj.Count - 1
+                    If SEA_CastObj(j) = oldGuid Then SEA_CastObj(j) = newGuid
                 Next
                 If Not newGuid = Nothing Then GuidsTemp.Add(newGuid)
                 'End If
@@ -344,13 +344,13 @@ Public Class SE
                             'sun analysis
                             tempEx = 1
                             'Analyse Type = Exposure analysys
-                            Do Until oi = SEA_OccObj.Count Or tempEx = 0
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_OccObj(oi))
+                            Do Until oi = SEA_CastObj.Count Or tempEx = 0
+                                objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
                                 Try
 
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
                                     'If param > 0.1 Then tempEx = 0
-                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then tempEx = 0
+                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_CastObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then tempEx = 0
 
                                 Catch ex As Exception
                                     'Rhino.RhinoApp.WriteLine("Redefine occluding geometry")
@@ -363,8 +363,8 @@ Public Class SE
                             'shadow casting
                             tempEx = 0
                             'Analyse Type = Shadow casting
-                            Do Until oi = SEA_OccObj.Count Or tempEx = 1
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_OccObj(oi))
+                            Do Until oi = SEA_CastObj.Count Or tempEx = 1
+                                objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
                                 Try
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
                                     'If param > 0.1 Then tempEx = 1
@@ -373,7 +373,7 @@ Public Class SE
                                     'attribs.ColorSource = Rhino.DocObjects.ObjectColorSource.ColorFromObject
                                     'attribs.Name = CStr(h & ":" & mins)
                                     'idd = doc.Objects.AddLine(New Rhino.Geometry.Line(vertx, ray.PointAt(1)))
-                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_OccObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then
+                                    If (param >= doc.ModelAbsoluteTolerance And id <> SEA_CastObj(oi)) Or (param > doc.ModelAbsoluteTolerance) Then
                                         tempEx = 1
                                         'attribs.ObjectColor = Drawing.Color.Blue
                                     Else

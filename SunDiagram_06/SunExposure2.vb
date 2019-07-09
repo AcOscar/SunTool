@@ -26,6 +26,8 @@ Public Class SunExposure2
         Dim GuidsTemp As New List(Of Guid)
         Dim colTemp As Drawing.Color
         Dim counter As Integer = 0
+
+
         Dim numberTotal As Integer = 0
         Dim mesh As New Rhino.Geometry.Mesh
         Dim pts As Rhino.Geometry.Collections.MeshVertexList
@@ -37,7 +39,7 @@ Public Class SunExposure2
 
         SEAProgressBar.Value = 0
 
-        If SEA_OccObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
+        If SEA_CastObj Is Nothing Or SEA_RecObj Is Nothing Then Return Rhino.Commands.Result.Failure
 
         'Dim SunAng As New SunAngle2(0, month, day, 12, 0, TZone, lat, lon, nOffset)
 
@@ -200,8 +202,8 @@ Public Class SunExposure2
                 doc.Objects.Delete(objRef, True)
                 newGuid = doc.Objects.AddMesh(mesh, attribs)
 
-                For j = 0 To SEA_OccObj.Count - 1
-                    If SEA_OccObj(j) = oldGuid Then SEA_OccObj(j) = newGuid
+                For j = 0 To SEA_CastObj.Count - 1
+                    If SEA_CastObj(j) = oldGuid Then SEA_CastObj(j) = newGuid
                 Next
 
                 If Not newGuid = Nothing Then GuidsTemp.Add(newGuid)
@@ -308,11 +310,7 @@ Public Class SunExposure2
         Dim RoundTime As Double
         Dim len As Double
 
-
-
         For i = iMin To iMax
-            'h = i
-
 
             For j = 0 To jMax
                 'mins = minsS * 60 + j * quartCount * 15
@@ -321,27 +319,20 @@ Public Class SunExposure2
                 h = i + Math.Floor(mins / 60)
 
                 mins = mins Mod 60
-                'Rhino.RhinoApp.WriteLine(CStr(i) & " _ " & CStr(mins) & " _ " & CStr(h))
-                'arrSunValues = SunAngle.Calculate(0, tMonth, tDay, h, mins, TZone, lat, lon, fOff)
+
                 mySunAngle.Calculate(h, mins)
 
-                'tempEx = 1
-                'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)))
-                'If Math.Round((h + mins / 60), 2) >= Math.Round(arrSunValues(2), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(arrSunValues(3), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
                 RoundTime = Math.Round((h + mins / 60), 2)
 
                 If RoundTime >= Math.Round(mySunAngle.Sunrise, 2) AndAlso
                     RoundTime <= Math.Round(mySunAngle.Sunset, 2) AndAlso
                     RoundTime <= Math.Round(endT, 2) Then
-                    'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)) & " _ " & CStr(Math.Round(arrSunValues(2), 2)) & " _ " & CStr(Math.Round(arrSunValues(3), 2)) & " _ " & CStr(Math.Round(endT, 2)))
 
                     vec = New Rhino.Geometry.Vector3d(0, 1, 0)
                     vec.Rotate(Rhino.RhinoMath.ToRadians(mySunAngle.Altitude), New Rhino.Geometry.Vector3d(1, 0, 0))
                     vec.Rotate(Rhino.RhinoMath.ToRadians(-mySunAngle.Azimuth), New Rhino.Geometry.Vector3d(0, 0, 1))
 
-
                     len = vec.Length
-
 
                     If len = 0 Then Return 0
 
@@ -350,7 +341,6 @@ Public Class SunExposure2
                     'check if ray crosses the receiving geometry
                     angleVec = Rhino.Geometry.Vector3d.VectorAngle(vec, vecN)
                     Dim myMesh As Rhino.Geometry.Mesh
-
 
                     If Math.Abs(angleVec) <= piHalf AndAlso (angle >= SEA_MinAngle AndAlso angle <= SEA_MaxAngle) Then
                         'we want the ray to be offsetted from the mesh in order to make sure that the calculations are not corrupted by the selfcasting
@@ -362,11 +352,11 @@ Public Class SunExposure2
                             tempEx = 1
                             'Analyse Type = Exposure analysys
                             Try
-                                Do Until oi = SEA_OccObj.Count
-                                    myMesh = SEA_OccObjMesh(oi)
-                                    'param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
+                                Do Until oi = SEA_CastObj.Count
+                                    myMesh = SEA_CastObjMesh(oi)
+                                    'param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_CastObjMesh(oi), ray)
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(myMesh, ray)
-                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_OccObj(oi)) OrElse
+                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_CastObj(oi)) OrElse
                                         (param > ModelAbsoluteTolerance) Then
                                         tempEx = 0
                                         Exit Do
@@ -387,11 +377,11 @@ Public Class SunExposure2
                             tempEx = 0
                             'Analyse Type = Shadow casting
                             Try
-                                Do Until oi = SEA_OccObj.Count 'Or tempEx = 1
+                                Do Until oi = SEA_CastObj.Count 'Or tempEx = 1
 
-                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_OccObjMesh(oi), ray)
+                                    param = Rhino.Geometry.Intersect.Intersection.MeshRay(SEA_CastObjMesh(oi), ray)
 
-                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_OccObj(oi)) OrElse
+                                    If (param >= ModelAbsoluteTolerance AndAlso id <> SEA_CastObj(oi)) OrElse
                                         (param > ModelAbsoluteTolerance) Then
 
                                         tempEx = 1

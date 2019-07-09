@@ -342,8 +342,8 @@ Public Class Form1
     'pick occluding geometry
     Private Sub OccludingGeomButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OccludingGeomButton.Click
 
-        SEA_OccObj = New List(Of Guid)()
-        SEA_OccObjMesh = New List(Of Rhino.Geometry.Mesh)
+        SEA_CastObj = New List(Of Guid)()
+        SEA_CastObjMesh = New List(Of Rhino.Geometry.Mesh)
 
         Dim go As New Rhino.Input.Custom.GetObject()
         go.SetCommandPrompt("pick shadow casting objects As mesh")
@@ -358,12 +358,12 @@ Public Class Form1
         For i As Integer = 0 To go.ObjectCount - 1
             Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then
-                SEA_OccObj.Add(go.[Object](i).ObjectId)
-                SEA_OccObjMesh.Add(objref.Mesh)
+                SEA_CastObj.Add(go.[Object](i).ObjectId)
+                SEA_CastObjMesh.Add(objref.Mesh)
             End If
         Next
 
-        If Not SEA_OccObj Is Nothing Then
+        If Not SEA_CastObj Is Nothing Then
             OccludingGeomButton.ForeColor = Drawing.Color.Black
         Else
             OccludingGeomButton.ForeColor = Drawing.Color.Gray
@@ -535,7 +535,7 @@ Public Class Form1
 
         myStudy.ReceivingGeometry = SEA_RecObj
 
-        myStudy.CastingGeometry = SEA_OccObj
+        myStudy.CastingGeometry = SEA_CastObj
 
         myStudy.StartTime = New DateTime(MonthCalendar1.SelectionStart.Date.Date.Year, MonthCalendar1.SelectionStart.Date.Date.Month, MonthCalendar1.SelectionStart.Date.Date.Day, SEA_TimeStart.Value, SEA_TimeStart_Min.Value, 0)
 

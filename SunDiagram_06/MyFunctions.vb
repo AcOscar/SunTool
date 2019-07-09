@@ -31,8 +31,8 @@ Module MyFunction
     Public SR_ShadowRays As Boolean = False
     Public SEA_colorNeg As Drawing.Color = Drawing.Color.Red
     Public SEA_colorPos As Drawing.Color = Drawing.Color.White
-    Public SEA_OccObj As New List(Of Guid)()
-    Public SEA_OccObjMesh As New List(Of Rhino.Geometry.Mesh)()
+    Public SEA_CastObj As New List(Of Guid)()
+    Public SEA_CastObjMesh As New List(Of Rhino.Geometry.Mesh)()
     Public SEA_RecObj As New List(Of Guid)()
     Public SEA_StartH As Double
     Public SEA_EndH As Double
