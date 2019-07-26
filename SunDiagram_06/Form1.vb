@@ -359,7 +359,8 @@ Public Class Form1
             Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then
                 SEA_CastObj.Add(go.[Object](i).ObjectId)
-                SEA_CastObjMesh.Add(objref.Mesh)
+                'https://frasergreenroyd.com/rhino-error-this-object-cannot-be-modified-because-it-is-controlled-by-a-document/
+                SEA_CastObjMesh.Add(objref.Mesh.DuplicateMesh)
             End If
         Next
 

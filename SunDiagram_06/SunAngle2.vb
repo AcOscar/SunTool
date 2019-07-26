@@ -27,8 +27,10 @@
     ''' offset to north
     ''' </summary>
     Private fOffset As Double
-    Private _Altitude As Double
-    Private _Azimuth As Double
+    'Private _Altitude As Double
+    'Private _Azimuth As Double
+    Private _AltitudeRad As Double
+    Private _AzimuthRad As Double
     'Private _Sunset As Double
 
     'helpers
@@ -45,15 +47,25 @@
     Private CosfHourAngle As Double
     Private prod_cfha_cfd As Double
     Private CosfAltitude As Double
-    Public ReadOnly Property Altitude As Double
+    'Public ReadOnly Property Altitude As Double
+    '    Get
+    '        Return _Altitude
+    '    End Get
+    'End Property
+
+    'Public ReadOnly Property Azimuth As Double
+    '    Get
+    '        Return _Azimuth
+    '    End Get
+    'End Property
+    Public ReadOnly Property AzimuthRad As Double
         Get
-            Return _Altitude
+            Return _AzimuthRad
         End Get
     End Property
-
-    Public ReadOnly Property Azimuth As Double
+    Public ReadOnly Property AltitudeRad As Double
         Get
-            Return _Azimuth
+            Return _AltitudeRad
         End Get
     End Property
 
@@ -163,6 +175,89 @@
         _Sunset = fSunset
 
     End Sub
+
+    Public Sub SetAngle(ByVal h As Integer,
+                         ByVal mins As Integer)
+
+        _AltitudeRad = arrAltitude(h, mins)
+        _AzimuthRad = arrAzimuth(h, mins)
+
+
+
+    End Sub
+    Private arrAltitude(,) As Double
+    Private arrAzimuth(,) As Double
+
+    Public Sub PreCalculate(ByVal startT As Double,
+                            ByVal endT As Double,
+                            ByVal TUnits As Double)
+        'Dim exposureU As Integer
+        'Dim arrExposure As New List(Of Integer)
+        Dim minsS As Double
+
+        'Dim ray As Rhino.Geometry.Ray3d
+
+        'Dim tMonth As Double = month
+        'Dim tDay As Double = day
+
+        'Dim angle As Double
+
+        'Dim vec As Rhino.Geometry.Vector3d
+        Dim iter As Integer = CType((endT - startT) * TUnits, Integer)
+        Dim iMin As Integer = CType(Math.Floor(startT), Integer)
+        minsS = startT - iMin
+        Dim iMax As Integer = CType(endT, Integer)
+        Dim h, mins As Double
+        Dim minCount As Integer
+        Dim jMax As Integer
+
+        Select Case TUnits
+            Case 1
+                'Unit = 60min
+                minCount = 60
+                jMax = 0
+            Case 2
+                'Unit = 30min
+                minCount = 30
+                jMax = 1
+            Case 4
+                'Unit = 15min
+                minCount = 15
+                jMax = 3
+            Case Else
+                'Unit = 1min
+                minCount = 1
+                jMax = 59
+        End Select
+        ReDim arrAltitude(iMax - iMin, jMax) 'As Double
+        ReDim arrAzimuth(iMax - iMin, jMax) 'As Double
+
+
+        For i = iMin To iMax
+
+            For j = 0 To jMax
+                mins = minsS * 60 + j * minCount
+
+                h = i + Math.Floor(mins / 60)
+
+                mins = mins Mod 60
+
+                Calculate(h, mins)
+
+                arrAltitude(i - iMin, j) = AltitudeRad
+                arrAzimuth(i - iMin, j) = AzimuthRad
+
+
+            Next j
+        Next i
+
+
+
+
+
+    End Sub
+
+
     Public Sub Calculate(ByVal iTimeHours As Double,
                          ByVal iTimeMinutes As Double)
 
@@ -249,8 +344,10 @@
             fAzimuth = -fAzimuth
         End If
 
-        _Altitude = fAltitude * 180 / Math.PI
-        _Azimuth = fAzimuth * 180 / Math.PI + fOffset
+        _AltitudeRad = fAltitude
+        _AzimuthRad = fAzimuth + (fOffset * Math.PI / 180)
+        '_Altitude = fAltitude * 180 / Math.PI
+        '_Azimuth = (fAzimuth * 180 / Math.PI) + fOffset
 
     End Sub
 
