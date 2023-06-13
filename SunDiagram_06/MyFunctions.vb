@@ -55,6 +55,10 @@ Module MyFunction
     Public text_font As String = "Verdana"
     Public text_plane As New Rhino.Geometry.Plane
 
+    Public WriteFile As Boolean
+    Public CreateLegend As Boolean
+    Public CreateDots As Boolean
+
     ''' <summary>
     ''' create array with default values for the sun calculations
     ''' </summary>
@@ -64,7 +68,7 @@ Module MyFunction
     ''' <param name="tZone"></param>
     ''' <param name="nOffset"></param>
     ''' <returns></returns>
-    Public Function GetData(ByVal doc As Rhino.RhinoDoc, ByVal lon As Double, ByVal lat As Double, ByVal tZone As Double, ByVal nOffset As Double) As Double()
+    Public Function GetData(ByVal lon As Double, ByVal lat As Double, ByVal tZone As Double, ByVal nOffset As Double) As Double()
 
         'Dim arrVal As New ArrayList
         'With arrVal
@@ -100,9 +104,9 @@ Module MyFunction
     ''' <param name="fAltitude"></param>
     ''' <param name="fAzimuth"></param>
     ''' <returns></returns>
-    Public Function GetSunVector(ByVal doc As Rhino.RhinoDoc, ByVal fAltitude As Double, ByVal fAzimuth As Double) As Rhino.Geometry.Vector3d
+    Public Function GetSunVector(ByVal fAltitude As Double, ByVal fAzimuth As Double) As Rhino.Geometry.Vector3d
 
-        Dim vec As Rhino.Geometry.Vector3d = Nothing
+        Dim vec As Rhino.Geometry.Vector3d
         Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
 
         vec = New Rhino.Geometry.Vector3d(0, 1, 0)
@@ -122,14 +126,18 @@ Module MyFunction
     Public Function AddLayer(ByVal doc As Rhino.RhinoDoc, ByVal layer_name As String) As Rhino.Commands.Result
 
         ' Does a layer with the same name already exist?
-        Dim layer_index As Integer = doc.Layers.Find(layer_name, True)
-        If layer_index >= 0 Then
+        'Dim layer_index As Integer = doc.Layers.Find(layer_name, True)
+
+        Dim currentLayer As Rhino.DocObjects.Layer = doc.Layers.FindName("layer_name")
+
+        'If layer_index >= 0 Then
+        If currentLayer Is Nothing Then
             'Rhino.RhinoApp.WriteLine("A layer with the name {0} already exists.", layer_name)
             Return Rhino.Commands.Result.Cancel
         End If
 
         ' Add a new layer to the document
-        layer_index = doc.Layers.Add(layer_name, System.Drawing.Color.Black)
+        Dim layer_index As Integer = doc.Layers.Add(layer_name, System.Drawing.Color.Black)
         If layer_index < 0 Then
             'Rhino.RhinoApp.WriteLine("Unable to add {0} layer.", layer_name)
             Return Rhino.Commands.Result.Failure
@@ -148,18 +156,28 @@ Module MyFunction
     Public Function AddChildLayer(ByVal doc As Rhino.RhinoDoc, ByVal parent_name As String, ByVal child_name As String, ByVal color As String) As Rhino.Commands.Result
 
         ' Was a layer named entered?
-        Dim index As Integer = doc.Layers.Find(parent_name, True)
-        If index < 0 Then
+        'Dim index As Integer = doc.Layers.Find(parent_name, True)
+
+        'If index < 0 Then
+        '    Return Rhino.Commands.Result.Cancel
+        'End If
+
+        Dim parent_layer As Rhino.DocObjects.Layer = doc.Layers.FindName(parent_name)
+
+        'If layer_index >= 0 Then
+        If parent_layer IsNot Nothing Then
             Return Rhino.Commands.Result.Cancel
         End If
 
-        Dim parent_layer As Rhino.DocObjects.Layer = doc.Layers(index)
+
+        'Dim parent_layer As Rhino.DocObjects.Layer = doc.Layers(index)
 
         ' Create a child layer
         Dim name As String = parent_name + "_" + child_name
-        Dim childlayer As New Rhino.DocObjects.Layer()
-        childlayer.ParentLayerId = parent_layer.Id
-        childlayer.Name = name
+        Dim childlayer As New Rhino.DocObjects.Layer With {
+            .ParentLayerId = parent_layer.Id,
+            .Name = name
+        }
 
         If color = "red" Then
             childlayer.Color = System.Drawing.Color.Red
@@ -175,7 +193,7 @@ Module MyFunction
             childlayer.Color = System.Drawing.Color.Black
         End If
 
-        index = doc.Layers.Add(childlayer)
+        Dim index = doc.Layers.Add(childlayer)
         If index < 0 Then
             'Rhino.RhinoApp.WriteLine("Unable to add {0} layer.", name)
             Return Rhino.Commands.Result.Failure
@@ -198,7 +216,10 @@ Module MyFunction
         Return CType(res, Integer)
 
     End Function
-
+    ''' <summary>
+    ''' returns a list of 9 colors - Indigo, Blue, DeepSkyBlue, Teal, LawnGreen, Yellow, Orange, OrangeRed, Red
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetColorSteps() As List(Of System.Drawing.Color)
         Dim arr_col As New List(Of System.Drawing.Color)
         Dim col_Temp As System.Drawing.Color
@@ -258,7 +279,7 @@ Module MyFunction
     End Function
 
     'get bounding box from the array of mesh ids
-    Public Function GetBBox(ByVal ids_Mesh As List(Of Guid)) As Rhino.Geometry.BoundingBox
+    Public Function GetBBox(doc As Rhino.RhinoDoc, ByVal ids_Mesh As List(Of Guid)) As Rhino.Geometry.BoundingBox
 
         Dim objRef As Rhino.DocObjects.ObjRef
         Dim arr_pts_t As New List(Of Rhino.Geometry.Point3d)
@@ -266,7 +287,8 @@ Module MyFunction
 
         For Each obj In ids_Mesh
             Dim pts() As Rhino.Geometry.Point3d
-            objRef = New Rhino.DocObjects.ObjRef(obj)
+            'objRef = New Rhino.DocObjects.ObjRef(obj)
+            objRef = New Rhino.DocObjects.ObjRef(doc, obj)
             If Not IsNothing(objRef.Mesh) Then
                 pts = objRef.Mesh.GetBoundingBox(True).GetCorners
 

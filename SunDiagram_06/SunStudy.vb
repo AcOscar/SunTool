@@ -1,4 +1,7 @@
-﻿Public Class SunStudy
+﻿Imports Rhino
+
+
+Public Class SunStudy
 
 
     Public Property Sun As Rhino.Render.Sun

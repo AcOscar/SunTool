@@ -4,29 +4,29 @@
     'http://wiki.naturalfrequency.com/wiki/Solar_Position_Calculator#Manual
 
 
-    Private fLongitude As Double
-    Private FTimeZone As Double
-    Private fLatitude As Double
-    Private fDifference As Double
-    Private fDeclination As Double
-    Private fEquation As Double
+    Private ReadOnly fLongitude As Double
+    Private ReadOnly FTimeZone As Double
+    Private ReadOnly fLatitude As Double
+    Private ReadOnly fDifference As Double
+    Private ReadOnly fDeclination As Double
+    Private ReadOnly fEquation As Double
 
 
     Private fLocalTime As Double
     Private fSolarTime As Double
     Private fAltitude As Double
     Private fAzimuth As Double
-    Private fSunrise As Double
-    Private fSunset As Double
+    Private ReadOnly fSunrise As Double
+    Private ReadOnly fSunset As Double
 
-    Private iJulianDate As Double
+    Private ReadOnly iJulianDate As Double
 
     Private t As Double
 
     ''' <summary>
     ''' offset to north
     ''' </summary>
-    Private fOffset As Double
+    Private ReadOnly fOffset As Double
     'Private _Altitude As Double
     'Private _Azimuth As Double
     Private _AltitudeRad As Double
@@ -130,7 +130,7 @@
          )
 
         ' Convert to radians.
-        fDeclination = fDeclination * (Math.PI / 180.0)
+        fDeclination *= (Math.PI / 180.0)
 
         ' Calculate the equation of time as per Carruthers et al.
         t = (279.134 + 0.985647 * iJulianDate) * (Math.PI / 180.0)
@@ -146,7 +146,7 @@
          )
 
         ' Convert seconds to hours.
-        fEquation = fEquation / 3600.0
+        fEquation /= 3600.0
 
         ' Calculate difference (in minutes) from reference longitude.
         fDifference = (((fLongitude - FTimeZone) * 180 / Math.PI) * 4) / 60.0

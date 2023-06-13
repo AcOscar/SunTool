@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.SunPathDiagram = New System.Windows.Forms.Button()
@@ -54,6 +54,10 @@ Partial Class Form1
         Me.SunPath3D = New System.Windows.Forms.CheckBox()
         Me.SunAnalysisTab = New System.Windows.Forms.TabPage()
         Me.SunExpGB1 = New System.Windows.Forms.GroupBox()
+        Me.CreateLegendCB = New System.Windows.Forms.CheckBox()
+        Me.WriteFileCB = New System.Windows.Forms.CheckBox()
+        Me.CreateDotsCB = New System.Windows.Forms.CheckBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.SEA_Reset = New System.Windows.Forms.Button()
         Me.SEAProgressBar = New System.Windows.Forms.ProgressBar()
@@ -89,7 +93,6 @@ Partial Class Form1
         Me.DropShadowBox = New System.Windows.Forms.GroupBox()
         Me.DropShadowButton = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Tabs.SuspendLayout()
         Me.Data.SuspendLayout()
         CType(Me.HourTB, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,6 +165,8 @@ Partial Class Form1
         'SetDateCB
         '
         resources.ApplyResources(Me.SetDateCB, "SetDateCB")
+        Me.SetDateCB.Checked = True
+        Me.SetDateCB.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SetDateCB.Name = "SetDateCB"
         Me.SetDateCB.UseVisualStyleBackColor = True
         '
@@ -314,6 +319,9 @@ Partial Class Form1
         '
         'SunExpGB1
         '
+        Me.SunExpGB1.Controls.Add(Me.CreateLegendCB)
+        Me.SunExpGB1.Controls.Add(Me.WriteFileCB)
+        Me.SunExpGB1.Controls.Add(Me.CreateDotsCB)
         Me.SunExpGB1.Controls.Add(Me.Button2)
         Me.SunExpGB1.Controls.Add(Me.Button1)
         Me.SunExpGB1.Controls.Add(Me.SEA_Reset)
@@ -350,6 +358,36 @@ Partial Class Form1
         resources.ApplyResources(Me.SunExpGB1, "SunExpGB1")
         Me.SunExpGB1.Name = "SunExpGB1"
         Me.SunExpGB1.TabStop = False
+        '
+        'CreateLegendCB
+        '
+        resources.ApplyResources(Me.CreateLegendCB, "CreateLegendCB")
+        Me.CreateLegendCB.Checked = True
+        Me.CreateLegendCB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CreateLegendCB.Name = "CreateLegendCB"
+        Me.CreateLegendCB.UseVisualStyleBackColor = True
+        '
+        'WriteFileCB
+        '
+        resources.ApplyResources(Me.WriteFileCB, "WriteFileCB")
+        Me.WriteFileCB.Checked = True
+        Me.WriteFileCB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.WriteFileCB.Name = "WriteFileCB"
+        Me.WriteFileCB.UseVisualStyleBackColor = True
+        '
+        'CreateDotsCB
+        '
+        resources.ApplyResources(Me.CreateDotsCB, "CreateDotsCB")
+        Me.CreateDotsCB.Checked = True
+        Me.CreateDotsCB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CreateDotsCB.Name = "CreateDotsCB"
+        Me.CreateDotsCB.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -528,7 +566,7 @@ Partial Class Form1
         resources.ApplyResources(Me.SEA_TimeEnd, "SEA_TimeEnd")
         Me.SEA_TimeEnd.Maximum = New Decimal(New Integer() {23, 0, 0, 0})
         Me.SEA_TimeEnd.Name = "SEA_TimeEnd"
-        Me.SEA_TimeEnd.Value = New Decimal(New Integer() {18, 0, 0, 0})
+        Me.SEA_TimeEnd.Value = New Decimal(New Integer() {23, 0, 0, 0})
         '
         'Label3
         '
@@ -542,7 +580,7 @@ Partial Class Form1
         resources.ApplyResources(Me.SEA_TimeStart, "SEA_TimeStart")
         Me.SEA_TimeStart.Maximum = New Decimal(New Integer() {23, 0, 0, 0})
         Me.SEA_TimeStart.Name = "SEA_TimeStart"
-        Me.SEA_TimeStart.Value = New Decimal(New Integer() {7, 0, 0, 0})
+        Me.SEA_TimeStart.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'Label2
         '
@@ -576,12 +614,6 @@ Partial Class Form1
         'ColorDialog1
         '
         Me.ColorDialog1.Color = System.Drawing.Color.DarkRed
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -681,4 +713,7 @@ Partial Class Form1
     Friend WithEvents SunPathDiagram2 As Windows.Forms.Button
     Friend WithEvents Button1 As Windows.Forms.Button
     Friend WithEvents Button2 As Windows.Forms.Button
+    Friend WithEvents CreateLegendCB As Windows.Forms.CheckBox
+    Friend WithEvents WriteFileCB As Windows.Forms.CheckBox
+    Friend WithEvents CreateDotsCB As Windows.Forms.CheckBox
 End Class

@@ -14,7 +14,7 @@ Public Class Form1
         nOffset = Double.Parse(NorthOffTB.Text)
         'Dim arr() As Double
         'arr =
-        getData()
+        GetData()
         'month = arr(1)
         'day = arr(0)
 
@@ -31,9 +31,10 @@ Public Class Form1
         SEA_AnType = 0 'sunExposure
 
         'change set locale value
-        Dim ci As System.Globalization.CultureInfo = New System.Globalization.CultureInfo("en-gb")
-        Dim instance As New System.Data.DataSet
-        instance.Locale = ci
+        Dim ci As New System.Globalization.CultureInfo("en-gb")
+        Dim instance As New System.Data.DataSet With {
+            .Locale = ci
+        }
 
         SEA_TimeSeg = 100.0
     End Sub
@@ -52,22 +53,6 @@ Public Class Form1
         End Try
 
     End Sub
-
-    'check if text is convertible to Double
-    Private Function controlDouble(ByVal text As String) As Boolean
-        Dim val As Double
-        Dim result As Boolean = True
-
-        Try
-            val = Double.Parse(text)
-        Catch ex As FormatException
-            result = False
-        End Try
-
-        Return result
-
-    End Function
-
 
     'Set Longitude
     Private Sub LongitudeTB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LongitudeTB.TextChanged
@@ -104,9 +89,9 @@ Public Class Form1
     'setDate check bar
     Private Sub SetDateCB_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SetDateCB.CheckedChanged
         setDate = SetDateCB.Checked
-        Dim arr() As Double
+        'Dim arr() As Double
         'arr = 
-        getData()
+        GetData()
         'month = arr(1)
         'day = arr(0)
 
@@ -151,7 +136,7 @@ Public Class Form1
             'Dim arr() As Double
 
             ' arr = 
-            getData()
+            GetData()
             'month = arr(1)
             'day = arr(0)
 
@@ -164,7 +149,7 @@ Public Class Form1
     End Sub
 
     'get data from the calendar
-    Private Sub getData() 'As Double()
+    Private Sub GetData() 'As Double()
 
         ' Dim temp As String = CStr(MonthCalendar1.SelectionStart.Date)
         Dim myDate As Date = MonthCalendar1.SelectionStart.Date
@@ -356,7 +341,7 @@ Public Class Form1
         End If
 
         For i As Integer = 0 To go.ObjectCount - 1
-            Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            Dim objref As New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then
                 SEA_CastObj.Add(go.[Object](i).ObjectId)
                 'https://frasergreenroyd.com/rhino-error-this-object-cannot-be-modified-because-it-is-controlled-by-a-document/
@@ -364,7 +349,7 @@ Public Class Form1
             End If
         Next
 
-        If Not SEA_CastObj Is Nothing Then
+        If SEA_CastObj IsNot Nothing Then
             OccludingGeomButton.ForeColor = Drawing.Color.Black
         Else
             OccludingGeomButton.ForeColor = Drawing.Color.Gray
@@ -388,17 +373,17 @@ Public Class Form1
 
         'Dim ids As New List(Of Guid)()
         For i As Integer = 0 To go.ObjectCount - 1
-            Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            Dim objref As New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then SEA_RecObj.Add(go.[Object](i).ObjectId)
         Next
 
-        If Not SEA_RecObj Is Nothing Then
+        If SEA_RecObj IsNot Nothing Then
             SEAButton.Enabled = True
         Else
             SEAButton.Enabled = False
         End If
 
-        If Not SEA_RecObj Is Nothing Then
+        If SEA_RecObj IsNot Nothing Then
             ReceivingGeomButton.ForeColor = Drawing.Color.Black
         Else
             ReceivingGeomButton.ForeColor = Drawing.Color.Gray
@@ -526,11 +511,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-        Dim myStudy As New SunStudy
-
-        myStudy.Sun = New Rhino.Render.Sun
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        Dim myStudy As New SunStudy With {
+            .Sun = New Rhino.Render.Sun
+        }
 
         myStudy.Sun.SetPosition(MonthCalendar1.SelectionStart.Date, lat, lon)
 
@@ -559,5 +543,23 @@ Public Class Form1
         myStudy.Analyse()
 
     End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        SunExposure2.Analyse(Rhino.RhinoDoc.ActiveDoc, SEAProgressBar, New Date(2023, 1, 1), New Date(2023, 12, 31))
+        SEAProgressBar.Value = 0
+    End Sub
+
+    Private Sub CreateTextCB_CheckedChanged(sender As Object, e As EventArgs) Handles CreateDotsCB.CheckedChanged
+        CreateDots = CreateDotsCB.Checked
+    End Sub
+
+    Private Sub WriteFileCB_CheckedChanged(sender As Object, e As EventArgs) Handles WriteFileCB.CheckedChanged
+        WriteFile = WriteFileCB.Checked
+    End Sub
+
+    Private Sub CreateLegendCB_CheckedChanged(sender As Object, e As EventArgs) Handles CreateLegendCB.CheckedChanged
+        CreateLegend = CreateLegendCB.Checked
+    End Sub
+
 End Class
 

@@ -1,4 +1,6 @@
-﻿Public Class SR
+﻿Imports Rhino
+
+Public Class SR
     Public Shared ids As New List(Of Guid)()
 
     'main - create List of objects, layers, calling the DrawRaysToPoint Function
@@ -8,11 +10,12 @@
         ids = New List(Of Guid)()
         'get array of values
         Dim arr() As Double
-        arr = GetData(doc, lon, lat, tZone, nOffset)
+        arr = GetData(lon, lat, TZone, nOffset)
         'add layer
         SR.AddLayers_SR(doc)
         'draw rays
         SR.DrawRaysFromToPoint(doc, arr)
+        Return Rhino.Commands.Result.Success
 
     End Function
 
@@ -97,7 +100,7 @@
     End Function
 
     'draws single Ray on the given data
-    Public Shared Function DrawRay(ByVal doc As Rhino.RhinoDoc, ByVal iJulianDate As Double, ByVal iTimeMonth As Double, ByVal iTimeDay As Double, ByVal iTimeHours As Double, ByVal iTimeMinutes As Double, _
+    Public Shared Function DrawRay(ByVal doc As Rhino.RhinoDoc, ByVal iJulianDate As Double, ByVal iTimeMonth As Double, ByVal iTimeDay As Double, ByVal iTimeHours As Double, ByVal iTimeMinutes As Double,
      ByVal FTimeZone As Double, ByVal fLatitude As Double, ByVal fLongitude As Double, ByVal fOffset As Double, ByVal dir As Integer) As Rhino.Commands.Result
 
 
@@ -105,13 +108,13 @@
         Dim arrMonth() As String = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
         Dim arrIntMonth() As Integer = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
         Dim tMin, arrSunValues(3) As Double
-        Dim vec As New Rhino.Geometry.Vector3d
-        Dim sunPt As New Rhino.Geometry.Point3d
+        Dim vec As Rhino.Geometry.Vector3d
+        Dim sunPt As Rhino.Geometry.Point3d
         Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
-        Dim ray As New Rhino.Geometry.Line
+        Dim ray As Rhino.Geometry.Line
         Dim name As String
-        Dim index As Integer
-
+        'Dim index As Integer
+        Dim currentLayer As Rhino.DocObjects.Layer
         tMin = 0
 
         arrSunValues = SunAngle.Calculate(iJulianDate, iTimeMonth, iTimeDay, iTimeHours, tMin, FTimeZone, fLatitude, fLongitude, fOffset)
@@ -124,9 +127,9 @@
 
         If iTimeHours >= arrSunValues(2) And iTimeHours <= arrSunValues(3) Then
 
-            vec = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
-            vec = vec * 5
-            vec = vec * dir
+            vec = GetSunVector(arrSunValues(0), arrSunValues(1))
+            vec *= 5
+            vec *= dir
             sunPt = New Rhino.Geometry.Point3d(vec)
 
             ray = New Rhino.Geometry.Line(New Rhino.Geometry.Point3d(0, 0, 0), sunPt)
@@ -135,11 +138,17 @@
                     name = iTimeDay & ". " & arrMonth(k + 1) & ", " & j & ":00, Al:" & Math.Round(arrSunValues(0) * 10) / 10 & ", Az:" & Math.Round(arrSunValues(1) * 10) / 10
                     ' I don't know how to change the name of the object
                     If iTimeDay < 183 Then
-                        index = doc.Layers.Find("SR_rays_1-6", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SR_rays_1-6", True)
+                        'doc.Layers.SetCurrentLayerIndex(index, True)
+                        currentLayer = doc.Layers.FindName("SR_rays_1-6")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     Else
-                        index = doc.Layers.Find("SR_rays_7-12", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SR_rays_7-12", True)
+                        'doc.Layers.SetCurrentLayerIndex(index, True)
+                        currentLayer = doc.Layers.FindName("SR_rays_7-12")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     End If
                     ids.Add(doc.Objects.AddLine(ray))
                     ids.Add(doc.Objects.AddPoint(sunPt))
@@ -147,6 +156,9 @@
                 End If
             Next
         End If
+
+        Return Rhino.Commands.Result.Success
+
     End Function
 
     'add SunDiagram Layers
@@ -161,5 +173,5 @@
         Return Rhino.Commands.Result.Success
     End Function
 
-   
+
 End Class

@@ -1,5 +1,4 @@
-﻿
-Public Class SPD2
+﻿Public Class SPD2
     Public Shared ids As New List(Of Guid)()
 
     'main function, that draws the diagram
@@ -7,7 +6,7 @@ Public Class SPD2
         Rhino.RhinoApp.WriteLine("Draw Sun Path Diagram")
 
         Dim arr() As Double
-        arr = GetData(doc, lon, lat, TZone, nOffset)
+        arr = GetData(lon, lat, TZone, nOffset)
         AddLayers_SDP(doc)
         ids = New List(Of Guid)()
 
@@ -39,8 +38,10 @@ Public Class SPD2
         Dim delete_original As Boolean = True
 
         'set current layer
-        Dim index As Integer = doc.Layers.Find("SPD_template", True)
-        doc.Layers.SetCurrentLayerIndex(index, True)
+        'Dim index As Integer = doc.Layers.Find("SPD_template", True)
+        'doc.Layers.SetCurrentLayerIndex(index, True)
+        Dim currentLayer As Rhino.DocObjects.Layer = doc.Layers.FindName("SPD_template")
+        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
         'Draw outer ring and main axes
         Dim c As New Rhino.Geometry.Circle(center, fRad + 1)
@@ -137,7 +138,8 @@ Public Class SPD2
         Dim height As Double = 1.5
         Dim font As String = "Arial"
         Dim vecT As Rhino.Geometry.Vector3d
-        Dim index As Integer
+        'Dim index As Integer
+        Dim currentLayer As Rhino.DocObjects.Layer
         Dim arrObj As New System.Collections.Generic.List(Of Guid)()
 
         'calculate and draw monhly path
@@ -219,8 +221,10 @@ Public Class SPD2
                     plane.Origin = New Rhino.Geometry.Point3d(vecT)
 
                     'set current layer
-                    index = doc.Layers.Find("SPD_monthPath_1-6", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                    'doc.Layers.SetCurrentLayerIndex(index, True)
+                    currentLayer = doc.Layers.FindName("SPD_monthPath_1-6")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                     arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
                 Else
@@ -232,8 +236,10 @@ Public Class SPD2
                     plane.Origin = New Rhino.Geometry.Point3d(vecT)
 
                     'set current layer
-                    index = doc.Layers.Find("SPD_monthPath_7-12", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                    'doc.Layers.SetCurrentLayerIndex(index, True)
+                    currentLayer = doc.Layers.FindName("SPD_monthPath_7-12")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                     arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
                 End If
@@ -317,8 +323,10 @@ Public Class SPD2
                 plane.Origin = New Rhino.Geometry.Point3d(vecT)
 
                 'set current layer
-                index = doc.Layers.Find("SPD_monthPath_1-6", True)
-                doc.Layers.SetCurrentLayerIndex(index, True)
+                'index = doc.Layers.Find("SPD_monthPath_1-6", True)
+                'doc.Layers.SetCurrentLayerIndex(index, True)
+                currentLayer = doc.Layers.FindName("SPD_monthPath_1-6")
+                doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                 arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
 
@@ -329,8 +337,10 @@ Public Class SPD2
                 plane.Origin = New Rhino.Geometry.Point3d(vecT)
 
                 'set current layer
-                index = doc.Layers.Find("SPD_monthPath_7-12", True)
-                doc.Layers.SetCurrentLayerIndex(index, True)
+                'index = doc.Layers.Find("SPD_monthPath_7-12", True)
+                'doc.Layers.SetCurrentLayerIndex(index, True)
+                currentLayer = doc.Layers.FindName("SPD_monthPath_7-12")
+                doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                 arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
             End If
@@ -351,6 +361,7 @@ Public Class SPD2
 
         Dim tMonth As Double = arrVal(0)
         Dim tDay As Double = arrVal(1)
+#Disable Warning IDE0059 ' Unnecessary assignment of a value
         Dim tHours As Double = arrVal(2)
         Dim tMin As Double = arrVal(3)
         Dim lat As Double = arrVal(4)
@@ -373,10 +384,12 @@ Public Class SPD2
         Dim crv As Rhino.Geometry.Curve
         Dim j As Integer
         Dim arrObj As New System.Collections.Generic.List(Of Guid)()
-        Dim index As Integer
+        'Dim index As Integer
+        Dim currentLayer As Rhino.DocObjects.Layer
         Dim sphere As Rhino.Geometry.Sphere
         Dim vec_sun As Rhino.Geometry.Vector3d
         Dim angle As Double
+#Enable Warning IDE0059 ' Unnecessary assignment of a value
 
         ' calculate and hourly path
         Dim flag As Integer
@@ -440,30 +453,42 @@ Public Class SPD2
 
                     If arrPts.Count > 0 And flag = 0 Then
                         'set current layer
-                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        'doc.Layers.SetCurrentLayerIndex(Index, True)
+                        currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                         'add Crv
                         crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
                         arrObj.Add(doc.Objects.AddCurve(crv))
 
                         'set current layer
-                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        'doc.Layers.SetCurrentLayerIndex(Index, True)
+                        currentLayer = doc.Layers.FindName("SPD_hourPath_7-12")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                         'add Crv
                         crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
                         arrObj.Add(doc.Objects.AddCurve(crv))
 
                     ElseIf arrPts.Count > 0 And flag = 1 Then
                         'set current layer
-                        index = doc.Layers.Find("SPD_hourPath_1-6", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                        'doc.Layers.SetCurrentLayerIndex(Index, True)
+                        currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                         'add Crv
                         crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
                         arrObj.Add(doc.Objects.AddCurve(crv))
 
                         'set current layer
-                        index = doc.Layers.Find("SPD_hourPath_7-12", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                        'doc.Layers.SetCurrentLayerIndex(Index, True)
+                        currentLayer = doc.Layers.FindName("SPD_hourPath_7-12")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                         'add Crv
                         crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
                         arrObj.Add(doc.Objects.AddCurve(crv))
@@ -491,12 +516,15 @@ Public Class SPD2
                         Dim arrPt As New Rhino.Geometry.Point3d(vec)
                         If Is3D Then
                             If tMonth <= 6 Then
-                                index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                                'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                                currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
                             Else
-                                index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                                'Index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                                currentLayer = doc.Layers.FindName("SPD_hourPath_7-12")
                             End If
 
-                            doc.Layers.SetCurrentLayerIndex(index, True)
+                            'doc.Layers.SetCurrentLayerIndex(index, True)
+                            doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                         End If
 
@@ -511,7 +539,7 @@ Public Class SPD2
                         arrVec += vec
 
                         If SPD_showAngle Then
-                            vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                            vec_sun = GetSunVector(arrSunValues(0), arrSunValues(1))
                             angle = GetVecAngle(vec_sun)
                             t = i & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
                         Else
@@ -522,8 +550,10 @@ Public Class SPD2
                         plane.Origin = New Rhino.Geometry.Point3d(arrVec)
                         arrObj.Add(doc.Objects.AddText(t, plane, height, font, False, False))
                         If Is3D Then
-                            index = doc.Layers.Find("SPD_sunDirection", True)
-                            doc.Layers.SetCurrentLayerIndex(index, True)
+                            'index = doc.Layers.Find("SPD_sunDirection", True)
+                            'doc.Layers.SetCurrentLayerIndex(index, True)
+                            currentLayer = doc.Layers.FindName("SPD_sunDirection")
+                            doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                             'sun Sphere
                             plane.Origin = New Rhino.Geometry.Point3d(vec)
@@ -533,8 +563,11 @@ Public Class SPD2
                             attribs.ObjectDecoration = Rhino.DocObjects.ObjectDecoration.None
                             attribs.ObjectColor = Drawing.Color.Aqua
 
-                            index = doc.Layers.Find("SPD_sunDirection", True)
-                            doc.Layers.SetCurrentLayerIndex(index, True)
+                            'Index = doc.Layers.Find("SPD_sunDirection", True)
+                            'doc.Layers.SetCurrentLayerIndex(Index, True)
+
+                            currentLayer = doc.Layers.FindName("SPD_sunDirection")
+                            doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                             arrObj.Add(doc.Objects.AddSphere(sphere))
                             arrObj.Add(doc.Objects.AddLine(arrow, attribs))
@@ -601,30 +634,42 @@ Public Class SPD2
 
                 If arrPts.Count > 0 And flag = 0 Then
                     'set current layer
-                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    'doc.Layers.SetCurrentLayerIndex(Index, True)
+                    currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     'add Crv
                     crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
                     arrObj.Add(doc.Objects.AddCurve(crv))
 
                     'set current layer
-                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    'doc.Layers.SetCurrentLayerIndex(Index, True)
+                    currentLayer = doc.Layers.FindName("SPD_hourPath_7-12")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     'add Crv
                     crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
                     arrObj.Add(doc.Objects.AddCurve(crv))
 
                 ElseIf arrPts.Count > 0 And flag = 1 Then
                     'set current layer
-                    index = doc.Layers.Find("SPD_hourPath_1-6", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                    'doc.Layers.SetCurrentLayerIndex(Index, True)
+                    currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     'add Crv
                     crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsR, 3)
                     arrObj.Add(doc.Objects.AddCurve(crv))
 
                     'set current layer
-                    index = doc.Layers.Find("SPD_hourPath_7-12", True)
-                    doc.Layers.SetCurrentLayerIndex(index, True)
+                    'index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                    'doc.Layers.SetCurrentLayerIndex(Index, True)
+                    currentLayer = doc.Layers.FindName("SPD_hourPath_7-12")
+                    doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+
                     'add Crv
                     crv = Rhino.Geometry.Curve.CreateInterpolatedCurve(arrPtsB, 3)
                     arrObj.Add(doc.Objects.AddCurve(crv))
@@ -656,12 +701,15 @@ Public Class SPD2
                     arrPts.Add(arrPt)
                     If Is3D Then
                         If tMonth <= 6 Then
-                            index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                            'index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                            currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
                         Else
-                            index = doc.Layers.Find("SPD_hourPath_7-12", True)
+                            'Index = doc.Layers.Find("SPD_hourPath_1-6", True)
+                            currentLayer = doc.Layers.FindName("SPD_hourPath_1-6")
                         End If
 
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'doc.Layers.SetCurrentLayerIndex(index, True)
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                     End If
 
@@ -676,7 +724,7 @@ Public Class SPD2
 
 
                     If SPD_showAngle Then
-                        vec_sun = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                        vec_sun = GetSunVector(arrSunValues(0), arrSunValues(1))
                         angle = GetVecAngle(vec_sun)
                         t = tHours & ":00" & ", " & CStr(Math.Round(angle, 1)) & "°"
                     Else
@@ -693,8 +741,10 @@ Public Class SPD2
                         sphere = New Rhino.Geometry.Sphere(plane, 1.5)
                         Dim arrow As New Rhino.Geometry.Line(arrPt, New Rhino.Geometry.Point3d(0, 0, 0))
 
-                        index = doc.Layers.Find("SPD_sunDirection", True)
-                        doc.Layers.SetCurrentLayerIndex(index, True)
+                        'index = doc.Layers.Find("SPD_sunDirection", True)
+                        'doc.Layers.SetCurrentLayerIndex(index, True)
+                        currentLayer = doc.Layers.FindName("SPD_sunDirection")
+                        doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
 
                         Dim attribs = doc.CreateDefaultAttributes()
                         attribs.ObjectDecoration = Rhino.DocObjects.ObjectDecoration.None

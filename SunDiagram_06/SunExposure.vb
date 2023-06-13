@@ -1,4 +1,6 @@
 ﻿'sun exposure
+Imports Rhino
+
 Public Class SE
 
     Public Shared Function Analyse(ByVal doc As Rhino.RhinoDoc, ByRef SEAProgressBar As System.Windows.Forms.ProgressBar) As Rhino.Commands.Result
@@ -9,7 +11,7 @@ Public Class SE
 
         'get array of values
         Dim arr() As Double
-        arr = GetData(doc, lon, lat, TZone, nOffset)
+        arr = GetData(lon, lat, TZone, nOffset)
 
         'variables
         Dim objRef As Rhino.DocObjects.ObjRef
@@ -17,7 +19,7 @@ Public Class SE
         Dim vecNtemp As Rhino.Geometry.Vector3d
         Dim threshold As Double
         Dim exp_Units As Integer
-        Dim arrVal = GetData(doc, lon, lat, TZone, nOffset)
+        Dim arrVal = GetData(lon, lat, TZone, nOffset)
         Dim tu As Double = SEA_TimeUnits
         Dim vertex_rec As New Rhino.Collections.Point3dList
         Dim vecNorms As New Rhino.Collections.RhinoList(Of Rhino.Geometry.Vector3d)
@@ -83,10 +85,11 @@ Public Class SE
 
         'for the progress bar - calculate how many vertexes we already have
         For i = 0 To SEA_RecObj.Count - 1
-            objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
+            'objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
+            objRef = New Rhino.DocObjects.ObjRef(doc, SEA_RecObj(i))
             mesh = objRef.Mesh
             pts = mesh.Vertices
-            numberTotal = numberTotal + (pts.Count - 1)
+            numberTotal += (pts.Count - 1)
         Next
 
         For i = 0 To SEA_RecObj.Count - 1
@@ -95,7 +98,8 @@ Public Class SE
             vecNorms = New Rhino.Collections.RhinoList(Of Rhino.Geometry.Vector3d)
 
             'Dim myObj = doc.Objects.Find(SEA_RecObj(i))
-            objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
+            'objRef = New Rhino.DocObjects.ObjRef(SEA_RecObj(i))
+            objRef = New Rhino.DocObjects.ObjRef(doc, SEA_RecObj(i))
 
             'debugger
             Try
@@ -106,7 +110,7 @@ Public Class SE
                 faces = mesh.Faces
 
                 'arr of vertexes
-                If Not pts Is Nothing Then
+                If pts IsNot Nothing Then
                     For j = 0 To pts.Count - 1
                         ptTemp = New Rhino.Geometry.Point3d(pts(j))
                         vertex_rec.Add(ptTemp)
@@ -127,7 +131,7 @@ Public Class SE
 
 
                 'arr of normals in vertexes
-                If Not faceNormals Is Nothing Then
+                If faceNormals IsNot Nothing Then
                     For j = 0 To faceNormals.Count - 1
                         vecNtemp = faceNormals(j)
                         vecNorms.Add(vecNtemp)
@@ -326,7 +330,7 @@ Public Class SE
                 'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)))
                 If Math.Round((h + mins / 60), 2) >= Math.Round(arrSunValues(2), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(arrSunValues(3), 2) And Math.Round((h + mins / 60), 2) <= Math.Round(endT, 2) Then
                     'Rhino.RhinoApp.WriteLine(CStr(Math.Round((h + mins / 60), 2)) & " _ " & CStr(Math.Round(arrSunValues(2), 2)) & " _ " & CStr(Math.Round(arrSunValues(3), 2)) & " _ " & CStr(Math.Round(endT, 2)))
-                    vec = GetSunVector(doc, arrSunValues(0), arrSunValues(1))
+                    vec = GetSunVector(arrSunValues(0), arrSunValues(1))
                     angle = GetVecAngle(vec)
 
 
@@ -345,7 +349,8 @@ Public Class SE
                             tempEx = 1
                             'Analyse Type = Exposure analysys
                             Do Until oi = SEA_CastObj.Count Or tempEx = 0
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
+                                'objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
+                                objRef = New Rhino.DocObjects.ObjRef(doc, SEA_CastObj(oi))
                                 Try
 
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
@@ -357,14 +362,15 @@ Public Class SE
                                     tempEx = 1
                                     'Return Rhino.Commands.Result.Failure
                                 End Try
-                                oi = oi + 1
+                                oi += 1
                             Loop
                         Else
                             'shadow casting
                             tempEx = 0
                             'Analyse Type = Shadow casting
                             Do Until oi = SEA_CastObj.Count Or tempEx = 1
-                                objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
+                                'objRef = New Rhino.DocObjects.ObjRef(SEA_CastObj(oi))
+                                objRef = New Rhino.DocObjects.ObjRef(doc, SEA_CastObj(oi))
                                 Try
                                     param = Rhino.Geometry.Intersect.Intersection.MeshRay(objRef.Mesh, ray)
                                     'If param > 0.1 Then tempEx = 1
@@ -386,7 +392,7 @@ Public Class SE
                                     tempEx = 0
                                     'Return Rhino.Commands.Result.Failure
                                 End Try
-                                oi = oi + 1
+                                oi += 1
                             Loop
                         End If
 
@@ -435,12 +441,12 @@ Public Class SE
 
         For i = 0 To arrExposure.Count - 1
 
-            sumAll = sumAll + arrExposure(i)
+            sumAll += arrExposure(i)
 
             If arrExposure(i) = 1 And (i < arrExposure.Count - 1) Then
-                sumTemp = sumTemp + arrExposure(i)
+                sumTemp += arrExposure(i)
             ElseIf arrExposure(i) = 1 And (i = arrExposure.Count - 1) Then
-                sumTemp = sumTemp + arrExposure(i)
+                sumTemp += arrExposure(i)
                 If sumTemp > sum1 Then
                     sum2 = sum1
                     sum1 = sumTemp
@@ -488,12 +494,12 @@ Public Class SE
     'add color diagram
     Public Shared Function AddColorDiagram(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
         Dim ids_col As New List(Of Guid)
-        Dim rec As New Rhino.Geometry.Rectangle3d
+        Dim rec As Rhino.Geometry.Rectangle3d
         Dim vecL, vecH, vecO, vecT As Rhino.Geometry.Vector3d
         Dim pRef As Rhino.Geometry.Point3d
         Dim hatch() As Rhino.Geometry.Hatch
         Dim attrib_hatch As New Rhino.DocObjects.ObjectAttributes
-        Dim arr_col As New List(Of System.Drawing.Color)
+        Dim arr_col As List(Of System.Drawing.Color)
         Dim col As System.Drawing.Color
         Dim plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
         Dim name As String = "Sun_ColorDiagram"
@@ -503,18 +509,25 @@ Public Class SE
         Dim index As Integer
         Dim attribs As New Rhino.DocObjects.ObjectAttributes
 
-        Dim bbox As New Rhino.Geometry.BoundingBox
+        Dim bbox As Rhino.Geometry.BoundingBox
 
         AddLayers_legend(doc)
 
-        index = doc.Layers.Find("SE_legend", True)
+        'index = doc.Layers.Find("SE_legend", True)
 
-        If index < 0 Then index = 1
+        Dim currentLayer As Rhino.DocObjects.Layer = doc.Layers.FindName("SE_legend")
+        'doc.Layers.SetCurrentLayerIndex(currentLayer.Index, True)
+        If currentLayer Is Nothing Then
+            index = 1
+        Else
+            index = currentLayer.Index
+        End If
+        'If index < 0 Then index = 1
 
         attribs.LayerIndex = index
 
         'get insertion point
-        bbox = GetBBox(SEA_RecObj)
+        bbox = GetBBox(doc, SEA_RecObj)
         If Not IsNothing(bbox) Then
             pt = bbox.GetCorners()(1)
         Else
@@ -551,7 +564,7 @@ Public Class SE
                 attrib_hatch.ObjectColor = col
                 attrib_hatch.Name = name
                 attrib_hatch.LayerIndex = index
-                hatch = Rhino.Geometry.Hatch.Create(arr_Rec, 0, 0, 0)
+                hatch = Rhino.Geometry.Hatch.Create(arr_Rec, 0, 0, 0, 0)
 
                 For Each ht In hatch
                     id_hatch = doc.Objects.AddHatch(ht)
@@ -577,7 +590,7 @@ Public Class SE
 
         doc.Groups.Add(ids_col)
 
-
+        Return Rhino.Commands.Result.Success
 
     End Function
 
@@ -606,7 +619,8 @@ Public Class SE
             'Exit Function
         End If
         For i As Integer = 0 To go.ObjectCount - 1
-            Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            'Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            Dim objref As New Rhino.DocObjects.ObjRef(doc, go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then
                 mesh = objref.Mesh
 

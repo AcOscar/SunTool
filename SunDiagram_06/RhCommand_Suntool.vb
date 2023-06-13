@@ -1,15 +1,15 @@
 ﻿Imports Rhino
 
-Public Class RhCommand
+Public Class RhCommand_Suntool
     Inherits Commands.Command
 
-    Shared _instance As RhCommand
+    Shared _instance As RhCommand_Suntool
 
     Public Sub New()
         _instance = Me
     End Sub
 
-    Public Shared ReadOnly Property Instance() As RhCommand
+    Public Shared ReadOnly Property Instance() As RhCommand_Suntool
         Get
             Return _instance
         End Get

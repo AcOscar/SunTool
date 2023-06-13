@@ -15,12 +15,14 @@
         go.GroupSelect = True
         go.GetMultiple(1, 0)
         If go.CommandResult() <> Rhino.Commands.Result.Success Then
-            Exit Function
+            Return Rhino.Commands.Result.Failure
+            'Exit Function
         End If
 
         Dim ids As New List(Of Guid)()
         For i As Integer = 0 To go.ObjectCount - 1
-            Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            'Dim objref As Rhino.DocObjects.ObjRef = New Rhino.DocObjects.ObjRef(go.[Object](i).ObjectId)
+            Dim objref As New Rhino.DocObjects.ObjRef(doc, go.[Object](i).ObjectId)
             If Not IsNothing(objref.Mesh) Then ids.Add(objref.ObjectId)
         Next
 
@@ -46,10 +48,11 @@
                         Rhino.RhinoApp.WriteLine("Problem with units")
                     End Try
                 Next
-                
+
             End If
         Else
             Rhino.RhinoApp.WriteLine("I'm not going to draw a shadow for the whole year! Select day first")
+
         End If
 
 
@@ -58,7 +61,7 @@
 
     Public Shared Function SunStudy(ByVal doc As Rhino.RhinoDoc, ByVal ids As List(Of Guid), ByVal hour As Double) As Rhino.Commands.Result
 
-        Dim plane As New Rhino.Geometry.Plane
+        Dim plane As Rhino.Geometry.Plane
 
         plane = New Rhino.Geometry.Plane(New Rhino.Geometry.Point3d(0, 0, 0), New Rhino.Geometry.Vector3d(0, 0, 1))
 
@@ -66,7 +69,7 @@
         planeEq = plane.GetPlaneEquation()
 
         Dim arr() As Double
-        arr = GetData(doc, lon, lat, TZone, nOffset)
+        arr = GetData(lon, lat, TZone, nOffset)
 
         'Rhino.RhinoApp.WriteLine(CStr(planeEq(0)) & "_" & CStr(planeEq(1)) & "_" & CStr(planeEq(2)) & "_" & CStr(planeEq(3)) & "_id nbr" & CStr(ids.Count) & "_" & CStr(month) & CStr(hour))
 
@@ -89,11 +92,12 @@
         Dim fRad As Double = arrVal(7)
         Dim fOff As Double = arrVal(8)
 
-        Dim sunVec As New Rhino.Geometry.Vector3d
-        Dim index As Integer
-        Dim matrix As New Rhino.Geometry.Transform
+        Dim sunVec As Rhino.Geometry.Vector3d
+        'Dim index As Integer
+        Dim CurrentLayer As Rhino.DocObjects.Layer
+        Dim matrix As Rhino.Geometry.Transform
         Dim ObjXform As Guid
-        Dim objref As Rhino.DocObjects.ObjRef = Nothing
+        Dim objref As Rhino.DocObjects.ObjRef
         Dim arrSunValues() As Double
         Dim ax As New Rhino.Geometry.Vector3d(0, 0, 1)
 
@@ -106,19 +110,22 @@
             sunVec.Rotate(Rhino.RhinoMath.ToRadians(-arrSunValues(1)), ax)
             sunVec.Reverse()
 
-            matrix = projectionmatrix(sunVec, plane)
+            matrix = Projectionmatrix(sunVec, plane)
 
             doc.Views.RedrawEnabled = False
 
             'add child layer
             Dim layName As String = month & "." & day & "_" & hour & ": 00"
             AddChildLayer(doc, "Shadow", layName, "black")
-            index = doc.Layers.Find("Shadow_" & layName, True)
-            doc.Layers.SetCurrentLayerIndex(index, True)
+            'index = doc.Layers.Find("Shadow_" & layName, True)
+            'doc.Layers.SetCurrentLayerIndex(index, True)
+            CurrentLayer = doc.Layers.FindName("Shadow_" & layName)
+            doc.Layers.SetCurrentLayerIndex(CurrentLayer.Index, True)
 
             For i As Integer = 0 To ids.Count - 1
                 ObjXform = doc.Objects.Transform(ids(i), matrix, False)
-                objref = New Rhino.DocObjects.ObjRef(ObjXform)
+                'objref = New Rhino.DocObjects.ObjRef(ObjXform)
+                objref = New Rhino.DocObjects.ObjRef(doc, ObjXform)
                 Dim outline() As Rhino.Geometry.Polyline
                 Dim pts As New Rhino.Collections.Point3dList
                 outline = objref.Mesh.GetOutlines(Rhino.Geometry.Plane.WorldXY)
@@ -140,7 +147,7 @@
 
     End Function
 
-    Public Shared Function projectionmatrix(ByVal lightvect As Rhino.Geometry.Vector3d, ByVal ground() As Double) As Rhino.Geometry.Transform
+    Public Shared Function Projectionmatrix(ByVal lightvect As Rhino.Geometry.Vector3d, ByVal ground() As Double) As Rhino.Geometry.Transform
 
         Dim k As Double
 
@@ -170,7 +177,7 @@
         shadowMat(3, 2) = 0
         shadowMat(3, 3) = 1
 
-        projectionmatrix = shadowMat
+        Projectionmatrix = shadowMat
 
     End Function
 
